@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.34301.259
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLyKetQuaHocTap", "QuanLyKetQuaHocTap.csproj", "{28E3CF25-71D7-400D-B26F-C0CCDC97B824}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{28E3CF25-71D7-400D-B26F-C0CCDC97B824}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28E3CF25-71D7-400D-B26F-C0CCDC97B824}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28E3CF25-71D7-400D-B26F-C0CCDC97B824}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28E3CF25-71D7-400D-B26F-C0CCDC97B824}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D8777BF4-CCE6-4B9B-A6A7-C4402452C571}
+	EndGlobalSection
+EndGlobal
