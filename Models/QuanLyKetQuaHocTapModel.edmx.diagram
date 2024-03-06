@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d9c180013b984e03b69103522686a17d" Name="Diagram1" ZoomLevel="68">
+        <EntityTypeShape EntityType="db_QuanLyKetQuaHocTapModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_QuanLyKetQuaHocTapModel.tb_ChiTietDGRL" Width="1.5" PointX="17.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_QuanLyKetQuaHocTapModel.tb_ChiTietTieuChiDGRL" Width="1.5" PointX="15" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_QuanLyKetQuaHocTapModel.tb_DanhGiaRenLuyen" Width="1.5" PointX="15" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_QuanLyKetQuaHocTapModel.tb_DiemHocPhan" Width="1.5" PointX="12" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_QuanLyKetQuaHocTapModel.tb_GiangVien" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_QuanLyKetQuaHocTapModel.tb_HocPhan" Width="1.5" PointX="5.25" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_QuanLyKetQuaHocTapModel.tb_KhoaVien" Width="1.5" PointX="5.25" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_QuanLyKetQuaHocTapModel.tb_MinhChungDGRL" Width="1.5" PointX="19.5" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_QuanLyKetQuaHocTapModel.tb_NoiDungDGRL" Width="1.5" PointX="12.75" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_QuanLyKetQuaHocTapModel.tb_Nganh" Width="1.5" PointX="7.5" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_QuanLyKetQuaHocTapModel.tb_PhongHoc" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_QuanLyKetQuaHocTapModel.tb_QuanTri" Width="1.5" PointX="3" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_QuanLyKetQuaHocTapModel.tb_SinhVien" Width="1.5" PointX="9.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_QuanLyKetQuaHocTapModel.tb_TaiKhoan" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_QuanLyKetQuaHocTapModel.tb_TieuChiDGRL" Width="1.5" PointX="12.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_QuanLyKetQuaHocTapModel.tb_ThongTinBuoiHoc" Width="1.5" PointX="7.5" PointY="11.625" IsExpanded="true" />
+        <AssociationConnector Association="db_QuanLyKetQuaHocTapModel.FK__tb_ChiTie__ID_Ch__17F790F9" ManuallyRouted="false" />
+        <AssociationConnector Association="db_QuanLyKetQuaHocTapModel.FK__tb_ChiTie__ID_Da__17036CC0" ManuallyRouted="false" />
+        <AssociationConnector Association="db_QuanLyKetQuaHocTapModel.FK__tb_MinhCh__ID_Ch__1AD3FDA4" ManuallyRouted="false" />
+        <AssociationConnector Association="db_QuanLyKetQuaHocTapModel.FK__tb_ChiTie__ID_Ti__05D8E0BE" ManuallyRouted="false" />
+        <AssociationConnector Association="db_QuanLyKetQuaHocTapModel.FK__tb_DanhGi__ID_Si__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="db_QuanLyKetQuaHocTapModel.FK_tb_DanhGiaRenLuyen_tb_NoiDungDGRL" ManuallyRouted="false" />
+        <AssociationConnector Association="db_QuanLyKetQuaHocTapModel.FK__tb_DiemHo__ID_Ho__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="db_QuanLyKetQuaHocTapModel.FK__tb_DiemHo__ID_Si__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="db_QuanLyKetQuaHocTapModel.FK__tb_GiangV__ID_Ta__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="db_QuanLyKetQuaHocTapModel.FK__tb_HocPha__ID_Gi__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="db_QuanLyKetQuaHocTapModel.FK__tb_ThongT__ID_Ho__29221CFB" ManuallyRouted="false" />
+        <AssociationConnector Association="db_QuanLyKetQuaHocTapModel.FK_tb_Nganh_tb_KhoaVien" ManuallyRouted="false" />
+        <AssociationConnector Association="db_QuanLyKetQuaHocTapModel.FK__tb_TieuCh__ID_No__7F2BE32F" ManuallyRouted="false" />
+        <AssociationConnector Association="db_QuanLyKetQuaHocTapModel.FK__tb_SinhVi__ID_Ng__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="db_QuanLyKetQuaHocTapModel.FK__tb_ThongTi__MaPH__2A164134" ManuallyRouted="false" />
+        <AssociationConnector Association="db_QuanLyKetQuaHocTapModel.FK__tb_QuanTr__ID_Ta__267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="db_QuanLyKetQuaHocTapModel.FK__tb_SinhVi__ID_Ta__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="db_QuanLyKetQuaHocTapModel.tb_GVThuocKhoaVien" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="db_QuanLyKetQuaHocTapModel.tb_CoVanHocTap" Width="1.5" PointX="9.75" PointY="17.25" />
+        <AssociationConnector Association="db_QuanLyKetQuaHocTapModel.FK__tb_CoVanH__ID_Gi__30F848ED" />
+        <AssociationConnector Association="db_QuanLyKetQuaHocTapModel.FK__tb_SinhVi__ID_Co__35BCFE0A" />
+        <AssociationConnector Association="db_QuanLyKetQuaHocTapModel.FK_tb_CoVanHocTap_tb_Nganh" />
+        <EntityTypeShape EntityType="db_QuanLyKetQuaHocTapModel.tb_CTGD" Width="1.5" PointX="0.75" PointY="7" />
+        <EntityTypeShape EntityType="db_QuanLyKetQuaHocTapModel.tb_MonHoc" Width="1.5" PointX="12.75" PointY="11.375" />
+        <AssociationConnector Association="db_QuanLyKetQuaHocTapModel.FK_tb_MonHoc_tb_CTGD" />
+        <AssociationConnector Association="db_QuanLyKetQuaHocTapModel.FK__tb_HocPha__ID_Mo__3E52440B" />
+        <AssociationConnector Association="db_QuanLyKetQuaHocTapModel.FK__tb_MonHoc__ID_Ng__398D8EEE" />
+        <AssociationConnector Association="db_QuanLyKetQuaHocTapModel.tb_GVThuocCTGD" />
+        <AssociationConnector Association="db_QuanLyKetQuaHocTapModel.tb_PhanCongGiangDay" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
