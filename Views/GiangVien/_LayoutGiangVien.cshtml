@@ -1,0 +1,163 @@
+﻿@using QuanLyKetQuaHocTap.Models;
+
+
+@{
+    if (Session["TK"] == null || ((tb_TaiKhoan)Session["TK"]).LoaiTaiKhoan != General.intTaiKhoanGV)
+    {
+        Response.Redirect(Url.Action("DangNhap", "DangNhap"));
+        return;
+    }
+
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+
+        <link rel="stylesheet" href="~/Content/Template_Frame/fonts/icomoon/style.css">
+
+        <link rel="stylesheet" href="~/Content/Template_Frame/css/owl.carousel.min.css">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="~/Content/Template_Frame/css/bootstrap.min.css">
+
+        <!-- Style -->
+        <link rel="stylesheet" href="~/Content/Template_Frame/css/frame.css">
+
+        <link rel="icon" type="image/ico" href="~/assets/imgs/logo.png">
+        <title>@ViewBag.Title - Trang web dành cho Giảng viên</title>
+    </head>
+    <body>
+
+
+        <div class="site-mobile-menu site-navbar-target">
+            <div class="site-mobile-menu-header">
+                <div class="site-mobile-menu-close mt-3">
+                    <span class="icon-close2 js-menu-toggle"></span>
+                </div>
+            </div>
+            <div class="site-mobile-menu-body"></div>
+        </div>
+
+
+        @*<div class="top-bar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <a href="#" class=""><span class="mr-2  icon-envelope-open-o"></span> <span class="d-none d-md-inline-block">info@yourdomain.com</span></a>
+                            <span class="mx-md-2 d-inline-block"></span>
+                            <a href="#" class=""><span class="mr-2  icon-phone"></span> <span class="d-none d-md-inline-block">1+ (234) 5678 9101</span></a>
+
+
+                            <div class="float-right">
+
+                                <a href="#" class=""><span class="mr-2  icon-twitter"></span> <span class="d-none d-md-inline-block">Twitter</span></a>
+                                <span class="mx-md-2 d-inline-block"></span>
+                                <a href="#" class=""><span class="mr-2  icon-facebook"></span> <span class="d-none d-md-inline-block">Facebook</span></a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>*@
+        <header class="site-navbar js-sticky-header site-navbar-target" role="banner">
+
+            <div class="container">
+                <div class="row align-items-center position-relative">
+
+
+                    <div class="col-12">
+                        <nav class="site-navigation text-right ml-auto " role="navigation">
+
+                            <ul class="site-menu main-menu js-clone-nav ml-auto d-none d-lg-block">
+                                <li><a href="@Url.Action("TrangChu", "GiangVien")" class="nav-link">Trang chủ</a></li>
+
+                                <li class="has-children">
+                                    <a href="@Url.Action("DanhSachLopHoc", "GiangVien")" class="nav-link">Lớp cố vấn</a>
+                                    <ul class="dropdown arrow-top">
+                                        <li><a href="@Url.Action("DanhSachLopHoc", "GiangVien")" class="nav-link">Danh sách lớp học</a></li>
+                                        <li><a href="@Url.Action("DanhGiaRenLuyen", "GiangVien")" class="nav-link">Đánh giá rèn luyện</a></li>
+                                        <li><a href="@Url.Action("BangThongKeLopHoc", "GiangVien")" class="nav-link">Bảng thống kê</a></li>
+                                        @*<li><a href="#" class="nav-link">FAQ</a></li>*@
+                                        @*<li class="has-children">
+                    <a href="#">More Links</a>
+                    <ul class="dropdown">
+                        <li><a href="#">Menu One</a></li>
+                        <li><a href="#">Menu Two</a></li>
+                        <li><a href="#">Menu Three</a></li>
+                    </ul>
+                </li>*@
+                                    </ul>
+                                </li>
+
+                                <li class="has-children">
+                                    <a href="@Url.Action("DanhSachHocPhan", "GiangVien")" class="nav-link">Học phần giảng dạy</a>
+                                    <ul class="dropdown arrow-top">
+                                        <li><a href="@Url.Action("DanhSachHocPhan", "GiangVien")" class="nav-link">Danh sách học phần</a></li>
+                                        <li><a href="@Url.Action("LichGiangDay", "GiangVien")" class="nav-link">Lịch giảng dạy</a></li>
+                                        <li><a href="@Url.Action("BangThongKeHocPhan", "GiangVien")" class="nav-link">Bảng thống kê</a></li>
+                                    </ul>
+                                </li>
+
+                                <li class="has-children">
+                                    <a href="@Url.Action("ChuongTrinhCuaBan", "GiangVien")" class="nav-link">Chương trình giảng dạy</a>
+                                    <ul class="dropdown arrow-top">
+                                        <li><a href="@Url.Action("ChuongTrinhCuaBan", "GiangVien")" class="nav-link">Chương trình của bạn</a></li>
+                                        <li><a href="@Url.Action("ChuongTrinhGiangDay", "GiangVien")" class="nav-link">Thông tin chương trình</a></li>
+                                    </ul>
+                                </li>
+                                @*<li><a href="#" class="nav-link">Blog</a></li>
+        <li><a href="#" class="nav-link">Contact</a></li>*@
+                                <li class="has-children">
+                                    <a href="@Url.Action("ThongTinCaNhan", "GiangVien")" class="nav-link">Người dùng</a>
+                                    <ul class="dropdown arrow-top">
+                                        <li><a href="@Url.Action("ThongTinCaNhan", "GiangVien")" class="nav-link">Thông tin cá nhân</a></li>
+                                        <li><a href="@Url.Action("DangXuat", "DangNhap")" class="nav-link">Đăng xuất</a></li>
+                                        @*<li><a href="#" class="nav-link">FAQ</a></li>*@
+                                        @*<li class="has-children">
+                    <a href="#">More Links</a>
+                    <ul class="dropdown">
+                        <li><a href="#">Menu One</a></li>
+                        <li><a href="#">Menu Two</a></li>
+                        <li><a href="#">Menu Three</a></li>
+                    </ul>
+                </li>*@
+                                    </ul>
+                                </li>
+
+                            </ul>
+
+
+
+                        </nav>
+
+                    </div>
+
+                    <div class="toggle-button d-inline-block d-lg-none"><a href="#" class="site-menu-toggle py-5 js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
+
+                </div>
+            </div>
+
+        </header>
+
+        <div class="hero" style="background-image: url('~/Content/Template_Frame/images/hero_1.jpg');">
+            @RenderBody()
+        </div>
+
+
+
+        <script src="~/Content/Template_Frame/js/jquery-3.3.1.min.js"></script>
+        <script src="~/Content/Template_Frame/js/popper.min.js"></script>
+        <script src="~/Content/Template_Frame/js/bootstrap.min.js"></script>
+        <script src="~/Content/Template_Frame/js/jquery.sticky.js"></script>
+        <script src="~/Content/Template_Frame/js/main.js"></script>
+    </body>
+</html>
+}
+

@@ -1,0 +1,61 @@
+﻿@using QuanLyKetQuaHocTap.Models;
+@model IEnumerable<tb_HocPhan>
+@{
+    ViewBag.Title = "Danh sách học phần giảng dạy";
+    Layout = "~/Views/GiangVien/_LayoutGiangVien.cshtml";
+}
+
+
+<link rel="stylesheet" href="~/Content/Template_List/dslhcv.css" />
+
+@{
+    var gv = ((tb_TaiKhoan)Session["TK"]).tb_GiangVien.First();
+    <div class="container" style="margin-top: 20px">
+        <div class="main-body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card">
+                        @Html.Action("HienThiThongTinCaNhan_Partial", new { id = gv.ID })
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <h3 class="text-center">Danh sách học phần</h3>
+                            <h3 class="spec-1 text-center">Số lượng: @Model.Count()</h3>
+                        </div>
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+                            <div class="container mt-3 mb-5">
+                                <div class="d-flex justify-content-center row">
+                                    <div class="col-md-9">
+                                        @{
+                                            foreach (var item in Model)
+                                            {
+                                                <div class="row p-2 bg-white border rounded">
+                                                    <div class="col-md-3 mt-1">
+                                                        <a href="@Url.Action("XemHocPhan", "GiangVien", new { id = item.ID })">
+                                                            <img class="img-fluid img-responsive rounded product-image" src="~/assets/imgs/class.jpg">
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-md-7 mt-1">
+                                                        <h5>@item.MaHP</h5>
+                                                        <div class="mt-1 mb-1 spec-1">Sỉ số: @item.SiSo_HienTai/@item.SiSo_ToiDa</div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

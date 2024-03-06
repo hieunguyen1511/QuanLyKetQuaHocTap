@@ -1,0 +1,217 @@
+﻿@using QuanLyKetQuaHocTap.Models;
+@model IEnumerable<tb_DiemHocPhan>
+@{
+    ViewBag.Title = "Chi tiết học phần";
+    Layout = "~/Views/GiangVien/_LayoutGiangVien.cshtml";
+}
+<link rel="stylesheet" href="~/Content/Template_List/dslhcv.css" />
+
+
+<style>
+
+    th {
+        text-align: center;
+        background-color: steelblue;
+        color: white;    
+    }
+
+    td {
+        text-align: center;
+    }
+
+    input {
+        max-width: 150px;
+    }
+
+    .long {
+        min-width: 440px;
+    }
+
+    .thS {
+        min-width: 120px;
+    }
+
+    .longS {
+        min-width: 600px;
+    }
+
+    select {
+        min-width: 70px;
+        text-align: center;
+    }
+</style>
+
+
+
+@{
+    var gv = ((tb_TaiKhoan)Session["TK"]).tb_GiangVien.First();
+    var hp = (tb_HocPhan)ViewBag.HP;
+    var mh = hp.tb_MonHoc;
+    <div class="container" style="margin-top: 20px">
+        <div class="main-body">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center">Thông tin học phần mã @hp.MaHP</h3>
+                    <h3 class="spec-1 text-center">Môn học @hp.tb_MonHoc.TenMH (@hp.tb_MonHoc.MaMH)</h3>
+                    <h3 class="spec-1 text-center">Sỉ số: @hp.SiSo_HienTai / @hp.SiSo_ToiDa</h3>
+                    <h3 class="spec-1 text-center">Trạng thái: @hp.TrangThai</h3>
+                </div>
+                <div class="card-header">
+                </div>
+                <div class="card-body">
+                    <div class="container mt-5 mb-5">
+                        <div class="d-flex justify-content-center row">
+                            <div class="col-lg-12">
+
+                                <form action="@Url.Action("CapNhatDiemHP", new { id = hp.ID })" method="post">
+                                    <table class="table-bordered" cellpadding="5">
+                                        <thead>
+                                            <tr>
+                                                @{
+                                                    if (mh.XetDiem == General.coXetDiem)
+                                                    {
+                                                        <th>STT</th>
+                                                        <th class="long">
+                                                            Mã SV - Họ tên
+                                                        </th>
+                                                        <th>
+                                                            Điểm giữa kì (@(mh.TrongSoGiuaKi)%)
+                                                        </th>
+                                                        <th>
+                                                            Điểm cuối kì (@(100 - mh.TrongSoGiuaKi)%)
+                                                        </th>
+                                                        <th>
+                                                            Điểm TK (Hệ số 10)
+                                                        </th>
+                                                        <th>
+                                                            Xếp loại
+                                                        </th>
+                                                    }
+                                                    else
+                                                    {
+                                                        <th class="thS">STT</th>
+
+                                                        <th class="longS" style="min-width: 600px">
+                                                            Mã SV - Họ tên
+                                                        </th>
+                                                        <th class="thS">
+                                                            Kết quả
+                                                        </th>
+                                                        <th class="thS">
+                                                            Xếp loại
+                                                        </th>
+                                                    }
+                                                }
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+                                                var i = 1;
+                                                foreach (var item in Model)
+                                                {
+                                                    double? dtb = General.getDiemTB(mh.TrongSoGiuaKi, item.DiemGK, @item.DiemCK);
+                                                    var xl = General.getXepLoaiDiemHP(dtb);
+                                                    <tr>
+                                                        <td>@i</td>
+                                                        <td class="long">
+                                                            @item.tb_SinhVien.MaSV - @item.tb_SinhVien.HoTen
+                                                        </td>
+                                                        @{
+                                                            if (hp.TrangThai == General.dangHoatDongHP)
+                                                            {
+                                                                if (mh.XetDiem == General.coXetDiem)
+                                                                {
+                                                                    <td>
+                                                                        <input type="number" name="diemGK-@item.ID" value="@item.DiemGK" />
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="number" name="diemCK-@item.ID" value="@item.DiemCK" />
+                                                                    </td>
+                                                                    <td>
+                                                                        @dtb
+                                                                    </td>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <td>
+                                                                        <select name="diemTK-@item.ID">
+                                                                            @{
+                                                                                if (item.DiemCK == General.intDat)
+                                                                                {
+                                                                                    <option selected value="@General.intDat">
+                                                                                        DT
+                                                                                    </option>
+                                                                                    <option value="@General.intRot">
+                                                                                        CD
+                                                                                    </option>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <option value="@General.intDat">
+                                                                                        DT
+                                                                                    </option>
+                                                                                    <option selected value="@General.intRot">
+                                                                                        CD
+                                                                                    </option>
+                                                                                }
+                                                                            }
+
+                                                                        </select>
+                                                                    </td>
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                if (mh.XetDiem == General.coXetDiem)
+                                                                {
+                                                                    <td>@item.DiemGK</td>
+                                                                    <td>@item.DiemCK</td>
+                                                                    <td>
+                                                                        @dtb
+                                                                    </td>
+                                                                }
+                                                                else
+                                                                {
+                                                                    if (item.DiemCK == General.intDat)
+                                                                    {
+                                                                        xl = General.strDat;
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        xl = General.strRot;
+                                                                    }
+                                                                    <td>@xl</td>
+                                                                }
+                                                            }
+                                                        }
+                                                        <td class="center">
+                                                            @xl
+                                                        </td>
+                                                    </tr>
+                                                    i++;
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                    @{
+                                        <hr />
+                                        if (hp.TrangThai == General.dangHoatDongHP)
+                                        {
+                                            <div class="text-secondary">
+                                                <input type="submit" class="btn btn-primary px-4" value="Lưu thay đổi">
+                                            </div>
+                                        }
+                                    }
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

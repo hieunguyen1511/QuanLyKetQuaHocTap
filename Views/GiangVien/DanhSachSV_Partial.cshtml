@@ -1,0 +1,135 @@
+﻿@using QuanLyKetQuaHocTap.Models;
+@model IEnumerable<tb_SinhVien>
+
+<style>
+    .title {
+        background-color: cadetblue;
+        padding-left: 30px;
+        color: white;
+        font-weight: 800;
+    }
+
+    .success {
+        color: deepskyblue;
+        text-align: center;
+        font-weight: 500;
+    }
+
+    .fail {
+        color: red;
+        text-align: center;
+        font-weight: 500;
+    }
+
+    .foot {
+        text-align: left;
+    }
+
+    .foot-text {
+        font-weight: 400;
+        color: darkolivegreen;
+    }
+
+    th {
+        min-width: 110px;
+        text-align: center;
+        user-select: none;
+        background-color: darkslateblue;
+        color: white;
+    }
+
+    .long {
+        min-width: 400px;
+    }
+
+    table {
+    }
+
+    .stt {
+        text-align: center;
+    }
+
+    .center {
+        text-align: center;
+    }
+    select {
+        cursor: pointer;
+        min-width: 200px;
+    }
+</style>
+@{
+    var lh = (tb_CoVanHocTap)ViewBag.lh;
+    <div class="card-body">
+        <h5 class="text-center">Lớp học @lh.MaLop</h5>
+        <h5 class="spec-1 text-center">Ngành: @lh.tb_Nganh.TenNganh (@lh.tb_Nganh.MaNganh)</h5>
+        <h5 class="spec-1 text-center">Sỉ số: @Model.Count()</h5>
+    </div>
+    <div class="card-header">
+    </div>
+
+    <div class="card-body">
+        <table class="table-bordered" cellpadding="5">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Mã SV</th>
+                    <th class="long">Họ tên SV</th>
+                    <th>Ngày sinh</th>
+                    <th>
+                        Giới tính
+                    </th>
+                    <th>
+                        Đã đánh giá
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var i = 1;
+                    foreach (var sv in Model)
+                    {
+                        <tr>
+                            <td class="stt">@i</td>
+                            <td class="center">@sv.MaSV</td>
+                            <td>@sv.HoTen</td>
+                            <td>@General.getStrFormatDate(sv.NgaySinh)</td>
+                            <td class="center">@General.getStrGioiTinh(sv.GioiTinh)</td>
+                            @{
+                                var dg = General.getNewestDGRL(sv);
+                                if (dg == null)
+                                {
+                                    <td class="fail">
+                                        X
+                                    </td>
+                                    <td></td>
+                                }
+                                else
+                                {
+                                    if (dg.tb_ChiTietDGRL.Count() == 0)
+                                    {
+                                        <td class="fail">
+                                            X
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class="success">
+                                            V
+                                        </td>
+                                    }
+                                    <td class="center"><a class="btn btn-primary px-2" href="@Url.Action("XemThongTinSV", new { id = sv.ID })">Đánh giá</a></td>
+                                }
+                            }
+                        </tr>
+                        i++;
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+}
+
