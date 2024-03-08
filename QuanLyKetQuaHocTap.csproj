@@ -136,6 +136,7 @@
     <Compile Include="Areas\Admin\Controllers\QuanLyRenLuyenController.cs" />
     <Compile Include="Areas\Admin\Controllers\QuanLySinhVienController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThongKeController.cs" />
+    <Compile Include="Controllers\GiangVienController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -621,7 +622,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Controllers\" />
+    <Folder Include="Views\GiangVien\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
