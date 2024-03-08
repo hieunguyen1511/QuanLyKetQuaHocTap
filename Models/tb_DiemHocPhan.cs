@@ -12,17 +12,17 @@ namespace QuanLyKetQuaHocTap.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_ThongTinBuoiHoc
+    public partial class tb_DiemHocPhan
     {
         public int ID { get; set; }
         public Nullable<int> ID_HocPhan { get; set; }
-        public Nullable<int> MaPH { get; set; }
-        public Nullable<System.DateTime> NgayHoc { get; set; }
-        public Nullable<int> TietBatDau { get; set; }
-        public Nullable<int> TietKetThuc { get; set; }
-        public Nullable<int> SoTiet { get; set; }
+        public Nullable<int> ID_SinhVien { get; set; }
+        public Nullable<int> NamHoc_DK { get; set; }
+        public Nullable<int> HocKi_DK { get; set; }
+        public Nullable<double> DiemGK { get; set; }
+        public Nullable<double> DiemCK { get; set; }
     
         public virtual tb_HocPhan tb_HocPhan { get; set; }
-        public virtual tb_PhongHoc tb_PhongHoc { get; set; }
+        public virtual tb_SinhVien tb_SinhVien { get; set; }
     }
 }

@@ -17,20 +17,33 @@ namespace QuanLyKetQuaHocTap.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tb_GiangVien()
         {
-            this.tb_DanhGiaRenLuyen = new HashSet<tb_DanhGiaRenLuyen>();
-            this.tb_KhoaHoc = new HashSet<tb_KhoaHoc>();
+            this.tb_CoVanHocTap = new HashSet<tb_CoVanHocTap>();
+            this.tb_HocPhan = new HashSet<tb_HocPhan>();
+            this.tb_CTGD = new HashSet<tb_CTGD>();
+            this.tb_KhoaVien = new HashSet<tb_KhoaVien>();
+            this.tb_MonHoc = new HashSet<tb_MonHoc>();
         }
     
         public int ID { get; set; }
         public Nullable<int> ID_TaiKhoan { get; set; }
         public string MaGV { get; set; }
         public string HoTen { get; set; }
-        public string MaLop_CoVan { get; set; }
+        public Nullable<System.DateTime> NgaySinh { get; set; }
+        public Nullable<bool> GioiTinh { get; set; }
+        public string SDT { get; set; }
+        public string Email { get; set; }
+        public string TrinhDo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_DanhGiaRenLuyen> tb_DanhGiaRenLuyen { get; set; }
-        public virtual tb_TaiKhoanCap tb_TaiKhoanCap { get; set; }
+        public virtual ICollection<tb_CoVanHocTap> tb_CoVanHocTap { get; set; }
+        public virtual tb_TaiKhoan tb_TaiKhoan { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_KhoaHoc> tb_KhoaHoc { get; set; }
+        public virtual ICollection<tb_HocPhan> tb_HocPhan { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_CTGD> tb_CTGD { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_KhoaVien> tb_KhoaVien { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_MonHoc> tb_MonHoc { get; set; }
     }
 }

@@ -14,17 +14,25 @@ namespace QuanLyKetQuaHocTap.Models
     
     public partial class tb_DanhGiaRenLuyen
     {
-        public int ID { get; set; }
-        public Nullable<int> ID_SinhVien { get; set; }
-        public Nullable<int> ID_GiangVien { get; set; }
-        public Nullable<int> ID_QuanTri { get; set; }
-        public string ChuoiDiem { get; set; }
-        public Nullable<int> DiemTongSV { get; set; }
-        public Nullable<int> DiemTongGV { get; set; }
-        public Nullable<int> DiemTongKet { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tb_DanhGiaRenLuyen()
+        {
+            this.tb_ChiTietDGRL = new HashSet<tb_ChiTietDGRL>();
+        }
     
-        public virtual tb_GiangVien tb_GiangVien { get; set; }
-        public virtual tb_QuanTri tb_QuanTri { get; set; }
+        public int ID { get; set; }
+        public Nullable<int> ID_NoiDungDGRL { get; set; }
+        public Nullable<int> ID_SinhVien { get; set; }
+        public Nullable<int> DiemTongTuDG { get; set; }
+        public Nullable<int> DiemTongCVDG { get; set; }
+        public Nullable<int> DiemTongKhoaDG { get; set; }
+        public Nullable<int> HocKi { get; set; }
+        public Nullable<int> Nam { get; set; }
+        public Nullable<bool> TrangThai { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_ChiTietDGRL> tb_ChiTietDGRL { get; set; }
+        public virtual tb_NoiDungDGRL tb_NoiDungDGRL { get; set; }
         public virtual tb_SinhVien tb_SinhVien { get; set; }
     }
 }

@@ -12,37 +12,21 @@ namespace QuanLyKetQuaHocTap.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_SinhVien
+    public partial class tb_NoiDungDGRL
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tb_SinhVien()
+        public tb_NoiDungDGRL()
         {
             this.tb_DanhGiaRenLuyen = new HashSet<tb_DanhGiaRenLuyen>();
-            this.tb_DiemHocPhan = new HashSet<tb_DiemHocPhan>();
+            this.tb_TieuChiDGRL = new HashSet<tb_TieuChiDGRL>();
         }
     
         public int ID { get; set; }
-        public Nullable<int> ID_Nganh { get; set; }
-        public Nullable<int> ID_TaiKhoan { get; set; }
-        public Nullable<int> ID_CoVan { get; set; }
-        public string MaSV { get; set; }
-        public string HoTen { get; set; }
-        public Nullable<int> Cap_NNKC { get; set; }
-        public Nullable<int> Cap_KyNang { get; set; }
-        public Nullable<bool> Bang_NNKC { get; set; }
-        public Nullable<bool> Bang_KyNang { get; set; }
-        public System.DateTime NgaySinh { get; set; }
-        public Nullable<bool> GioiTinh { get; set; }
-        public string SDT { get; set; }
-        public string Email { get; set; }
-        public string TonGiao { get; set; }
+        public Nullable<System.DateTime> NgayTao { get; set; }
     
-        public virtual tb_CoVanHocTap tb_CoVanHocTap { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_DanhGiaRenLuyen> tb_DanhGiaRenLuyen { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_DiemHocPhan> tb_DiemHocPhan { get; set; }
-        public virtual tb_Nganh tb_Nganh { get; set; }
-        public virtual tb_TaiKhoan tb_TaiKhoan { get; set; }
+        public virtual ICollection<tb_TieuChiDGRL> tb_TieuChiDGRL { get; set; }
     }
 }
