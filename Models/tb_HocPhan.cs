@@ -12,25 +12,29 @@ namespace QuanLyKetQuaHocTap.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_Nganh
+    public partial class tb_HocPhan
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tb_Nganh()
+        public tb_HocPhan()
         {
-            this.tb_MonHoc = new HashSet<tb_MonHoc>();
-            this.tb_SinhVien = new HashSet<tb_SinhVien>();
+            this.tb_DiemHocPhan = new HashSet<tb_DiemHocPhan>();
+            this.tb_ThongTinBuoiHoc = new HashSet<tb_ThongTinBuoiHoc>();
         }
     
         public int ID { get; set; }
-        public string MaNganh { get; set; }
-        public string TenNganh { get; set; }
-        public Nullable<int> ID_KhoaVien { get; set; }
-        public Nullable<int> SoNam { get; set; }
+        public Nullable<int> ID_GiangVien { get; set; }
+        public Nullable<int> ID_MonHoc { get; set; }
+        public string MaHP { get; set; }
+        public Nullable<int> SiSo_HienTai { get; set; }
+        public Nullable<int> SiSo_ToiDa { get; set; }
+        public string TrangThai { get; set; }
+        public Nullable<System.DateTime> NgayKhoiTao { get; set; }
     
-        public virtual tb_KhoaVien tb_KhoaVien { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_MonHoc> tb_MonHoc { get; set; }
+        public virtual ICollection<tb_DiemHocPhan> tb_DiemHocPhan { get; set; }
+        public virtual tb_GiangVien tb_GiangVien { get; set; }
+        public virtual tb_MonHoc tb_MonHoc { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_SinhVien> tb_SinhVien { get; set; }
+        public virtual ICollection<tb_ThongTinBuoiHoc> tb_ThongTinBuoiHoc { get; set; }
     }
 }

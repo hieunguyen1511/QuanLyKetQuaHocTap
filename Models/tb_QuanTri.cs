@@ -14,25 +14,11 @@ namespace QuanLyKetQuaHocTap.Models
     
     public partial class tb_QuanTri
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tb_QuanTri()
-        {
-            this.tb_DanhGiaRenLuyen = new HashSet<tb_DanhGiaRenLuyen>();
-            this.tb_KhoaHoc = new HashSet<tb_KhoaHoc>();
-            this.tb_TaiKhoanCap = new HashSet<tb_TaiKhoanCap>();
-        }
-    
         public int ID { get; set; }
+        public Nullable<int> ID_TaiKhoan { get; set; }
         public string MaQT { get; set; }
         public string HoTen { get; set; }
-        public string TenDN { get; set; }
-        public string MatKhau { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_DanhGiaRenLuyen> tb_DanhGiaRenLuyen { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_KhoaHoc> tb_KhoaHoc { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_TaiKhoanCap> tb_TaiKhoanCap { get; set; }
+        public virtual tb_TaiKhoan tb_TaiKhoan { get; set; }
     }
 }

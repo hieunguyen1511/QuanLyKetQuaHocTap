@@ -25,15 +25,24 @@ namespace QuanLyKetQuaHocTap.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tb_DangKyMon> tb_DangKyMon { get; set; }
+        public virtual DbSet<tb_ChiTietDGRL> tb_ChiTietDGRL { get; set; }
+        public virtual DbSet<tb_ChiTietTieuChiDGRL> tb_ChiTietTieuChiDGRL { get; set; }
+        public virtual DbSet<tb_CoVanHocTap> tb_CoVanHocTap { get; set; }
+        public virtual DbSet<tb_CTGD> tb_CTGD { get; set; }
         public virtual DbSet<tb_DanhGiaRenLuyen> tb_DanhGiaRenLuyen { get; set; }
+        public virtual DbSet<tb_DiemHocPhan> tb_DiemHocPhan { get; set; }
         public virtual DbSet<tb_GiangVien> tb_GiangVien { get; set; }
-        public virtual DbSet<tb_KhoaHoc> tb_KhoaHoc { get; set; }
+        public virtual DbSet<tb_HocPhan> tb_HocPhan { get; set; }
+        public virtual DbSet<tb_KhoaVien> tb_KhoaVien { get; set; }
+        public virtual DbSet<tb_MinhChungDGRL> tb_MinhChungDGRL { get; set; }
         public virtual DbSet<tb_MonHoc> tb_MonHoc { get; set; }
         public virtual DbSet<tb_Nganh> tb_Nganh { get; set; }
+        public virtual DbSet<tb_NoiDungDGRL> tb_NoiDungDGRL { get; set; }
+        public virtual DbSet<tb_PhongHoc> tb_PhongHoc { get; set; }
         public virtual DbSet<tb_QuanTri> tb_QuanTri { get; set; }
         public virtual DbSet<tb_SinhVien> tb_SinhVien { get; set; }
-        public virtual DbSet<tb_TaiKhoanCap> tb_TaiKhoanCap { get; set; }
+        public virtual DbSet<tb_TaiKhoan> tb_TaiKhoan { get; set; }
         public virtual DbSet<tb_ThongTinBuoiHoc> tb_ThongTinBuoiHoc { get; set; }
+        public virtual DbSet<tb_TieuChiDGRL> tb_TieuChiDGRL { get; set; }
     }
 }

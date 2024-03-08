@@ -136,56 +136,80 @@
     <Compile Include="Areas\Admin\Controllers\QuanLyRenLuyenController.cs" />
     <Compile Include="Areas\Admin\Controllers\QuanLySinhVienController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThongKeController.cs" />
-    <Compile Include="Controllers\GiangVienController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\SinhVienController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\QuanLyDiemModel.Context.cs">
+    <Compile Include="Models\QuanLyKetQuaHocTapModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>QuanLyDiemModel.Context.tt</DependentUpon>
+      <DependentUpon>QuanLyKetQuaHocTapModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\QuanLyDiemModel.cs">
+    <Compile Include="Models\QuanLyKetQuaHocTapModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>QuanLyDiemModel.tt</DependentUpon>
+      <DependentUpon>QuanLyKetQuaHocTapModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\QuanLyDiemModel.Designer.cs">
+    <Compile Include="Models\QuanLyKetQuaHocTapModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>QuanLyDiemModel.edmx</DependentUpon>
+      <DependentUpon>QuanLyKetQuaHocTapModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\tb_DangKyMon.cs">
-      <DependentUpon>QuanLyDiemModel.tt</DependentUpon>
+    <Compile Include="Models\tb_ChiTietDGRL.cs">
+      <DependentUpon>QuanLyKetQuaHocTapModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_ChiTietTieuChiDGRL.cs">
+      <DependentUpon>QuanLyKetQuaHocTapModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_CoVanHocTap.cs">
+      <DependentUpon>QuanLyKetQuaHocTapModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_CTGD.cs">
+      <DependentUpon>QuanLyKetQuaHocTapModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tb_DanhGiaRenLuyen.cs">
-      <DependentUpon>QuanLyDiemModel.tt</DependentUpon>
+      <DependentUpon>QuanLyKetQuaHocTapModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_DiemHocPhan.cs">
+      <DependentUpon>QuanLyKetQuaHocTapModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tb_GiangVien.cs">
-      <DependentUpon>QuanLyDiemModel.tt</DependentUpon>
+      <DependentUpon>QuanLyKetQuaHocTapModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tb_KhoaHoc.cs">
-      <DependentUpon>QuanLyDiemModel.tt</DependentUpon>
+    <Compile Include="Models\tb_HocPhan.cs">
+      <DependentUpon>QuanLyKetQuaHocTapModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_KhoaVien.cs">
+      <DependentUpon>QuanLyKetQuaHocTapModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_MinhChungDGRL.cs">
+      <DependentUpon>QuanLyKetQuaHocTapModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tb_MonHoc.cs">
-      <DependentUpon>QuanLyDiemModel.tt</DependentUpon>
+      <DependentUpon>QuanLyKetQuaHocTapModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tb_Nganh.cs">
-      <DependentUpon>QuanLyDiemModel.tt</DependentUpon>
+      <DependentUpon>QuanLyKetQuaHocTapModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_NoiDungDGRL.cs">
+      <DependentUpon>QuanLyKetQuaHocTapModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_PhongHoc.cs">
+      <DependentUpon>QuanLyKetQuaHocTapModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tb_QuanTri.cs">
-      <DependentUpon>QuanLyDiemModel.tt</DependentUpon>
+      <DependentUpon>QuanLyKetQuaHocTapModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tb_SinhVien.cs">
-      <DependentUpon>QuanLyDiemModel.tt</DependentUpon>
+      <DependentUpon>QuanLyKetQuaHocTapModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tb_TaiKhoanCap.cs">
-      <DependentUpon>QuanLyDiemModel.tt</DependentUpon>
+    <Compile Include="Models\tb_TaiKhoan.cs">
+      <DependentUpon>QuanLyKetQuaHocTapModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tb_ThongTinBuoiHoc.cs">
-      <DependentUpon>QuanLyDiemModel.tt</DependentUpon>
+      <DependentUpon>QuanLyKetQuaHocTapModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_TieuChiDGRL.cs">
+      <DependentUpon>QuanLyKetQuaHocTapModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -252,6 +276,16 @@
     <Content Include="Content\css\icons\weather-icons\less\css\variables-wind-names.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\style.min.css" />
+    <Content Include="Models\QuanLyKetQuaHocTapModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QuanLyKetQuaHocTapModel.edmx</DependentUpon>
+      <LastGenOutput>QuanLyKetQuaHocTapModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\QuanLyKetQuaHocTapModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QuanLyKetQuaHocTapModel.edmx</DependentUpon>
+      <LastGenOutput>QuanLyKetQuaHocTapModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\js\app-style-switcher.js" />
     <Content Include="Scripts\js\custom.js" />
     <Content Include="Scripts\js\sidebarmenu.js" />
@@ -302,23 +336,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\QuanLyDiemModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>QuanLyDiemModel.Context.cs</LastGenOutput>
-      <DependentUpon>QuanLyDiemModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\QuanLyDiemModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>QuanLyDiemModel.edmx</DependentUpon>
-      <LastGenOutput>QuanLyDiemModel.cs</LastGenOutput>
-    </Content>
-    <EntityDeploy Include="Models\QuanLyDiemModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>QuanLyDiemModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\QuanLyDiemModel.edmx.diagram">
-      <DependentUpon>QuanLyDiemModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap\dist\.DS_Store" />
     <Content Include="Content\bootstrap\dist\css\bootstrap-grid.css.map" />
     <Content Include="Content\bootstrap\dist\css\bootstrap-grid.min.css.map" />
@@ -600,19 +617,26 @@
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
     <Content Include="Views\Shared\_PartialTopBar.cshtml" />
     <Content Include="Views\Shared\_PartialLeftSideBar.cshtml" />
-    <Content Include="Views\SinhVien\Index.cshtml" />
-    <Content Include="Views\GiangVien\Index.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <EntityDeploy Include="Models\QuanLyKetQuaHocTapModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QuanLyKetQuaHocTapModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\QuanLyKetQuaHocTapModel.edmx.diagram">
+      <DependentUpon>QuanLyKetQuaHocTapModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Views\QuanLySinhVien\SuaThongTin.cshtml" />
+    <Content Include="Areas\Admin\Views\QuanLySinhVien\Chitiet.cshtml" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

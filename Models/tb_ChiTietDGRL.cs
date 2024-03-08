@@ -12,25 +12,24 @@ namespace QuanLyKetQuaHocTap.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_Nganh
+    public partial class tb_ChiTietDGRL
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tb_Nganh()
+        public tb_ChiTietDGRL()
         {
-            this.tb_MonHoc = new HashSet<tb_MonHoc>();
-            this.tb_SinhVien = new HashSet<tb_SinhVien>();
+            this.tb_MinhChungDGRL = new HashSet<tb_MinhChungDGRL>();
         }
     
         public int ID { get; set; }
-        public string MaNganh { get; set; }
-        public string TenNganh { get; set; }
-        public Nullable<int> ID_KhoaVien { get; set; }
-        public Nullable<int> SoNam { get; set; }
+        public Nullable<int> ID_DanhGiaRenLuyen { get; set; }
+        public Nullable<int> ID_ChiTietTieuChiDGRL { get; set; }
+        public Nullable<int> DiemTuDG { get; set; }
+        public Nullable<int> DiemCVHT { get; set; }
+        public Nullable<int> DiemKhoa { get; set; }
     
-        public virtual tb_KhoaVien tb_KhoaVien { get; set; }
+        public virtual tb_ChiTietTieuChiDGRL tb_ChiTietTieuChiDGRL { get; set; }
+        public virtual tb_DanhGiaRenLuyen tb_DanhGiaRenLuyen { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_MonHoc> tb_MonHoc { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_SinhVien> tb_SinhVien { get; set; }
+        public virtual ICollection<tb_MinhChungDGRL> tb_MinhChungDGRL { get; set; }
     }
 }

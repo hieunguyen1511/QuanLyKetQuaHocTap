@@ -18,18 +18,7 @@ namespace QuanLyKetQuaHocTap
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional }
             );
-            
-            routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "GiangVien", action = "TrangChu", id = UrlParameter.Optional }
-            );
-            
-            routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "SinhVien", action = "TrangChu", id = UrlParameter.Optional }
-            );
+           
         }
     }
 }

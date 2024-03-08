@@ -3,13 +3,206 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+@model IEnumerable<QuanLyKetQuaHocTap.Models.tb_SinhVien>
 
 <div class="row">
+
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                Quản lý sinh viên
+                <div class="row">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                        <button type="button" class="btn btn btn-info me-md-2" data-toggle="modal" data-target="#modalThemGiangVien">
+                            Thêm sinh viên
+                        </button>
+                        <button type="button" class="btn btn btn-success me-md-2" data-toggle="modal" data-target="#modalDSGV">
+                            In danh sách
+                        </button>
+                        &nbsp;
+
+                    </div>
+                </div>
+                <hr />
+
+
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h3 class="text-center">DANH SÁCH SINH VIÊN</h3>
+                <hr />
+                <table class="table 0">
+                    <tr>
+                        <th>Mã SV</th>
+                        <th>Họ Tên</th>
+                        <th>Ngày Sinh</th>
+                        <th>Giới tính</th>
+                        <th>SĐT</th>
+                        <th>Email</th>
+                        <th>Chuyên Ngành</th>
+                        <th>Chức Năng</th>
+
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MaSV)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HoTen)
+                            </td>
+
+                            <td>
+                                @item.NgaySinh.ToString("dd-MM-yyyy")
+                            </td>
+                            <td>
+                                @{
+                                    if (item.GioiTinh == false)
+                                    {
+                                        <label>Nữ</label>
+                                    }
+
+                                    else
+                                    {
+                                        <label>Nam</label>
+                                    }
+
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SDT)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tb_Nganh.TenNganh)
+                            </td>
+
+                            <td>
+                                @Html.ActionLink("Sửa", "SuaThongTin", new { id = item.ID }, new { @class = "btn btn-primary" })
+                                @Html.ActionLink("Chi tiết", "ChiTiet", new { id = item.ID }, new { @class = "btn btn-success" })
+                                @*@Html.ActionLink("Xóa", "CapNhatTrangThai", null, new { @class = "btn btn-danger" })*@
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalXoaSV-@item.ID">
+                                    Xóa Sinh viên
+                                </button>
+
+
+                                <!--Modal popup xoa sinh vien-->
+                                @using (Html.BeginForm("XoaSinhVien", "QuanLySinhVien", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" value="@item.ID" name="ID" id="ID" />
+                                    <div class="modal fade" id="modalXoaSV-@item.ID">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Thông báo</h4>
+                                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <label> Bạn có muốn xóa Sinh viên <strong style="color:red;">@item.HoTen</strong> không?</label>
+                                                </div>
+                                                <div class="modal-footer justify-content-between">
+                                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Hủy</button>
+                                                    <button type="submit" class="btn btn-danger">Xóa</button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                                <!--end modal-->
+
+                            </td>
+                        </tr>
+                    }
+
+                </table>
             </div>
         </div>
     </div>
+</div>
+
+
+<!--Tim kiem-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card card-body">
+            @using (Html.BeginForm("TimKiem", "QuanLySinhVien", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="row">
+
+                    <div class="col-lg-6">
+                        <input type="text" id="timkiemSV" name="KEY" class="form-control" placeholder="Tìm theo Mã SV hoặc Tên" />
+                    </div>
+                    <div class="col-lg-2">
+                        <button class="btn btn-success" type="submit">Tìm kiếm</button>
+                    </div>
+                    <div class="col-lg-4">
+                        <button class="btn btn-primary col-md-12" type="button" data-bs-toggle="collapse" data-bs-target="#TimKiemGV" aria-expanded="false" aria-controls="TimKiemGV">
+                            Bộ lọc
+                        </button>
+                    </div>
+                </div>
+            }
+            <div class="row">
+                <div class="form-group col-12">
+
+
+
+                    <div class="collapse" id="TimKiemGV">
+                        <hr />
+                        @using (Html.BeginForm("LocTimKiem", "QuanLySinhVien", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="card card-body">
+                                <div class="form-group">
+
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <label class="col-5">Giới tính: @ViewBag.count </label>
+                                            <div class="form-check col-3">
+                                                <input class="form-check-input" type="radio" name="GioiTinh" id="GioiTinh1" value="true" checked>
+                                                <label class="form-check-label" for="GioiTinh1">
+                                                    Nam
+                                                </label>
+                                            </div>
+                                            <div class="form-check col-2">
+                                                <input class="form-check-input" type="radio" name="GioiTinh" id="GioiTinh2" value="false">
+                                                <label class="form-check-label" for="GioiTinh2">
+                                                    Nữ
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <span class="col-4">Chuyên ngành: </span>
+                                            <div class="col-md-8">
+                                                @Html.DropDownList("ChuyenNganh", null, htmlAttributes: new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <button class="btn btn-primary" type="submit">Lọc</button>
+                                </div>
+                            </div>
+                        }
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

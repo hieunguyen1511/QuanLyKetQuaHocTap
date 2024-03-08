@@ -12,18 +12,13 @@ namespace QuanLyKetQuaHocTap.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_DangKyMon
+    public partial class tb_MinhChungDGRL
     {
         public int ID { get; set; }
-        public Nullable<int> ID_KhoaHoc { get; set; }
-        public Nullable<int> ID_SinhVien { get; set; }
-        public Nullable<int> NamHoc_DK { get; set; }
-        public Nullable<int> HocKi_DK { get; set; }
-        public Nullable<double> Diem_KTGK { get; set; }
-        public Nullable<double> Diem_KTCK { get; set; }
-        public string XepLoai { get; set; }
+        public Nullable<int> ID_ChiTietDGRL { get; set; }
+        public string HinhAnh { get; set; }
+        public Nullable<int> STT { get; set; }
     
-        public virtual tb_KhoaHoc tb_KhoaHoc { get; set; }
-        public virtual tb_SinhVien tb_SinhVien { get; set; }
+        public virtual tb_ChiTietDGRL tb_ChiTietDGRL { get; set; }
     }
 }
