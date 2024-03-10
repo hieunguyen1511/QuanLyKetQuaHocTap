@@ -1,0 +1,107 @@
+﻿@using QuanLyKetQuaHocTap.Models;
+@model IEnumerable<tb_ThongTinBuoiHoc>
+<style>
+
+    .button {
+        min-width: 100px;
+        cursor: pointer;
+    }
+
+    table {
+        text-align: center;
+        user-select: none;
+    }
+
+    .header {
+        background-color: cadetblue;
+        min-width: 180px;
+    }
+
+    .tiet {
+        background-color: cadetblue;
+    }
+</style>
+<div id="LichGiangDay">
+    @{
+        DateTime firstDate = (DateTime)ViewBag.FirstDate;
+        DateTime lastDate = (DateTime)ViewBag.LastDate;
+        var gv = ((tb_TaiKhoan)Session["TK"]).tb_GiangVien.First();
+        var t2 = Model.Where(n => n.NgayHoc.GetValueOrDefault().DayOfWeek == DayOfWeek.Monday);
+        var t3 = Model.Where(n => n.NgayHoc.GetValueOrDefault().DayOfWeek == DayOfWeek.Tuesday);
+        var t4 = Model.Where(n => n.NgayHoc.GetValueOrDefault().DayOfWeek == DayOfWeek.Wednesday);
+        var t5 = Model.Where(n => n.NgayHoc.GetValueOrDefault().DayOfWeek == DayOfWeek.Thursday);
+        var t6 = Model.Where(n => n.NgayHoc.GetValueOrDefault().DayOfWeek == DayOfWeek.Friday);
+        var t7 = Model.Where(n => n.NgayHoc.GetValueOrDefault().DayOfWeek == DayOfWeek.Saturday);
+        var cn = Model.Where(n => n.NgayHoc.GetValueOrDefault().DayOfWeek == DayOfWeek.Sunday);
+        DateTime prev = General.getPreviousDate(firstDate);
+        DateTime next = General.getNextDate(lastDate);
+        <div class="card">
+            <div class="card-body">
+                <h5 class="d-flex align-items-center mb-3"><b>Lịch dạy học</b></h5>
+                <p class="text-dark">Từ ngày @General.getStrFormatDate(firstDate, '/') đến @General.getStrFormatDate(lastDate, '/')</p>
+                <table border="1" cellpadding="1">
+                    <thead>
+                        <tr>
+                            <th class="button" onclick="changeDate(this)" id="@prev.Day-@prev.Month-@prev.Year">Trước</th>
+                            <th class="header">Thứ 2</th>
+                            <th class="header">Thứ 3</th>
+                            <th class="header">Thứ 4</th>
+                            <th class="header">Thứ 5</th>
+                            <th class="header">Thứ 6</th>
+                            <th class="header">Thứ 7</th>
+                            <th class="header">Chủ nhật</th>
+                            <th class="button" onclick="changeDate(this)" id="@next.Day-@next.Month-@next.Year">Sau</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            for (int i = 1; i <= 14; i++)
+                            {
+                                <tr>
+                                    <th class="tiet">Tiết @i</th>
+                                    @{
+                                        Html.RenderAction("BlockHocPhan_Partial", new { tt = t2, tiet = i });
+                                        Html.RenderAction("BlockHocPhan_Partial", new { tt = t3, tiet = i });
+                                        Html.RenderAction("BlockHocPhan_Partial", new { tt = t4, tiet = i });
+                                        Html.RenderAction("BlockHocPhan_Partial", new { tt = t5, tiet = i });
+                                        Html.RenderAction("BlockHocPhan_Partial", new { tt = t6, tiet = i });
+                                        Html.RenderAction("BlockHocPhan_Partial", new { tt = t7, tiet = i });
+                                        Html.RenderAction("BlockHocPhan_Partial", new { tt = cn, tiet = i });
+                                    }
+                                    <th class="tiet">Tiết @i</th>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <th class="button">Trước</th>
+                            <th class="header">Thứ 2</th>
+                            <th class="header">Thứ 3</th>
+                            <th class="header">Thứ 4</th>
+                            <th class="header">Thứ 5</th>
+                            <th class="header">Thứ 6</th>
+                            <th class="header">Thứ 7</th>
+                            <th class="header">Chủ nhật</th>
+                            <th class="button">Sau</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    }
+
+</div>
+
+<script>
+    function changeDate(input) {
+        var date = input.id.split('-');
+        const url = new URL('@Url.Action("Lich_Partial", "GiangVien")', location.origin);
+        url.searchParams.set('day', date[0]);
+        url.searchParams.set('month', date[1]);
+        url.searchParams.set('year', date[2]);
+
+        $('#LichGiangDay').load(url.href);
+    }
+</script>
