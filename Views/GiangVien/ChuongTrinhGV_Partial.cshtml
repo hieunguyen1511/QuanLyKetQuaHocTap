@@ -1,0 +1,166 @@
+﻿@using QuanLyKetQuaHocTap.Models;
+@model IEnumerable<tb_CTGD>
+<style>
+    .title {
+        background-color: cadetblue;
+        padding-left: 30px;
+        color: white;
+        font-weight: 800;
+    }
+
+    .success {
+        color: deepskyblue;
+        text-align: center;
+        font-weight: 500;
+    }
+
+    .fail {
+        color: red;
+        text-align: center;
+        font-weight: 500;
+    }
+
+    .foot {
+        text-align: left;
+    }
+
+    .foot-text {
+        font-weight: 400;
+        color: darkolivegreen;
+    }
+
+    th {
+        min-width: 110px;
+        text-align: center;
+        user-select: none;
+        background-color: darkslateblue;
+        color: white;
+    }
+
+    .long {
+        min-width: 500px;
+    }
+
+    table {
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .number {
+        text-align: center;
+    }
+
+    .hightlight {
+        background-color: darkcyan;
+        color: white;
+    }
+</style>
+@{
+    int type = (int)ViewBag.Type;
+    if (type == 0)
+    {
+        var gv = ((tb_TaiKhoan)Session["TK"]).tb_GiangVien.First();
+        foreach (var item in Model)
+        {
+            <div class="card-body">
+                <h5 class="text-center">Chương trình @item.TenCT (@item.MaCT)</h5>
+                <h6 class="spec-1 text-center">Số môn: @item.tb_MonHoc.Count()</h6>
+
+                <br />
+                <table class="table-bordered" cellpadding="5">
+                    <thead>
+                        <tr class="title">
+                            <th>STT</th>
+                            <th>Mã MH</th>
+                            <th class="long">Tên MH</th>
+                            <th>Số TC</th>
+                            <th>Mã Ngành</th>
+                            <th>Môn bắt buộc</th>
+                            <th>Tổng tiết</th>
+                            <th>Lý thuyết</th>
+                            <th>Thực hành</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int i = 1;
+                            foreach (var mh in item.tb_MonHoc)
+                            {
+                                var coDay = gv.tb_MonHoc.FirstOrDefault(n => n.ID == mh.ID) != null;
+                                if (coDay)
+                                {
+                                    <tr>
+                                        <td class="hightlight center">@i</td>
+                                        <td class="hightlight">@mh.MaMH</td>
+                                        <td class="hightlight">@mh.TenMH</td>
+                                        <td class="hightlight center">@mh.SoTC</td>
+                                        <td class="hightlight center">@mh.tb_Nganh.MaNganh</td>
+                                        @{
+                                            if (mh.BatBuoc == General.batBuoc)
+                                            {
+                                                <td class="hightlight success">X</td>
+                                            }
+                                            else
+                                            {
+                                                <td class="hightlight success"></td>
+                                            }
+                                        }
+                                        <td class="hightlight center">@(mh.SoTietLT + mh.SoTietTH)</td>
+                                        <td class="hightlight center">@mh.SoTietLT</td>
+                                        <td class="hightlight center">@mh.SoTietTH</td>
+                                    </tr>
+
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td class="center">@i</td>
+                                        <td>@mh.MaMH</td>
+                                        <td>@mh.TenMH</td>
+                                        <td class="center">@mh.SoTC</td>
+                                        <td class="center">@mh.tb_Nganh.MaNganh</td>
+                                        @{
+                                            if (mh.BatBuoc == General.batBuoc)
+                                            {
+                                                <td class="success">X</td>
+                                            }
+                                            else
+                                            {
+                                                <td class="success"></td>
+                                            }
+                                        }
+                                        <td class="center">@(mh.SoTietLT + mh.SoTietTH)</td>
+                                        <td class="center">@mh.SoTietLT</td>
+                                        <td class="center">@mh.SoTietTH</td>
+                                    </tr>
+                                }
+                                i++;
+
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        }
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <div class="row p-2 bg-white border rounded">
+                <div class="col-md-3 mt-1">
+                    <a href="@Url.Action("XemCTGD", "GiangVien", new { id = item.ID })">
+                        <img class="img-fluid img-responsive rounded product-image" src="~/assets/imgs/studying.jpg">
+                    </a>
+                </div>
+                <div class="col-md-7 mt-1">
+                    <h6>@item.MaCT - @item.TenCT</h6>
+                    <div class="mt-1 mb-1 spec-1">Số môn: @General.getSoLuongMonCTGD(item.ID)</div>
+                </div>
+            </div>
+        }
+    }
+}
