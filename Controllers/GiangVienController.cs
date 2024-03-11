@@ -11,16 +11,24 @@ namespace QuanLyKetQuaHocTap.Controllers
         // GET: GiangVien
         public static tb_GiangVien gv;
 
-        public ActionResult HienThiThongTinCaNhan_Partial(int? id)
-        {
-            var gv = General.db.tb_GiangVien.Find(id);
-            return PartialView(gv);
-        }
-
         public ActionResult DanhSachLopHoc()
         {
-            var lh = gv.tb_CoVanHocTap;
-            return View(lh);
+            return View();
+        }
+
+        public ActionResult DanhSachLopHoc_Partial(string keyword)
+        {
+            IEnumerable<tb_CoVanHocTap> cvht;
+            if (keyword == null)
+            {
+                cvht = gv.tb_CoVanHocTap;
+            }
+            else
+            {
+                keyword = keyword.ToUpper();
+                cvht = gv.tb_CoVanHocTap.Where(n => (n.tb_GiangVien.HoTen.ToUpper().Contains(keyword) || n.tb_GiangVien.MaGV.ToUpper().Contains(keyword) || n.MaLop.ToUpper().Contains(keyword) || n.tb_Nganh.MaNganh.ToUpper().Contains(keyword) || n.tb_Nganh.TenNganh.ToUpper().Contains(keyword)));
+            }
+            return PartialView(cvht);
         }
 
         public ActionResult XemLopHocCoVan(int? id)
@@ -92,10 +100,35 @@ namespace QuanLyKetQuaHocTap.Controllers
             return View(gv.tb_CoVanHocTap);
         }
 
-        public ActionResult DanhSachSV_Partial(int? id)
+        public ActionResult DanhSachSV_Partial(int? id, int type, string keyword)
         {
-            var dssv = General.db.tb_SinhVien.Where(n => n.ID_CoVan == id);
-            ViewBag.lh = General.db.tb_CoVanHocTap.Find(id);
+            IEnumerable<tb_SinhVien> dssv;
+            if (type == 0 || type == 2)
+            {
+                if (keyword == null)
+                {
+                    dssv = General.db.tb_SinhVien.Where(n => n.ID_CoVan == id);
+                }
+                else
+                {
+                    keyword = keyword.ToUpper();
+                    dssv = General.db.tb_SinhVien.Where(n => n.ID_CoVan == id && (n.HoTen.ToUpper().Contains(keyword) || n.MaSV.ToUpper().Contains(keyword)));
+                }
+                ViewBag.lh = General.db.tb_CoVanHocTap.Find(id);
+            }
+            else
+            {
+                if (keyword == null)
+                {
+                    dssv = General.db.tb_SinhVien.Where(n => n.tb_DiemHocPhan.FirstOrDefault(s => s.ID_HocPhan == id) != null);
+                }
+                else
+                {
+                    dssv = General.db.tb_SinhVien.Where(n => n.tb_DiemHocPhan.FirstOrDefault(s => s.ID_HocPhan == id) != null && (n.HoTen.ToUpper().Contains(keyword) || n.MaSV.ToUpper().Contains(keyword)));
+                }
+                ViewBag.HP = General.db.tb_HocPhan.Find(id);
+            }
+            ViewBag.Type = type;
             return PartialView(dssv);
         }
         
@@ -105,12 +138,25 @@ namespace QuanLyKetQuaHocTap.Controllers
             return View(hp);
         }
 
+        public ActionResult DanhSachHocPhan_Partial(string keyword)
+        {
+            IEnumerable<tb_HocPhan> dshp;
+            if (keyword == null)
+            {
+                dshp = gv.tb_HocPhan;
+            }
+            else
+            {
+                keyword = keyword.ToUpper();
+                dshp = gv.tb_HocPhan.Where(n => (n.MaHP.ToUpper().Contains(keyword) || n.tb_MonHoc.TenMH.ToUpper().Contains(keyword) || n.tb_MonHoc.MaMH.ToUpper().Contains(keyword) || n.tb_GiangVien.HoTen.ToUpper().Contains(keyword) || n.tb_GiangVien.MaGV.ToUpper().Contains(keyword)));
+            }
+            return PartialView(dshp);
+        }
+
         public ActionResult XemHocPhan(int? id)
         {
             var hp = General.db.tb_HocPhan.Find(id);
-            var dsdk = hp.tb_DiemHocPhan;
-            ViewBag.HP = General.db.tb_HocPhan.Find(id);
-            return View(dsdk);
+            return View(hp);
         }
 
         public ActionResult CapNhatDiemHP(int? id, FormCollection collection)
@@ -119,6 +165,10 @@ namespace QuanLyKetQuaHocTap.Controllers
             var dhp = hp.tb_DiemHocPhan;
             foreach (var diem in dhp)
             {
+                if (string.IsNullOrEmpty(collection["diemGK-" + diem.ID]))
+                {
+                    continue;
+                }
                 tb_DiemHocPhan diemhp = General.db.tb_DiemHocPhan.Find(diem.ID);
                 if (hp.tb_MonHoc.XetDiem == General.coXetDiem)
                 {
@@ -137,6 +187,11 @@ namespace QuanLyKetQuaHocTap.Controllers
             }
             gv = General.db.tb_GiangVien.Find(gv.ID);
             return RedirectToAction("XemHocPhan", new { hp.ID });
+        }
+
+        public ActionResult XemCTGD(int? id)
+        {
+            return View(General.db.tb_CTGD.Find(id));
         }
     }
 }
