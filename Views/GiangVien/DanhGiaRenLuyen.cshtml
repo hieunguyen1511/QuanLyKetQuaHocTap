@@ -1,9 +1,10 @@
-﻿@using QuanLyKetQuaHocTap.Models;
+@using QuanLyKetQuaHocTap.Models;
 @model IEnumerable<tb_CoVanHocTap>
 @{
     ViewBag.Title = "Đánh giá rèn luyện";
     Layout = "~/Views/GiangVien/_LayoutGiangVien.cshtml";
 }
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
     .title {
         background-color: cadetblue;
@@ -64,6 +65,13 @@
 
 
             <div class="card">
+                <div class="card-header">
+                    <div class="input-group">
+                        <input type="search" id="search" class="form-control rounded" placeholder="Nhập từ khoá" aria-label="Search" aria-describedby="search-addon" />
+
+                        <button style="margin-left: 10px" type="button" class="btn btn-outline-primary" data-mdb-ripple-init onclick="search()">Tìm kiếm</button>
+                    </div>
+                </div>
                 <div class="card-body">
                     <h3 class="text-center">Đánh giá rèn luyện học kì mới</h3>
                 </div>
@@ -94,7 +102,7 @@
 
                 </div>
                 <div id="dssv">
-                    @Html.Action("DanhSachSV_Partial", new { id = firstCV.ID });
+                    @Html.Action("DanhSachSV_Partial", new { id = firstCV.ID, type = 0 });
                 </div>
             </div>
         }
@@ -116,9 +124,30 @@
     selectElement.addEventListener("change", function (event) {
         // Lấy giá trị đã chọn trong select
         var id_cv = Number.parseInt(event.target.value);
+        var s = document.getElementById('search').value;
         const url = new URL('@Url.Action("DanhSachSV_Partial", "GiangVien")', location.origin);
         url.searchParams.set('id', id_cv);
+        url.searchParams.set('type', 0);
+        url.searchParams.set('keyword', s)
+
         $('#dssv').load(url.href);
+    });
+
+    function search() {
+        var s = document.getElementById('search').value;
+        var id = Number.parseInt(selectElement.value);
+        const url = new URL('@Url.Action("DanhSachSV_Partial", "GiangVien")', location.origin);
+        url.searchParams.set('keyword', s)
+        url.searchParams.set('type', 0)
+        url.searchParams.set('id', id)
+        $('#dssv').load(url.href);
+    }
+    var searchBar = document.getElementById('search');
+    searchBar.addEventListener("keypress", function (event) {
+        // Sử dụng keyCode hoặc key để kiểm tra xem có phải là phím Enter không
+        if (event.keyCode === 13 || event.key === "Enter") {
+            search(); // Gọi hàm của bạn ở đây
+        }
     });
 </script>
 
