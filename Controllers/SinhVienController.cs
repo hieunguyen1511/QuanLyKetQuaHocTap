@@ -10,7 +10,7 @@ namespace QuanLyKetQuaHocTap.Controllers
     {
         // GET: SinhVien
         public static tb_SinhVien sv;
-
+ 
         public ActionResult ChuongTrinhDaoTao()
         {
             return View();
@@ -75,6 +75,61 @@ namespace QuanLyKetQuaHocTap.Controllers
             General.db.SaveChanges();
             sv = General.db.tb_SinhVien.Find(sv.ID);
             return RedirectToAction("DanhGiaRenLuyen");
+        }
+
+
+        public ActionResult HocPhanDangKy()
+        {
+            var hp = General.db.tb_HocPhan.Where(n => n.tb_DiemHocPhan.FirstOrDefault(s => s.ID_SinhVien == sv.ID && s.NamHoc_DK == sv.tb_CoVanHocTap.Nam_HT && s.HocKi_DK == sv.tb_CoVanHocTap.HocKi_HT) != null);
+
+            ViewBag.HPCH = General.db.tb_HocPhan.Where(n => n.tb_DiemHocPhan.FirstOrDefault(s => s.ID_SinhVien == sv.ID && (s.NamHoc_DK != sv.tb_CoVanHocTap.Nam_HT || s.HocKi_DK != sv.tb_CoVanHocTap.HocKi_HT)) != null);
+
+            return View(hp);
+        }
+
+        public ActionResult DanhSachHocPhan_Partial(int? nam, int? hocKi, string keyword)
+        {
+            if (keyword == null)
+            {
+                return PartialView(General.db.tb_HocPhan.Where(n => n.tb_DiemHocPhan.FirstOrDefault(s => s.ID_SinhVien == sv.ID && s.NamHoc_DK == nam && s.HocKi_DK == hocKi) != null));
+            }
+            else
+            {
+                return PartialView(General.db.tb_HocPhan.Where(n => n.tb_DiemHocPhan.FirstOrDefault(s => s.ID_SinhVien == sv.ID && s.NamHoc_DK == nam && s.HocKi_DK == hocKi) != null && (n.MaHP.Contains(keyword) || n.tb_MonHoc.TenMH.Contains(keyword) || n.tb_GiangVien.HoTen.Contains(keyword) || n.tb_GiangVien.MaGV.Contains(keyword) || n.tb_GiangVien.MaGV.Contains(keyword))));
+            }
+        }
+
+        public ActionResult XemHocPhan(int? id)
+        {
+            return View(General.db.tb_HocPhan.Find(id));
+        }
+
+        public ActionResult DanhSachSV_Partial(int id, int type, string keyword)
+        {
+            IEnumerable<tb_SinhVien> dssv;
+            if (type == 0)
+            {
+                if (keyword == null)
+                {
+                    dssv = General.db.tb_SinhVien.Where(n => n.tb_DiemHocPhan.FirstOrDefault(s => s.ID_HocPhan == id) != null);
+                }
+                else
+                {
+                    dssv = General.db.tb_SinhVien.Where(n => n.tb_DiemHocPhan.FirstOrDefault(s => s.ID_HocPhan == id) != null && (n.HoTen.Contains(keyword) || n.MaSV.Contains(keyword)));
+                }
+            }
+            else
+            {
+                if (keyword == null)
+                {
+                    dssv = General.db.tb_SinhVien.Where(n => n.ID_CoVan == id);
+                }
+                else
+                {
+                    dssv = General.db.tb_SinhVien.Where(n => n.ID_CoVan == id && (n.HoTen.Contains(keyword) || n.MaSV.Contains(keyword)));
+                }
+            }
+            return PartialView(dssv);
         }
 
     }
