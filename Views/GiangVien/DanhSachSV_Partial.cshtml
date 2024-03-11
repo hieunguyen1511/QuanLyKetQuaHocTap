@@ -1,4 +1,4 @@
-﻿@using QuanLyKetQuaHocTap.Models;
+@using QuanLyKetQuaHocTap.Models;
 @model IEnumerable<tb_SinhVien>
 
 <style>
@@ -52,84 +52,268 @@
     .center {
         text-align: center;
     }
+
     select {
         cursor: pointer;
         min-width: 200px;
     }
 </style>
 @{
-    var lh = (tb_CoVanHocTap)ViewBag.lh;
-    <div class="card-body">
-        <h5 class="text-center">Lớp học @lh.MaLop</h5>
-        <h5 class="spec-1 text-center">Ngành: @lh.tb_Nganh.TenNganh (@lh.tb_Nganh.MaNganh)</h5>
-        <h5 class="spec-1 text-center">Sỉ số: @Model.Count()</h5>
-    </div>
-    <div class="card-header">
-    </div>
 
-    <div class="card-body">
-        <table class="table-bordered" cellpadding="5">
-            <thead>
-                <tr>
-                    <th>STT</th>
-                    <th>Mã SV</th>
-                    <th class="long">Họ tên SV</th>
-                    <th>Ngày sinh</th>
-                    <th>
-                        Giới tính
-                    </th>
-                    <th>
-                        Đã đánh giá
-                    </th>
-                    <th>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @{
-                    var i = 1;
-                    foreach (var sv in Model)
-                    {
-                        <tr>
-                            <td class="stt">@i</td>
-                            <td class="center">@sv.MaSV</td>
-                            <td>@sv.HoTen</td>
-                            <td>@General.getStrFormatDate(sv.NgaySinh)</td>
-                            <td class="center">@General.getStrGioiTinh(sv.GioiTinh)</td>
-                            @{
-                                var dg = General.getNewestDGRL(sv);
-                                if (dg == null)
-                                {
-                                    <td class="fail">
-                                        X
-                                    </td>
-                                    <td></td>
-                                }
-                                else
-                                {
-                                    if (dg.tb_ChiTietDGRL.Count() == 0)
+    int type = (int)ViewBag.Type;
+    if (type == 0)
+    {
+        var lh = (tb_CoVanHocTap)ViewBag.lh;
+        <div class="card-body">
+            <h5 class="text-center">Lớp học @lh.MaLop</h5>
+            <h5 class="spec-1 text-center">Ngành: @lh.tb_Nganh.TenNganh (@lh.tb_Nganh.MaNganh)</h5>
+            <h5 class="spec-1 text-center">Sỉ số: @Model.Count()</h5>
+        </div>
+        <div class="card-header">
+        </div>
+
+        <div class="card-body">
+            <table class="table-bordered" cellpadding="5">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Mã SV</th>
+                        <th class="long">Họ tên SV</th>
+                        <th>Ngày sinh</th>
+                        <th>
+                            Giới tính
+                        </th>
+                        <th>
+                            Đã đánh giá
+                        </th>
+                        <th>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        var i = 1;
+                        foreach (var sv in Model)
+                        {
+                            <tr>
+                                <td class="stt">@i</td>
+                                <td class="center">@sv.MaSV</td>
+                                <td>@sv.HoTen</td>
+                                <td>@General.getStrFormatDate(sv.NgaySinh)</td>
+                                <td class="center">@General.getStrGioiTinh(sv.GioiTinh)</td>
+                                @{
+                                    var dg = General.getNewestDGRL(sv);
+                                    if (dg == null)
                                     {
                                         <td class="fail">
                                             X
                                         </td>
+                                        <td></td>
                                     }
                                     else
                                     {
-                                        <td class="success">
-                                            V
-                                        </td>
+                                        if (dg.tb_ChiTietDGRL.Count() == 0)
+                                        {
+                                            <td class="fail">
+                                                X
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td class="success">
+                                                V
+                                            </td>
+                                        }
+                                        <td class="center"><a class="btn btn-primary px-2" href="@Url.Action("XemThongTinSV", new { id = sv.ID })">Đánh giá</a></td>
                                     }
-                                    <td class="center"><a class="btn btn-primary px-2" href="@Url.Action("XemThongTinSV", new { id = sv.ID })">Đánh giá</a></td>
                                 }
-                            }
-                        </tr>
-                        i++;
+                            </tr>
+                            i++;
+                        }
                     }
-                }
-            </tbody>
-        </table>
-    </div>
+                </tbody>
+            </table>
+        </div>
 
+    }
+    else if (type == 1)
+    {
+        var hp = (tb_HocPhan)ViewBag.HP;
+
+        <form action="@Url.Action("CapNhatDiemHP", new { id = hp.ID })" method="post">
+            <table class="table-bordered" cellpadding="5">
+                <thead>
+                    <tr>
+                        @{
+                            if (hp.tb_MonHoc.XetDiem == General.coXetDiem)
+                            {
+                                <th>STT</th>
+                                <th class="long">
+                                    Mã SV - Họ tên
+                                </th>
+                                <th>
+                                    Điểm giữa kì (@(hp.tb_MonHoc.TrongSoGiuaKi)%)
+                                </th>
+                                <th>
+                                    Điểm cuối kì (@(100 - hp.tb_MonHoc.TrongSoGiuaKi)%)
+                                </th>
+                                <th>
+                                    Điểm TK (Hệ số 10)
+                                </th>
+                                <th>
+                                    Xếp loại
+                                </th>
+                            }
+                            else
+                            {
+                                <th class="thS">STT</th>
+
+                                <th class="longS" style="min-width: 600px">
+                                    Mã SV - Họ tên
+                                </th>
+                                <th class="thS">
+                                    Kết quả
+                                </th>
+                                <th class="thS">
+                                    Xếp loại
+                                </th>
+                            }
+                        }
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        var i = 1;
+                        foreach (var item in Model)
+                        {
+                            var diemHP = item.tb_DiemHocPhan.FirstOrDefault(n => n.ID_HocPhan == hp.ID);
+                            double? dtb = General.getDiemTB(hp.tb_MonHoc.TrongSoGiuaKi, diemHP.DiemGK, diemHP.DiemCK);
+                            var xl = General.getXepLoaiDiemHP(dtb);
+                            <tr>
+                                <td>@i</td>
+                                <td class="long">
+                                    @item.MaSV - @item.HoTen
+                                </td>
+                                @{
+                                    if (hp.TrangThai == General.dangHoatDongHP)
+                                    {
+                                        if (hp.tb_MonHoc.XetDiem == General.coXetDiem)
+                                        {
+                                            <td>
+                                                <input type="number" name="diemGK-@diemHP.ID" value="@diemHP.DiemGK" />
+                                            </td>
+                                            <td>
+                                                <input type="number" name="diemCK-@diemHP.ID" value="@diemHP.DiemCK" />
+                                            </td>
+                                            <td>
+                                                @dtb
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <select name="diemTK-@item.ID">
+                                                    @{
+                                                        if (diemHP.DiemCK == General.intDat)
+                                                        {
+                                                            <option selected value="@General.intDat">
+                                                                DT
+                                                            </option>
+                                                            <option value="@General.intRot">
+                                                                CD
+                                                            </option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@General.intDat">
+                                                                DT
+                                                            </option>
+                                                            <option selected value="@General.intRot">
+                                                                CD
+                                                            </option>
+                                                        }
+                                                    }
+
+                                                </select>
+                                            </td>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (hp.tb_MonHoc.XetDiem == General.coXetDiem)
+                                        {
+                                            <td>@diemHP.DiemGK</td>
+                                            <td>@diemHP.DiemCK</td>
+                                            <td>
+                                                @dtb
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            if (diemHP.DiemCK == General.intDat)
+                                            {
+                                                xl = General.strDat;
+                                            }
+                                            else
+                                            {
+                                                xl = General.strRot;
+                                            }
+                                            <td>@xl</td>
+                                        }
+                                    }
+                                }
+                                <td class="center">
+                                    @xl
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    }
+                </tbody>
+            </table>
+            <hr />
+            @{
+
+                if (hp.TrangThai == General.dangHoatDongHP)
+                {
+                    <div class="text-secondary">
+                        <input type="submit" class="btn btn-primary px-4" value="Lưu thay đổi">
+                    </div>
+                }
+            }
+        </form>
+
+
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <div class="row p-2 bg-white border rounded">
+                <div class="col-md-3 mt-1">
+                    <a href="@Url.Action("XemThongTinSV", "GiangVien", new { id = item.ID })">
+                        @{
+                            if (item.GioiTinh == General.gioiTinhNam)
+                            {
+                                <img class="img-fluid img-responsive rounded product-image" src="~/assets/imgs/student_male.jpg">
+                            }
+                            else
+                            {
+                                <img class="img-fluid img-responsive rounded product-image" src="~/assets/imgs/student_female.jpg">
+                            }
+                        }
+                    </a>
+                </div>
+                <div class="col-md-8 mt-1">
+                    <h5>@item.MaSV - @item.HoTen</h5>
+                    <div class="mt-1 mb-1 spec-1">Ngày sinh: @General.getStrFormatDate(item.NgaySinh)</div>
+                    <div class="mt-1 mb-1 spec-1">Email: @item.Email</div>
+                    <div class="mt-1 mb-1 spec-1">SĐT: @item.SDT</div>
+                </div>
+            </div>
+        }
+    }
 
 }
 
