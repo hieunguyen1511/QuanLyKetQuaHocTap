@@ -1,4 +1,4 @@
-﻿@using QuanLyKetQuaHocTap.Models;
+@using QuanLyKetQuaHocTap.Models;
 
 @{
 
@@ -22,6 +22,7 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="~/Content/Template_Frame/css/bootstrap.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Style -->
         <link rel="stylesheet" href="~/Content/Template_Frame/css/frame.css">
@@ -79,12 +80,12 @@
                                 <li>
                                     <a href="@Url.Action("LopHocCoVan", "SinhVien")" class="nav-link">Lớp học cố vấn</a>
                                 </li>
+                                <li><a href="@Url.Action("ChuongTrinhDaoTao", "SinhVien")" class="nav-link">Chương trình đào tạo</a></li>
                                 <li class="has-children">
-                                    <a href="@Url.Action("ChuongTrinhDaoTao", "SinhVien")" class="nav-link">Chương trình đào tạo</a>
+                                    <a href="@Url.Action("HocPhanDangKy", "SinhVien")" class="nav-link">Học phần đăng ký</a>
                                     <ul class="dropdown arrow-top">
-                                        <li><a href="@Url.Action("ChuongTrinhDaoTao", "SinhVien")" class="nav-link">Chi tiết CTDT</a></li>    
+                                        <li><a href="@Url.Action("HocPhanDangKy", "SinhVien")" class="nav-link">Học phần đăng ký</a></li>  
                                         <li><a href="@Url.Action("XemDiem", "SinhVien")" class="nav-link">Xem điểm</a></li>
-
                                     </ul>
                                 </li>
                                 <li>
