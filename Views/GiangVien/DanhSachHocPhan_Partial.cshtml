@@ -1,0 +1,18 @@
+﻿@using QuanLyKetQuaHocTap.Models;
+@model IEnumerable<tb_HocPhan>
+@{
+    foreach (var item in Model)
+    {
+        <div class="row p-2 bg-white border rounded">
+            <div class="col-md-3 mt-1">
+                <a href="@Url.Action("XemHocPhan", "GiangVien", new { id = item.ID })">
+                    <img class="img-fluid img-responsive rounded product-image" src="~/assets/imgs/class.jpg">
+                </a>
+            </div>
+            <div class="col-md-7 mt-1">
+                <h6>@item.MaHP - @item.tb_MonHoc.TenMH (@item.tb_MonHoc.MaMH)</h6>
+                <div class="mt-1 mb-1 spec-1">Sỉ số: @item.SiSo_HienTai/@item.SiSo_ToiDa</div>
+            </div>
+        </div>
+    }
+}
