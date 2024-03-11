@@ -1,9 +1,10 @@
-﻿@using QuanLyKetQuaHocTap.Models;
+@using QuanLyKetQuaHocTap.Models;
 @model IEnumerable<tb_DanhGiaRenLuyen>
 @{
     ViewBag.Title = "Đánh giá rèn luyện";
     Layout = "~/Views/SinhVien/_LayoutSinhVien.cshtml";
 }
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
     select {
@@ -80,7 +81,7 @@
                                 }
                             }
                         </select>
-                        <br />
+                        <p></p>
                         <h5 class="d-flex align-items-center mb-3"><b>Bài đánh giá rèn luyện Học kì @first.HocKi Năm @first.Nam </b></h5>
                         <div id="dgrl">
                             @Html.Action("HienThiDGRL_Partial", new { id = first.ID, loaiTK = General.intTaiKhoanSV })
