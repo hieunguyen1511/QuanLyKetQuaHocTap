@@ -1,0 +1,138 @@
+﻿@using QuanLyKetQuaHocTap.Models;
+@model IEnumerable<tb_MonHoc>
+<style>
+    .title {
+        background-color: cadetblue;
+        padding-left: 30px;
+        color: white;
+        font-weight: 800;
+    }
+
+    .success {
+        color: deepskyblue;
+        text-align: center;
+        font-weight: 500;
+    }
+
+    .fail {
+        color: red;
+        text-align: center;
+        font-weight: 500;
+    }
+
+    .foot {
+        text-align: left;
+    }
+
+    .foot-text {
+        font-weight: 400;
+        color: darkolivegreen;
+    }
+
+    th {
+        min-width: 110px;
+        text-align: center;
+        user-select: none;
+        background-color: darkslateblue;
+        color: white;
+    }
+
+    .long {
+        min-width: 500px;
+    }
+
+    table {
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .number {
+        text-align: center;
+    }
+
+    .hightlight {
+        background-color: darkcyan;
+        color:white;
+    }
+</style>
+@{
+
+    var gv = ((tb_TaiKhoan)Session["TK"]).tb_GiangVien.First();
+    <table class="table-bordered" cellpadding="5">
+        <thead>
+            <tr class="title">
+                <th>STT</th>
+                <th>Mã MH</th>
+                <th class="long">Tên MH</th>
+                <th>Số TC</th>
+                <th>Mã Ngành</th>
+                <th>Môn bắt buộc</th>
+                <th>Tổng tiết</th>
+                <th>Lý thuyết</th>
+                <th>Thực hành</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int i = 1;
+                foreach (var mh in Model)
+                {
+                    var coDay = gv.tb_MonHoc.FirstOrDefault(n => n.ID == mh.ID) != null;
+                    if (coDay)
+                    {
+                        <tr>
+                            <td class="hightlight center">@i</td>
+                            <td class="hightlight">@mh.MaMH</td>
+                            <td class="hightlight">@mh.TenMH</td>
+                            <td class="hightlight center">@mh.SoTC</td>
+                            <td class="hightlight center">@mh.tb_Nganh.MaNganh</td>
+                            @{
+                                if (mh.BatBuoc == General.batBuoc)
+                                {
+                                    <td class="hightlight success">X</td>
+                                }
+                                else
+                                {
+                                    <td class="hightlight success"></td>
+                                }
+                            }
+                            <td class="hightlight center">@(mh.SoTietLT + mh.SoTietTH)</td>
+                            <td class="hightlight center">@mh.SoTietLT</td>
+                            <td class="hightlight center">@mh.SoTietTH</td>
+                        </tr>
+
+                    }
+                    else
+                    {
+                        <tr>
+                            <td class="center">@i</td>
+                            <td>@mh.MaMH</td>
+                            <td>@mh.TenMH</td>
+                            <td class="center">@mh.SoTC</td>
+                            <td class="center">@mh.tb_Nganh.MaNganh</td>
+                            @{
+                                if (mh.BatBuoc == General.batBuoc)
+                                {
+                                    <td class="success">X</td>
+                                }
+                                else
+                                {
+                                    <td class="success"></td>
+                                }
+                            }
+                            <td class="center">@(mh.SoTietLT + mh.SoTietTH)</td>
+                            <td class="center">@mh.SoTietLT</td>
+                            <td class="center">@mh.SoTietTH</td>
+                        </tr>
+                    }
+                    i++;
+
+                }
+            }
+
+        </tbody>
+    </table>
+
+}
