@@ -53,7 +53,6 @@ namespace QuanLyKetQuaHocTap.Controllers
             return RedirectToAction("ThongTinCaNhan");
         }
 
-
         public ActionResult BangThongKeLopHoc()
         {
             var lh = gv.tb_CoVanHocTap;
