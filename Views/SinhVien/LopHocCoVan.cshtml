@@ -1,0 +1,134 @@
+﻿@using QuanLyKetQuaHocTap.Models;
+@model tb_CoVanHocTap
+@{
+    ViewBag.Title = "Lớp học của bạn";
+    Layout = "~/Views/SinhVien/_LayoutSinhVien.cshtml";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+@{
+    var sv = ((tb_TaiKhoan)Session["TK"]).tb_SinhVien.First();
+
+    <div class="container" style="margin-top: 20px">
+
+        @{
+            if (Model != null)
+            {
+                <div class="card">
+
+                    <div class="card-body">
+                        <h5 class="d-flex align-items-center mb-3"><b>Lớp học mã @Model.MaLop</b></h5>
+                        <div class="d-flex flex-column align-items-center text-center">
+                            @{
+                                if (Model.tb_GiangVien.GioiTinh == General.gioiTinhNam)
+                                {
+                                    <img src="~/assets/imgs/teacher_male.jpg" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+                                }
+                                else
+                                {
+                                    <img src="~/assets/imgs/teacher_female.jpg" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+                                }
+                                <div class="mt-3">
+                                    <h4>Cố vấn học tập: @Model.tb_GiangVien.MaGV - @Model.tb_GiangVien.HoTen</h4>
+                                    <p class="text-muted font-size-sm">Email: @Model.tb_GiangVien.Email</p>
+                                    <p class="text-muted font-size-sm">SĐT: @Model.tb_GiangVien.SDT</p>
+                                    <p class="text-muted font-size-sm">Ngày sinh: @General.getStrFormatDate(Model.tb_GiangVien.NgaySinh)</p>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="d-flex align-items-center mb-3"><b>Bảng thống kê học kì hiện tại</b></h5>
+                        @{
+                            var per1 = General.getPhanTramDGRLLH_HKHT(Model.ID);
+                            var per2 = General.getPhanTramDGRLLH_CoVan(Model.ID, General.XuatSac);
+                            var per3 = General.getPhanTramDGRLLH_CoVan(Model.ID, General.Gioi);
+                            var per4 = General.getPhanTramDGRLLH_CoVan(Model.ID, General.Kha);
+                            var per5 = General.getPhanTramDGRLLH_CoVan(Model.ID, General.TB);
+                            var per6 = General.getPhanTramDGRLLH_CoVan(Model.ID, General.Yeu);
+                            var per7 = General.getPhanTramDGRLLH_CoVan(Model.ID, General.Kem);
+                            var per1_round = Math.Round(per1);
+                            var per2_round = Math.Round(per2);
+                            var per3_round = Math.Round(per3);
+                            var per4_round = Math.Round(per4);
+                            var per5_round = Math.Round(per5);
+                            var per6_round = Math.Round(per6);
+                            var per7_round = Math.Round(per7);
+                        }
+                        <p class="text-dark">Tỉ lệ sinh viên đã đánh giá rèn luyện học kì hiện tại: @per1%</p>
+                        <div class="progress mb-3" style="height: 5px">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: @per1_round%" aria-valuenow="@per1_round" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="text-dark">Tỉ lệ sinh viên loại xuất sắc đánh giá rèn luyện: @per2%</p>
+                        <div class="progress mb-3" style="height: 5px">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: @per2_round%" aria-valuenow="@per2_round" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="text-dark">Tỉ lệ sinh viên loại giỏi đánh giá rèn luyện: @per3%</p>
+                        <div class="progress mb-3" style="height: 5px">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: @per3_round%" aria-valuenow="@per3_round" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="text-dark">Tỉ lệ sinh viên loại khá đánh giá rèn luyện: @per4%</p>
+                        <div class="progress mb-3" style="height: 5px">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: @per4_round%" aria-valuenow="@per4_round" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="text-dark">Tỉ lệ sinh viên loại trung bình đánh giá rèn luyện: @per5%</p>
+                        <div class="progress mb-3" style="height: 5px">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: @per5_round%" aria-valuenow="@per5_round" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="text-dark">Tỉ lệ sinh viên loại yếu đánh giá rèn luyện: @per6%</p>
+                        <div class="progress mb-3" style="height: 5px">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: @per6_round%" aria-valuenow="@per6_round" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="text-dark">Tỉ lệ sinh viên loại kém đánh giá rèn luyện: @per7%</p>
+                        <div class="progress mb-3" style="height: 5px">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: @per7_round%" aria-valuenow="@per7_round" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+
+                    <div class="card-header">
+
+                        <div class="input-group">
+                            <input id="id" type="hidden" value="@Model.ID" />
+                            <input type="search" id="search" class="form-control rounded" placeholder="Nhập từ khoá" aria-label="Search" aria-describedby="search-addon" />
+
+                            <button style="margin-left: 10px" type="button" class="btn btn-outline-primary" data-mdb-ripple-init onclick="search()">Tìm kiếm</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="d-flex align-items-center mb-3"><b>Danh sách sinh viên</b></h5>
+                        <p><b>Sỉ số: @Model.tb_SinhVien.Count()</b></p>
+                        <div class="container mt-3 mb-5">
+                            <div class="d-flex justify-content-center row">
+                                <div class="col-md-9">
+                                    <div id="dssv">
+                                        @Html.Action("DanhSachSV_Partial", new { id = Model.ID, type = 1 })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+}
+<script>
+    function search() {
+        var s = document.getElementById('search').value;
+        var id = Number.parseInt(document.getElementById('id').value);
+        const url = new URL('@Url.Action("DanhSachSV_Partial", "SinhVien")', location.origin);
+        url.searchParams.set('id', id);
+        url.searchParams.set('keyword', s)
+        url.searchParams.set('type', 1)
+        $('#dssv').load(url.href);
+    }
+    var searchBar = document.getElementById('search');
+    searchBar.addEventListener("keypress", function (event) {
+        // Sử dụng keyCode hoặc key để kiểm tra xem có phải là phím Enter không
+        if (event.keyCode === 13 || event.key === "Enter") {
+            search(); // Gọi hàm của bạn ở đây
+        }
+    });
+</script>

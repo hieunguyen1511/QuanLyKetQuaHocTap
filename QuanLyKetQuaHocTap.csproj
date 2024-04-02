@@ -142,76 +142,100 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\QuanLyDiemModel.Context.cs">
+    <Compile Include="Models\General.cs" />
+    <Compile Include="Models\QuanLyKetQuaHocTapModel.Context.cs" />
+    <Compile Include="Models\QuanLyKetQuaHocTapModel.Context1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>QuanLyDiemModel.Context.tt</DependentUpon>
+      <DependentUpon>QuanLyKetQuaHocTapModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\QuanLyDiemModel.cs">
+    <Compile Include="Models\QuanLyKetQuaHocTapModel.cs" />
+    <Compile Include="Models\QuanLyKetQuaHocTapModel.Designer.cs">
+      <DependentUpon>QuanLyKetQuaHocTapModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QuanLyKetQuaHocTapModel1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>QuanLyDiemModel.tt</DependentUpon>
+      <DependentUpon>QuanLyKetQuaHocTapModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\QuanLyDiemModel.Designer.cs">
+    <Compile Include="Models\QuanLyKetQuaHocTapModel1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>QuanLyDiemModel.edmx</DependentUpon>
+      <DependentUpon>QuanLyKetQuaHocTapModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\tb_DangKyMon.cs">
-      <DependentUpon>QuanLyDiemModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tb_DanhGiaRenLuyen.cs">
-      <DependentUpon>QuanLyDiemModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tb_GiangVien.cs">
-      <DependentUpon>QuanLyDiemModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tb_KhoaHoc.cs">
-      <DependentUpon>QuanLyDiemModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tb_MonHoc.cs">
-      <DependentUpon>QuanLyDiemModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tb_Nganh.cs">
-      <DependentUpon>QuanLyDiemModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tb_QuanTri.cs">
-      <DependentUpon>QuanLyDiemModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tb_SinhVien.cs">
-      <DependentUpon>QuanLyDiemModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tb_TaiKhoanCap.cs">
-      <DependentUpon>QuanLyDiemModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tb_ThongTinBuoiHoc.cs">
-      <DependentUpon>QuanLyDiemModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\sysdiagrams.cs" />
+    <Compile Include="Models\tb_ChiTietDGRL.cs" />
+    <Compile Include="Models\tb_ChiTietTieuChiDGRL.cs" />
+    <Compile Include="Models\tb_CoVanHocTap.cs" />
+    <Compile Include="Models\tb_CTGD.cs" />
+    <Compile Include="Models\tb_DiemHocPhan.cs" />
+    <Compile Include="Models\tb_HocPhan.cs" />
+    <Compile Include="Models\tb_KhoaVien.cs" />
+    <Compile Include="Models\tb_MinhChungDGRL.cs" />
+    <Compile Include="Models\tb_NoiDungDGRL.cs" />
+    <Compile Include="Models\tb_PhongHoc.cs" />
+    <Compile Include="Models\tb_TaiKhoan.cs" />
+    <Compile Include="Models\tb_TieuChiDGRL.cs" />
+    <Compile Include="Models\TieuChiDanhGia_temp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\imgs\class.jpg" />
+    <Content Include="assets\imgs\logo-text.png" />
+    <Content Include="assets\imgs\logo.png" />
+    <Content Include="assets\imgs\module.jpg" />
+    <Content Include="assets\imgs\student_female.jpg" />
+    <Content Include="assets\imgs\student_male.jpg" />
+    <Content Include="assets\imgs\studying.jpg" />
+    <Content Include="assets\imgs\teacher_female.jpg" />
+    <Content Include="assets\imgs\teacher_male.jpg" />
+    <Content Include="Content\bootstrap\dist\.DS_Store" />
     <Content Include="Content\bootstrap\dist\css\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap\dist\css\bootstrap-grid.css.map" />
     <Content Include="Content\bootstrap\dist\css\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap\dist\css\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap\dist\css\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap\dist\css\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap\dist\css\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map" />
     <Content Include="Content\bootstrap\dist\css\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap\dist\css\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap\dist\css\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap\dist\css\bootstrap-reboot.min.css.map" />
     <Content Include="Content\bootstrap\dist\css\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap\dist\css\bootstrap-reboot.rtl.css.map" />
     <Content Include="Content\bootstrap\dist\css\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map" />
     <Content Include="Content\bootstrap\dist\css\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap\dist\css\bootstrap-utilities.css.map" />
     <Content Include="Content\bootstrap\dist\css\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap\dist\css\bootstrap-utilities.min.css.map" />
     <Content Include="Content\bootstrap\dist\css\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap\dist\css\bootstrap-utilities.rtl.css.map" />
     <Content Include="Content\bootstrap\dist\css\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map" />
     <Content Include="Content\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="Content\bootstrap\dist\css\bootstrap.css.map" />
     <Content Include="Content\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\dist\css\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap\dist\css\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap\dist\css\bootstrap.rtl.css.map" />
     <Content Include="Content\bootstrap\dist\css\bootstrap.rtl.min.css" />
+    <Content Include="Content\bootstrap\dist\css\bootstrap.rtl.min.css.map" />
     <Content Include="Content\bootstrap\dist\js\bootstrap.bundle.js" />
+    <Content Include="Content\bootstrap\dist\js\bootstrap.bundle.js.map" />
     <Content Include="Content\bootstrap\dist\js\bootstrap.bundle.min.js" />
+    <Content Include="Content\bootstrap\dist\js\bootstrap.bundle.min.js.map" />
     <Content Include="Content\bootstrap\dist\js\bootstrap.esm.js" />
+    <Content Include="Content\bootstrap\dist\js\bootstrap.esm.js.map" />
     <Content Include="Content\bootstrap\dist\js\bootstrap.esm.min.js" />
+    <Content Include="Content\bootstrap\dist\js\bootstrap.esm.min.js.map" />
     <Content Include="Content\bootstrap\dist\js\bootstrap.js" />
+    <Content Include="Content\bootstrap\dist\js\bootstrap.js.map" />
     <Content Include="Content\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="Content\bootstrap\dist\js\bootstrap.min.js.map" />
+    <Content Include="Content\css\.DS_Store" />
+    <Content Include="Content\css\icons\.DS_Store" />
     <Content Include="Content\css\icons\font-awesome\css\fa-brands.css" />
     <Content Include="Content\css\icons\font-awesome\css\fa-brands.min.css" />
     <Content Include="Content\css\icons\font-awesome\css\fa-regular.css" />
@@ -222,128 +246,6 @@
     <Content Include="Content\css\icons\font-awesome\css\fontawesome-all.min.css" />
     <Content Include="Content\css\icons\font-awesome\css\fontawesome.css" />
     <Content Include="Content\css\icons\font-awesome\css\fontawesome.min.css" />
-    <Content Include="Content\css\icons\font-awesome\webfonts\fa-brands-400.svg" />
-    <Content Include="Content\css\icons\font-awesome\webfonts\fa-regular-400.svg" />
-    <Content Include="Content\css\icons\font-awesome\webfonts\fa-solid-900.svg" />
-    <Content Include="Content\css\icons\material-design-iconic-font\css\material-design-iconic-font.css" />
-    <Content Include="Content\css\icons\material-design-iconic-font\css\material-design-iconic-font.min.css" />
-    <Content Include="Content\css\icons\material-design-iconic-font\css\materialdesignicons.min.css" />
-    <Content Include="Content\css\icons\material-design-iconic-font\fonts\Material-Design-Iconic-Font.svg" />
-    <Content Include="Content\css\icons\material-design-iconic-font\fonts\materialdesignicons-webfont.svg" />
-    <Content Include="Content\css\icons\themify-icons\fonts\themify.svg" />
-    <Content Include="Content\css\icons\themify-icons\ie7\ie7.css" />
-    <Content Include="Content\css\icons\themify-icons\ie7\ie7.js" />
-    <Content Include="Content\css\icons\themify-icons\themify-icons.css" />
-    <Content Include="Content\css\icons\weather-icons\css\weather-icons-core.css" />
-    <Content Include="Content\css\icons\weather-icons\css\weather-icons-variables.css" />
-    <Content Include="Content\css\icons\weather-icons\css\weather-icons-wind.css" />
-    <Content Include="Content\css\icons\weather-icons\css\weather-icons-wind.min.css" />
-    <Content Include="Content\css\icons\weather-icons\css\weather-icons.css" />
-    <Content Include="Content\css\icons\weather-icons\css\weather-icons.min.css" />
-    <Content Include="Content\css\icons\weather-icons\fonts\weathericons-regular-webfont.svg" />
-    <Content Include="Content\css\icons\weather-icons\less\css\variables-beaufort.css" />
-    <Content Include="Content\css\icons\weather-icons\less\css\variables-day.css" />
-    <Content Include="Content\css\icons\weather-icons\less\css\variables-direction.css" />
-    <Content Include="Content\css\icons\weather-icons\less\css\variables-misc.css" />
-    <Content Include="Content\css\icons\weather-icons\less\css\variables-moon.css" />
-    <Content Include="Content\css\icons\weather-icons\less\css\variables-neutral.css" />
-    <Content Include="Content\css\icons\weather-icons\less\css\variables-night.css" />
-    <Content Include="Content\css\icons\weather-icons\less\css\variables-time.css" />
-    <Content Include="Content\css\icons\weather-icons\less\css\variables-wind-names.css" />
-    <Content Include="Content\css\style.css" />
-    <Content Include="Content\css\style.min.css" />
-    <Content Include="Scripts\js\app-style-switcher.js" />
-    <Content Include="Scripts\js\custom.js" />
-    <Content Include="Scripts\js\sidebarmenu.js" />
-    <Content Include="Scripts\js\waves.js" />
-    <Content Include="Scripts\plugins\bower_components\chartist-plugin-tooltips\dist\chartist-plugin-tooltip.css" />
-    <Content Include="Scripts\plugins\bower_components\chartist-plugin-tooltips\dist\chartist-plugin-tooltip.min.js" />
-    <Content Include="Scripts\plugins\bower_components\chartist\dist\chartist.min.css" />
-    <Content Include="Scripts\plugins\bower_components\chartist\dist\chartist.min.js" />
-    <Content Include="Scripts\plugins\bower_components\counterup\jquery.counterup.min.js" />
-    <Content Include="Scripts\plugins\bower_components\gmaps\gmaps.js" />
-    <Content Include="Scripts\plugins\bower_components\gmaps\gmaps.min.js" />
-    <Content Include="Scripts\plugins\bower_components\gmaps\jquery.gmaps.js" />
-    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.controls.js" />
-    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.core.js" />
-    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.events.js" />
-    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.geofences.js" />
-    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.geometry.js" />
-    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.layers.js" />
-    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.map_types.js" />
-    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.markers.js" />
-    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.native_extensions.js" />
-    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.overlays.js" />
-    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.routes.js" />
-    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.static.js" />
-    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.streetview.js" />
-    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.styles.js" />
-    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.utils.js" />
-    <Content Include="Scripts\plugins\bower_components\jquery-sparkline\jquery.charts-sparkline.js" />
-    <Content Include="Scripts\plugins\bower_components\jquery-sparkline\jquery.sparkline.min.js" />
-    <Content Include="Scripts\plugins\bower_components\jquery\dist\core.js" />
-    <Content Include="Scripts\plugins\bower_components\jquery\dist\jquery.min.js" />
-    <Content Include="Scripts\plugins\bower_components\jquery\dist\jquery.slim.min.js" />
-    <Content Include="Scripts\plugins\bower_components\perfect-scrollbar\dist\css\perfect-scrollbar.min.css" />
-    <Content Include="Scripts\plugins\bower_components\perfect-scrollbar\dist\js\perfect-scrollbar.jquery.min.js" />
-    <Content Include="Scripts\plugins\bower_components\perfect-scrollbar\dist\js\perfect-scrollbar.min.js" />
-    <Content Include="Scripts\plugins\bower_components\perfect-scrollbar\dist\perfect-scrollbar.common.js" />
-    <Content Include="Scripts\plugins\bower_components\perfect-scrollbar\dist\perfect-scrollbar.esm.js" />
-    <Content Include="Scripts\plugins\bower_components\perfect-scrollbar\dist\perfect-scrollbar.jquery.min.js" />
-    <Content Include="Scripts\plugins\bower_components\perfect-scrollbar\dist\perfect-scrollbar.min.js" />
-    <Content Include="Scripts\plugins\bower_components\popper.js\dist\esm\popper-utils.min.js" />
-    <Content Include="Scripts\plugins\bower_components\popper.js\dist\esm\popper.min.js" />
-    <Content Include="Scripts\plugins\bower_components\popper.js\dist\popper-utils.min.js" />
-    <Content Include="Scripts\plugins\bower_components\popper.js\dist\popper.min.js" />
-    <Content Include="Scripts\plugins\bower_components\popper.js\dist\umd\popper-utils.min.js" />
-    <Content Include="Scripts\plugins\bower_components\popper.js\dist\umd\popper.min.js" />
-    <Content Include="Content\TDMU img\logo-text.png" />
-    <Content Include="Content\TDMU img\logo.png" />
-    <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Global.asax" />
-    <Content Include="Models\QuanLyDiemModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>QuanLyDiemModel.Context.cs</LastGenOutput>
-      <DependentUpon>QuanLyDiemModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\QuanLyDiemModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>QuanLyDiemModel.edmx</DependentUpon>
-      <LastGenOutput>QuanLyDiemModel.cs</LastGenOutput>
-    </Content>
-    <EntityDeploy Include="Models\QuanLyDiemModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>QuanLyDiemModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\QuanLyDiemModel.edmx.diagram">
-      <DependentUpon>QuanLyDiemModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Content\bootstrap\dist\.DS_Store" />
-    <Content Include="Content\bootstrap\dist\css\bootstrap-grid.css.map" />
-    <Content Include="Content\bootstrap\dist\css\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap\dist\css\bootstrap-grid.rtl.css.map" />
-    <Content Include="Content\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map" />
-    <Content Include="Content\bootstrap\dist\css\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap\dist\css\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap\dist\css\bootstrap-reboot.rtl.css.map" />
-    <Content Include="Content\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map" />
-    <Content Include="Content\bootstrap\dist\css\bootstrap-utilities.css.map" />
-    <Content Include="Content\bootstrap\dist\css\bootstrap-utilities.min.css.map" />
-    <Content Include="Content\bootstrap\dist\css\bootstrap-utilities.rtl.css.map" />
-    <Content Include="Content\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map" />
-    <Content Include="Content\bootstrap\dist\css\bootstrap.css.map" />
-    <Content Include="Content\bootstrap\dist\css\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap\dist\css\bootstrap.rtl.css.map" />
-    <Content Include="Content\bootstrap\dist\css\bootstrap.rtl.min.css.map" />
-    <Content Include="Content\bootstrap\dist\js\bootstrap.bundle.js.map" />
-    <Content Include="Content\bootstrap\dist\js\bootstrap.bundle.min.js.map" />
-    <Content Include="Content\bootstrap\dist\js\bootstrap.esm.js.map" />
-    <Content Include="Content\bootstrap\dist\js\bootstrap.esm.min.js.map" />
-    <Content Include="Content\bootstrap\dist\js\bootstrap.js.map" />
-    <Content Include="Content\bootstrap\dist\js\bootstrap.min.js.map" />
-    <Content Include="Content\css\.DS_Store" />
-    <Content Include="Content\css\icons\.DS_Store" />
     <Content Include="Content\css\icons\font-awesome\less\fa-brands.less" />
     <Content Include="Content\css\icons\font-awesome\less\fa-regular.less" />
     <Content Include="Content\css\icons\font-awesome\less\fa-solid.less" />
@@ -377,33 +279,61 @@
     <Content Include="Content\css\icons\font-awesome\scss\_stacked.scss" />
     <Content Include="Content\css\icons\font-awesome\scss\_variables.scss" />
     <Content Include="Content\css\icons\font-awesome\webfonts\fa-brands-400.eot" />
+    <Content Include="Content\css\icons\font-awesome\webfonts\fa-brands-400.svg" />
     <Content Include="Content\css\icons\font-awesome\webfonts\fa-brands-400.ttf" />
     <Content Include="Content\css\icons\font-awesome\webfonts\fa-brands-400.woff" />
     <Content Include="Content\css\icons\font-awesome\webfonts\fa-brands-400.woff2" />
     <Content Include="Content\css\icons\font-awesome\webfonts\fa-regular-400.eot" />
+    <Content Include="Content\css\icons\font-awesome\webfonts\fa-regular-400.svg" />
     <Content Include="Content\css\icons\font-awesome\webfonts\fa-regular-400.ttf" />
     <Content Include="Content\css\icons\font-awesome\webfonts\fa-regular-400.woff" />
     <Content Include="Content\css\icons\font-awesome\webfonts\fa-regular-400.woff2" />
     <Content Include="Content\css\icons\font-awesome\webfonts\fa-solid-900.eot" />
+    <Content Include="Content\css\icons\font-awesome\webfonts\fa-solid-900.svg" />
     <Content Include="Content\css\icons\font-awesome\webfonts\fa-solid-900.ttf" />
     <Content Include="Content\css\icons\font-awesome\webfonts\fa-solid-900.woff" />
     <Content Include="Content\css\icons\font-awesome\webfonts\fa-solid-900.woff2" />
+    <Content Include="Content\css\icons\material-design-iconic-font\css\material-design-iconic-font.css" />
+    <Content Include="Content\css\icons\material-design-iconic-font\css\material-design-iconic-font.min.css" />
+    <Content Include="Content\css\icons\material-design-iconic-font\css\materialdesignicons.min.css" />
     <Content Include="Content\css\icons\material-design-iconic-font\fonts\Material-Design-Iconic-Font.eot" />
+    <Content Include="Content\css\icons\material-design-iconic-font\fonts\Material-Design-Iconic-Font.svg" />
     <Content Include="Content\css\icons\material-design-iconic-font\fonts\Material-Design-Iconic-Font.ttf" />
     <Content Include="Content\css\icons\material-design-iconic-font\fonts\Material-Design-Iconic-Font.woff" />
     <Content Include="Content\css\icons\material-design-iconic-font\fonts\Material-Design-Iconic-Font.woff2" />
     <Content Include="Content\css\icons\material-design-iconic-font\fonts\materialdesignicons-webfont.eot" />
+    <Content Include="Content\css\icons\material-design-iconic-font\fonts\materialdesignicons-webfont.svg" />
     <Content Include="Content\css\icons\material-design-iconic-font\fonts\materialdesignicons-webfont.ttf" />
     <Content Include="Content\css\icons\material-design-iconic-font\fonts\materialdesignicons-webfont.woff" />
     <Content Include="Content\css\icons\material-design-iconic-font\fonts\materialdesignicons-webfont.woff2" />
     <Content Include="Content\css\icons\themify-icons\fonts\themify.eot" />
+    <Content Include="Content\css\icons\themify-icons\fonts\themify.svg" />
     <Content Include="Content\css\icons\themify-icons\fonts\themify.ttf" />
     <Content Include="Content\css\icons\themify-icons\fonts\themify.woff" />
+    <Content Include="Content\css\icons\themify-icons\ie7\ie7.css" />
+    <Content Include="Content\css\icons\themify-icons\ie7\ie7.js" />
+    <Content Include="Content\css\icons\themify-icons\themify-icons.css" />
     <Content Include="Content\css\icons\themify-icons\themify-icons.less" />
+    <Content Include="Content\css\icons\weather-icons\css\weather-icons-core.css" />
+    <Content Include="Content\css\icons\weather-icons\css\weather-icons-variables.css" />
+    <Content Include="Content\css\icons\weather-icons\css\weather-icons-wind.css" />
+    <Content Include="Content\css\icons\weather-icons\css\weather-icons-wind.min.css" />
+    <Content Include="Content\css\icons\weather-icons\css\weather-icons.css" />
+    <Content Include="Content\css\icons\weather-icons\css\weather-icons.min.css" />
     <Content Include="Content\css\icons\weather-icons\fonts\weathericons-regular-webfont.eot" />
+    <Content Include="Content\css\icons\weather-icons\fonts\weathericons-regular-webfont.svg" />
     <Content Include="Content\css\icons\weather-icons\fonts\weathericons-regular-webfont.ttf" />
     <Content Include="Content\css\icons\weather-icons\fonts\weathericons-regular-webfont.woff" />
     <Content Include="Content\css\icons\weather-icons\fonts\weathericons-regular-webfont.woff2" />
+    <Content Include="Content\css\icons\weather-icons\less\css\variables-beaufort.css" />
+    <Content Include="Content\css\icons\weather-icons\less\css\variables-day.css" />
+    <Content Include="Content\css\icons\weather-icons\less\css\variables-direction.css" />
+    <Content Include="Content\css\icons\weather-icons\less\css\variables-misc.css" />
+    <Content Include="Content\css\icons\weather-icons\less\css\variables-moon.css" />
+    <Content Include="Content\css\icons\weather-icons\less\css\variables-neutral.css" />
+    <Content Include="Content\css\icons\weather-icons\less\css\variables-night.css" />
+    <Content Include="Content\css\icons\weather-icons\less\css\variables-time.css" />
+    <Content Include="Content\css\icons\weather-icons\less\css\variables-wind-names.css" />
     <Content Include="Content\css\icons\weather-icons\less\icon-classes\classes-beaufort.less" />
     <Content Include="Content\css\icons\weather-icons\less\icon-classes\classes-day.less" />
     <Content Include="Content\css\icons\weather-icons\less\icon-classes\classes-direction.less" />
@@ -468,8 +398,8 @@
     <Content Include="Content\css\icons\weather-icons\sass\weather-icons-wind.scss" />
     <Content Include="Content\css\icons\weather-icons\sass\weather-icons.min.scss" />
     <Content Include="Content\css\icons\weather-icons\sass\weather-icons.scss" />
-    <Content Include="Scripts\plugins\bower_components\.DS_Store" />
-    <Content Include="Scripts\plugins\bower_components\gmaps\gmaps.min.js.map" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\style.min.css" />
     <Content Include="Content\scss\.DS_Store" />
     <Content Include="Content\scss\bootstrap\.DS_Store" />
     <Content Include="Content\scss\bootstrap\bootstrap-grid.scss" />
@@ -576,6 +506,93 @@
     <Content Include="Content\scss\widgets\profile.scss" />
     <Content Include="Content\scss\widgets\steamline.scss" />
     <Content Include="Content\scss\widgets\widgets.scss" />
+    <Content Include="Content\TDMU img\logo-text.png" />
+    <Content Include="Content\TDMU img\logo.png" />
+    <Content Include="Content\Template_Frame\css\bootstrap.min.css" />
+    <Content Include="Content\Template_Frame\css\bootstrap\bootstrap-reboot.css" />
+    <Content Include="Content\Template_Frame\css\bootstrap\mixins\_badge.css" />
+    <Content Include="Content\Template_Frame\css\bootstrap\mixins\_box-shadow.css" />
+    <Content Include="Content\Template_Frame\css\bootstrap\mixins\_reset-text.css" />
+    <Content Include="Content\Template_Frame\css\bootstrap\_media.css" />
+    <Content Include="Content\Template_Frame\css\frame.css" />
+    <Content Include="Content\Template_Frame\css\owl.carousel.min.css" />
+    <Content Include="Content\Template_Frame\fonts\icomoon\demo-files\demo.css" />
+    <Content Include="Content\Template_Frame\fonts\icomoon\demo-files\demo.js" />
+    <Content Include="Content\Template_Frame\fonts\icomoon\demo.html" />
+    <Content Include="Content\Template_Frame\fonts\icomoon\fonts\icomoon.svg" />
+    <Content Include="Content\Template_Frame\fonts\icomoon\Read Me.txt" />
+    <Content Include="Content\Template_Frame\fonts\icomoon\style.css" />
+    <Content Include="Content\Template_Frame\images\hero_1.jpg" />
+    <Content Include="Content\Template_Frame\images\hero_3.jpg" />
+    <Content Include="Content\Template_Frame\js\bootstrap.min.js" />
+    <Content Include="Content\Template_Frame\js\jquery-3.3.1.min.js" />
+    <Content Include="Content\Template_Frame\js\jquery.sticky.js" />
+    <Content Include="Content\Template_Frame\js\main.js" />
+    <Content Include="Content\Template_Frame\js\owl.carousel.min.js" />
+    <Content Include="Content\Template_Frame\js\popper.min.js" />
+    <Content Include="Content\Template_Info\main.css" />
+    <Content Include="Content\Template_List\dslhcv.css" />
+    <Content Include="Content\Template_Login\css\login.css" />
+    <Content Include="Content\Template_Login\img.png" />
+    <Content Include="Content\Template_Login\imgs\img.png" />
+    <Content Include="Models\QuanLyKetQuaHocTapModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>QuanLyKetQuaHocTapModel.Context1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\QuanLyKetQuaHocTapModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>QuanLyKetQuaHocTapModel1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\js\app-style-switcher.js" />
+    <Content Include="Scripts\js\custom.js" />
+    <Content Include="Scripts\js\sidebarmenu.js" />
+    <Content Include="Scripts\js\waves.js" />
+    <Content Include="Scripts\plugins\bower_components\chartist-plugin-tooltips\dist\chartist-plugin-tooltip.css" />
+    <Content Include="Scripts\plugins\bower_components\chartist-plugin-tooltips\dist\chartist-plugin-tooltip.min.js" />
+    <Content Include="Scripts\plugins\bower_components\chartist\dist\chartist.min.css" />
+    <Content Include="Scripts\plugins\bower_components\chartist\dist\chartist.min.js" />
+    <Content Include="Scripts\plugins\bower_components\counterup\jquery.counterup.min.js" />
+    <Content Include="Scripts\plugins\bower_components\gmaps\gmaps.js" />
+    <Content Include="Scripts\plugins\bower_components\gmaps\gmaps.min.js" />
+    <Content Include="Scripts\plugins\bower_components\gmaps\jquery.gmaps.js" />
+    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.controls.js" />
+    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.core.js" />
+    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.events.js" />
+    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.geofences.js" />
+    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.geometry.js" />
+    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.layers.js" />
+    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.map_types.js" />
+    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.markers.js" />
+    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.native_extensions.js" />
+    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.overlays.js" />
+    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.routes.js" />
+    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.static.js" />
+    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.streetview.js" />
+    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.styles.js" />
+    <Content Include="Scripts\plugins\bower_components\gmaps\lib\gmaps.utils.js" />
+    <Content Include="Scripts\plugins\bower_components\jquery-sparkline\jquery.charts-sparkline.js" />
+    <Content Include="Scripts\plugins\bower_components\jquery-sparkline\jquery.sparkline.min.js" />
+    <Content Include="Scripts\plugins\bower_components\jquery\dist\core.js" />
+    <Content Include="Scripts\plugins\bower_components\jquery\dist\jquery.min.js" />
+    <Content Include="Scripts\plugins\bower_components\jquery\dist\jquery.slim.min.js" />
+    <Content Include="Scripts\plugins\bower_components\perfect-scrollbar\dist\css\perfect-scrollbar.min.css" />
+    <Content Include="Scripts\plugins\bower_components\perfect-scrollbar\dist\js\perfect-scrollbar.jquery.min.js" />
+    <Content Include="Scripts\plugins\bower_components\perfect-scrollbar\dist\js\perfect-scrollbar.min.js" />
+    <Content Include="Scripts\plugins\bower_components\perfect-scrollbar\dist\perfect-scrollbar.common.js" />
+    <Content Include="Scripts\plugins\bower_components\perfect-scrollbar\dist\perfect-scrollbar.esm.js" />
+    <Content Include="Scripts\plugins\bower_components\perfect-scrollbar\dist\perfect-scrollbar.jquery.min.js" />
+    <Content Include="Scripts\plugins\bower_components\perfect-scrollbar\dist\perfect-scrollbar.min.js" />
+    <Content Include="Scripts\plugins\bower_components\popper.js\dist\esm\popper-utils.min.js" />
+    <Content Include="Scripts\plugins\bower_components\popper.js\dist\esm\popper.min.js" />
+    <Content Include="Scripts\plugins\bower_components\popper.js\dist\popper-utils.min.js" />
+    <Content Include="Scripts\plugins\bower_components\popper.js\dist\popper.min.js" />
+    <Content Include="Scripts\plugins\bower_components\popper.js\dist\umd\popper-utils.min.js" />
+    <Content Include="Scripts\plugins\bower_components\popper.js\dist\umd\popper.min.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\plugins\bower_components\.DS_Store" />
+    <Content Include="Scripts\plugins\bower_components\gmaps\gmaps.min.js.map" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_PartialTopBar.cshtml" />
@@ -613,6 +630,114 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\Template_Frame\css\.DS_Store" />
+    <Content Include="Content\Template_Frame\css\bootstrap.min.css.map" />
+    <Content Include="Content\Template_Frame\fonts\.DS_Store" />
+    <Content Include="Content\Template_Frame\fonts\icomoon\fonts\icomoon.eot" />
+    <Content Include="Content\Template_Frame\fonts\icomoon\fonts\icomoon.ttf" />
+    <Content Include="Content\Template_Frame\fonts\icomoon\fonts\icomoon.woff" />
+    <Content Include="Content\Template_Frame\fonts\icomoon\selection.json" />
+    <Content Include="Content\Template_Frame\images\.DS_Store" />
+    <Content Include="Content\Template_Frame\scss\.DS_Store" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\bootstrap-grid.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\bootstrap-reboot.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\bootstrap.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_alert.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_background-variant.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_badge.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_border-radius.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_box-shadow.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_breakpoints.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_buttons.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_caret.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_clearfix.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_deprecate.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_float.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_forms.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_gradients.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_grid-framework.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_grid.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_hover.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_image.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_list-group.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_lists.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_nav-divider.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_pagination.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_reset-text.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_resize.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_screen-reader.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_size.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_table-row.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_text-emphasis.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_text-hide.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_text-truncate.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_transition.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\mixins\_visibility.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\utilities\_align.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\utilities\_background.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\utilities\_borders.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\utilities\_clearfix.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\utilities\_display.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\utilities\_embed.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\utilities\_flex.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\utilities\_float.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\utilities\_overflow.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\utilities\_position.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\utilities\_screenreaders.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\utilities\_shadows.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\utilities\_sizing.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\utilities\_spacing.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\utilities\_stretched-link.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\utilities\_text.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\utilities\_visibility.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\vendor\_rfs.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_alert.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_badge.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_breadcrumb.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_button-group.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_buttons.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_card.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_carousel.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_close.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_code.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_custom-forms.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_dropdown.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_forms.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_functions.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_grid.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_images.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_input-group.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_jumbotron.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_list-group.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_media.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_mixins.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_modal.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_nav.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_navbar.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_pagination.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_popover.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_print.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_progress.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_reboot.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_root.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_spinners.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_tables.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_toasts.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_tooltip.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_transitions.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_type.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_utilities.scss" />
+    <Content Include="Content\Template_Frame\scss\bootstrap\_variables.scss" />
+    <Content Include="Content\Template_Frame\scss\style.scss" />
+    <Content Include=".gitattributes" />
+    <Content Include=".gitignore" />
+    <EntityDeploy Include="Models\QuanLyKetQuaHocTapModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QuanLyKetQuaHocTapModel1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\QuanLyKetQuaHocTapModel.edmx.diagram">
+      <DependentUpon>QuanLyKetQuaHocTapModel.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

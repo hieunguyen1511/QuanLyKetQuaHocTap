@@ -1,0 +1,161 @@
+﻿
+@using QuanLyKetQuaHocTap.Models
+
+@{
+    ViewBag.Title = "Quản lý đánh giá rèn luyện";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model IEnumerable<QuanLyKetQuaHocTap.Models.tb_CoVanHocTap>
+
+
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                        <a class="btn btn btn-info me-md-2" href="@Url.Action("QuanLyNoiDungRenLuyen")">
+                            Quản lý nội dung rèn luyện
+                        </a>
+                        <a class="btn btn btn-primary me-md-2" href="@Url.Action("ToChucDanhGia")">
+                            Tổ chức đánh giá rèn luyện
+                        </a>
+                    </div>
+                </div>
+                <hr />
+
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h3 class="text-center">DANH SÁCH LỚP HỌC</h3>
+                <hr />
+                <table class="table 0">
+                    <tr>
+                        <th>Mã lớp</th>
+                        <th>Mã GV</th>
+                        <th>Họ tên GV</th>
+                        <th>Sỉ số</th>
+                        <th>Chuyên ngành</th>
+                        <th>Năm - Học kì</th>
+                        <th>Chức Năng</th>
+
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MaLop)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tb_GiangVien.MaGV)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tb_GiangVien.HoTen)
+                            </td>
+                            <td>
+                                @item.tb_SinhVien.Count()
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tb_Nganh.TenNganh)
+                            </td>
+                            <td>
+                                Năm @item.Nam_HT - Học kì @item.HocKi_HT
+                            </td>
+
+                            <td>
+                                @Html.ActionLink("Chi tiết", "ChiTietLH", new { id = item.ID }, new { @class = "btn btn-success" })
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Tim kiem-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card card-body">
+            @using (Html.BeginForm("TimKiemLH", "QuanLyRenLuyen", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="row">
+
+                    <div class="col-lg-6">
+                        <input type="text" id="timkiemLH" name="KEY" class="form-control" placeholder="Tìm theo Mã lớp, Mã GV hoặc Tên GV" value="@ViewBag.keyword" />
+                    </div>
+                    <div class="col-lg-2">
+                        <button class="btn btn-success" type="submit">Tìm kiếm</button>
+                    </div>
+                    <div class="col-lg-4">
+                        <button class="btn btn-primary col-md-12" type="button" data-bs-toggle="collapse" data-bs-target="#BoLocLH" aria-expanded="false" aria-controls="BoLocLH">
+                            Bộ lọc
+                        </button>
+                    </div>
+                </div>
+            }
+            <div class="row">
+                <div class="form-group col-12">
+
+
+
+                    <div class="collapse" id="BoLocLH">
+                        <hr />
+                        @using (Html.BeginForm("LocTimKiemLH", "QuanLyRenLuyen", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="card card-body">
+                                <div class="form-group">
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <span class="col-4">Ngành học: </span>
+                                            <div class="col-md-8">
+                                                <select class="form-control" name="Nganh" id="selectNganh">
+                                                    @{
+                                                        var nganh = (List<tb_Nganh>)ViewBag.Nganh;
+                                                        if (ViewBag.SelectNganh == null)
+                                                        {
+                                                            <option value="-1" selected>Tất cả</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="-1">Tất cả</option>
+                                                        }
+                                                        foreach (var item in nganh)
+                                                        {
+                                                            if (ViewBag.SelectNganh != null && item.ID == (int)ViewBag.SelectNganh)
+                                                            {
+                                                                <option value="@item.ID" selected>@item.TenNganh</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="@item.ID">@item.TenNganh</option>
+                                                            }
+                                                        }
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <button class="btn btn-primary" type="submit">Lọc kết quả</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

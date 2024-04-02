@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "Đăng nhập tài khoản cấp";
+    Layout = "~/Views/DangNhap/_LayoutDangNhap.cshtml";
+}
+
+
+<section class="vh-100">
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-9 col-lg-6 col-xl-5">
+                <img src="~/Content/Template_Login/imgs/img.png"
+                     class="img-fluid" alt="Sample image">
+            </div>
+            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                <form>
+                    @*<div class="divider d-flex align-items-center my-4">
+                            <p class="text-center fw-bold mx-3 mb-0">Or</p>
+                        </div>*@
+                    <label class="form-label" for="userName">Tên đăng nhập</label>
+                    <div class="form-outline mb-4" id="userNameBlock">
+                        <input type="text" id="userName" class="form-control form-control-lg" />
+                    </div>
+
+                    <div class="form-outline mb-3" id="passwordBlock">
+                        <label class="form-label" for="password">Mật khẩu</label>
+                        <input type="password" id="password" class="form-control form-control-lg" />
+                        @{
+                            if (Session["ErrorWrongAccount"] != null)
+                            {
+                                <p class="small fw-bold mt-2 pt-1 mb-0" style="color: red">
+                                    @Session["ErrorWrongAccount"]
+                                </p>
+                            }
+                        }
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="form-check mb-0">
+                            <input class="form-check-input me-2" type="checkbox" value="" id="remember" />
+                            <label class="form-check-label" for="remember">
+                                Duy trì đăng nhập
+                            </label>
+                        </div>
+
+
+                        <a href="" class="text-body">Quên mật khẩu?</a>
+
+
+                    </div>
+
+                    <div class="text-center text-lg-start mt-4 pt-2">
+                        <button type="button" class="btn btn-primary btn-lg"
+                                style="padding-left: 2.5rem; padding-right: 2.5rem;" onclick="login()">
+                            Đăng nhập
+                        </button>
+                        <p class="small fw-bold mt-2 pt-1 mb-0">
+                            Tài khoản được cấp bởi Quản trị của TDMU
+                        </p>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

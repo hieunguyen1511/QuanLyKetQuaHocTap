@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewBag.Title = "ThemGiangVien";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+
+        <div class="card">
+            <div class="card-body">
+                @*<div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                        <a href="#" class="btn btn-success col-md-2 font-bold">Nhập danh sách</a>
+                    </div>*@
+                @*<a href="#" class="btn btn-success col-md-2 font-bold">Nhập danh sách</a>*@
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                @using (Html.BeginForm("ThemGiangVien", "QuanLyGiangVien", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Mã giảng viên</label>
+                                <div class="col-md">
+                                    <input type="text" name="MaGV" id="MaGV" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Họ tên giảng viên</label>
+                                <div class="col-md">
+                                    <input type="text" name="HoTenGV" id="HoTenGV" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Giới tính:</label>
+                                <div class="col-md-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="GioiTinh" id="GioiTinh1" value="true" checked>
+                                        <label class="form-check-label" for="GioiTinh1">
+                                            Nam
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="GioiTinh" id="GioiTinh2" value="false">
+                                        <label class="form-check-label" for="GioiTinh2">
+                                            Nữ
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Ngày sinh</label>
+                                <div class="col-md">
+                                    <input type="date" name="NgaySinh" id="NgaySinh" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Số điện thoại</label>
+                                <div class="col-md">
+                                    <input type="text" name="SDT" id="SDT" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <div class="col-md">
+                                    <input type="email" name="Email" id="Email" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Số CCCD</label>
+                                <div class="col-md">
+                                    <input type="text" name="CCCD" id="CCCD" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1"></div>
+                        <div class="col-5">
+
+                            <div class="form-group">
+                                <label>Trình độ</label>
+                                <div class="col-md">
+                                    <select class="form-control" id="TrinhDo" name="TrinhDo">
+                                        <option value="Thạc sĩ">Thạc sĩ</option>
+                                        <option value="Tiến sĩ">Tiến sĩ</option>
+                                    </select>
+                                </div>
+                            </div>
+                          
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                            <input type="submit" value="Thêm giảng viên" class="col-4 btn btn-primary font-bold" />
+                        </div>
+                    </div>
+
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

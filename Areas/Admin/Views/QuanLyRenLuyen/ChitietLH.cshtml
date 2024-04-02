@@ -1,0 +1,388 @@
+﻿
+@using QuanLyKetQuaHocTap.Models;
+@model tb_CoVanHocTap
+
+@{
+    ViewBag.Title = "Chi tiết lớp học";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+
+    .thead {
+        background-color: steelblue;
+        color: white;
+        min-width: 150px;
+    }
+
+    .tieude {
+        background-color: lightblue;
+    }
+
+    .stt {
+        text-align: center;
+        min-width: 50px
+    }
+</style>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h3>Thông tin lớp học</h3>
+                <hr />
+                <div class="row">
+                    <div class="col-lg-2">
+                        <h4>Mã lớp: </h4>
+                    </div>
+                    <div class="col-lg-4">
+                        <input value="@Model.MaLop" class="form-control" readonly />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-2">
+                        <h4>Mã giảng viên:</h4>
+                    </div>
+                    <div class="col-lg-4">
+                        <input value="@Model.tb_GiangVien.MaGV" class="form-control" readonly />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-2">
+                        <h4>Họ tên giảng viên:</h4>
+                    </div>
+                    <div class="col-lg-4">
+                        <input value="@Model.tb_GiangVien.HoTen" class="form-control" readonly />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-2">
+                        <h4>Chuyên ngành</h4>
+                    </div>
+                    <div class="col-lg-4">
+                        <input value="@Model.tb_Nganh.MaNganh - @Model.tb_Nganh.TenNganh" class="form-control" readonly />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-2">
+                        <h4>Năm học - Học kì:</h4>
+                    </div>
+                    <div class="col-lg-4">
+                        <input value="Năm @Model.Nam_HT - Học kì @Model.HocKi_HT" class="form-control" readonly />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-2">
+                        <h4>Sỉ số:</h4>
+                    </div>
+                    <div class="col-lg-4">
+                        <input value="@Model.tb_SinhVien.Count()" class="form-control" readonly />
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h3>Danh sách sinh viên</h3>
+                <hr />
+
+
+                <table class="table 0">
+                    <tr>
+                        <th>Mã SV</th>
+                        <th>Họ tên SV</th>
+                        <th>Ngày sinh</th>
+                        <th>Giới tính</th>
+                        <th style="text-align: center">Đã đánh giá</th>
+                        <th>Chức Năng</th>
+
+                    </tr>
+                    @{
+                        var dssv = (List<tb_SinhVien>)ViewBag.DSSV;
+                        foreach (var item in dssv)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MaSV)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.HoTen)
+                                </td>
+                                <td>
+                                    @General.getStrFormatDate(item.NgaySinh)
+                                </td>
+                                <td>
+                                    @General.getStrGioiTinh(item.GioiTinh)
+                                </td>
+                                @{
+                                    var dg = item.tb_DanhGiaRenLuyen.FirstOrDefault(n => n.Nam == Model.Nam_HT && n.HocKi == Model.HocKi_HT);
+                                    if (dg != null && dg.DiemTongTuDG != null && dg.DiemTongCVDG != null)
+                                    {
+                                        <td style="color: cornflowerblue; text-align: center"><b>O</b></td>
+                                        <td>
+                                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalDGRL-@item.ID">
+                                                Đánh giá
+                                            </button>
+
+
+                                            <!--Modal popup xoa sinh vien-->
+                                            @using (Html.BeginForm("DanhGiaRenLuyen", "QuanLyRenLuyen", FormMethod.Post))
+                                            {
+                                                var dgrl = General.getNewestDGRL(item);
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" value="@dgrl.ID" name="ID" id="ID" />
+                                                <div class="modal fade" id="modalDGRL-@item.ID">
+                                                    <div class="modal-dialog modal-xl">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Đánh giá rèn luyện năm @Model.Nam_HT - Học kì @Model.HocKi_HT</h4>
+                                                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+
+                                                                <table class="table-bordered" cellpadding="5">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th style="color: white; Background: steelblue">
+                                                                                STT
+                                                                            </th>
+                                                                            <th class="thead tieuchi" style="color: white; min-width: 300px">
+                                                                                Nội dung tiêu chí đánh giá
+                                                                            </th>
+                                                                            <th class="thead" style="color: white">
+                                                                                Điểm tối đa
+                                                                            </th>
+                                                                            <th class="thead" style="color: white">
+                                                                                Điểm tự đánh giá
+                                                                            </th>
+                                                                            <th class="thead" style="color: white">
+                                                                                Điểm CVHT
+                                                                            </th>
+                                                                            <th class="thead" style="color: white">
+                                                                                Điểm khoa
+                                                                            </th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        @{
+                                                                            foreach (var tieuchi in dgrl.tb_NoiDungDGRL.tb_TieuChiDGRL.OrderBy(n => n.STT))
+                                                                            {
+                                                                                int? tongDiemTuDG = 0, tongDiemCV = 0, tongDiemKhoa = 0;
+                                                                                foreach (var chitiet in tieuchi.tb_ChiTietTieuChiDGRL)
+                                                                                {
+                                                                                    var ctdg = dgrl.tb_ChiTietDGRL.FirstOrDefault(n => n.ID_ChiTietTieuChiDGRL == chitiet.ID);
+                                                                                    if (ctdg != null)
+                                                                                    {
+                                                                                        tongDiemTuDG += ctdg.DiemTuDG;
+                                                                                        tongDiemCV += ctdg.DiemCVHT;
+                                                                                        tongDiemKhoa += ctdg.DiemKhoa;
+                                                                                    }
+                                                                                }
+                                                                                <tr>
+                                                                                    <td class="tieude stt">
+                                                                                        @tieuchi.STT
+                                                                                    </td>
+                                                                                    <td class="tieude tieuchi">
+                                                                                        @tieuchi.NoiDung
+                                                                                    </td>
+                                                                                    <td class="tieude">
+                                                                                        @tieuchi.DiemToiDa
+                                                                                    </td>
+                                                                                    <td class="tieude">
+                                                                                        @tongDiemTuDG
+                                                                                    </td>
+                                                                                    <td class="tieude">
+                                                                                        @tongDiemCV
+                                                                                    </td>
+                                                                                    <td class="tieude">
+                                                                                        @tongDiemKhoa
+                                                                                    </td>
+                                                                                </tr>
+                                                                                foreach (var chitiet in tieuchi.tb_ChiTietTieuChiDGRL.OrderBy(n => n.STT))
+                                                                                {
+                                                                                    var ctdg = dgrl.tb_ChiTietDGRL.FirstOrDefault(n => n.ID_ChiTietTieuChiDGRL == chitiet.ID);
+                                                                                    int? diemTuDG = null, diemCVHT = null, diemKhoa = null;
+                                                                                    if (ctdg != null)
+                                                                                    {
+                                                                                        diemTuDG = ctdg.DiemTuDG;
+                                                                                        diemCVHT = ctdg.DiemCVHT;
+                                                                                        diemKhoa = ctdg.DiemKhoa;
+                                                                                    }
+                                                                                    <tr>
+                                                                                        <td class="stt">
+                                                                                            @tieuchi.STT.@chitiet.STT
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            @chitiet.NoiDung
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            @chitiet.DiemToiDa
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            @diemTuDG
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            @diemCVHT
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            @{
+                                                                                                if (dgrl.TrangThai == General.daHoanThanhDGRL)
+                                                                                                {
+                                                                                                    @diemKhoa
+                                                                                                }
+                                                                                                else
+                                                                                                {
+                                                                                                    <input name="diemKhoa-@tieuchi.ID-@chitiet.ID" type="number" value="@diemKhoa" />
+                                                                                                }
+                                                                                            }
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    </tbody>
+                                                                </table>
+                                                                <hr />
+                                                                <p class="text-black-50"><b>Điểm tổng tự đánh giá: @dgrl.DiemTongTuDG</b></p>
+                                                                <p class="text-black-50"><b>Điểm tổng cố vấn đánh giá: @dgrl.DiemTongCVDG</b></p>
+                                                                <p class="text-black-50"><b>Điểm tổng khoa đánh giá: @dgrl.DiemTongKhoaDG</b></p>
+
+
+                                                            </div>
+                                                            <div class="modal-footer justify-content-between">
+                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Hủy</button>
+                                                                <button type="submit" class="btn btn-info">Lưu đánh giá</button>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+
+                                            <!--end modal-->
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td style="text-align:center; color: red"><b>X</b></td>
+                                        <td></td>
+                                    }
+                                }
+                            </tr>
+                        }
+                    }
+
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--Tim kiem-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card card-body">
+            @using (Html.BeginForm("TimKiemSV", "QuanLyRenLuyen", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="ID" value="@Model.ID" />
+                <div class="row">
+
+                    <div class="col-lg-6">
+                        <input type="text" id="timkiemSV" name="KEY" class="form-control" placeholder="Tìm theo Mã SV hoặc Họ tên SV" value="@ViewBag.Keyword" />
+                    </div>
+                    <div class="col-lg-2">
+                        <button class="btn btn-success" type="submit">Tìm kiếm</button>
+                    </div>
+                    <div class="col-lg-4">
+                        <button class="btn btn-primary col-md-12" type="button" data-bs-toggle="collapse" data-bs-target="#BoLocSV" aria-expanded="false" aria-controls="BoLocSV">
+                            Bộ lọc
+                        </button>
+                    </div>
+                </div>
+            }
+            <div class="row">
+                <div class="form-group col-12">
+
+
+
+                    <div class="collapse" id="BoLocSV">
+                        <hr />
+                        @using (Html.BeginForm("LocTimKiemSV", "QuanLyRenLuyen", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="ID" value="@Model.ID" />
+                            <div class="card card-body">
+                                <div class="form-group">
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <label class="col-5">Trạng thái</label>
+                                            <div class="form-check col-3">
+                                                @{
+                                                    if (ViewBag.TrangThai != null && (bool)ViewBag.TrangThai == General.daHoanThanhDGRL)
+                                                    {
+                                                        <input class="form-check-input" type="radio" name="TrangThai" id="DaDG" value="true" checked>
+                                                    }
+                                                    else
+                                                    {
+                                                        <input class="form-check-input" type="radio" name="TrangThai" id="DaDG" value="true">
+                                                    }
+                                                }
+                                                <label class="form-check-label" for="TTHD">
+                                                    @General.strDaHoanThanhDGRL
+                                                </label>
+                                            </div>
+                                            <div class="form-check col-2">
+
+                                                @{
+                                                    if (ViewBag.TrangThai != null && (bool)ViewBag.TrangThai != General.daHoanThanhDGRL)
+                                                    {
+                                                        <input class="form-check-input" type="radio" name="TrangThai" id="ChuaDG" value="false" checked>
+                                                    }
+                                                    else
+                                                    {
+                                                        <input class="form-check-input" type="radio" name="TrangThai" id="ChuaDG" value="false">
+                                                    }
+                                                }
+                                                <label class="form-check-label" for="TTDHD">
+                                                    @General.strChuaHoanThanhDGRL
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <button class="btn btn-primary" type="submit">Lọc kết quả</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+

@@ -1,0 +1,139 @@
+﻿
+@{
+    ViewBag.Title = "Chitiet";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@model QuanLyKetQuaHocTap.Models.tb_SinhVien
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h3>Thông tin sinh viên</h3>
+                <hr />
+                <div class="row">
+                    <div class="col-lg-2">
+                        <h4>Mã sinh viên:</h4>
+                    </div>
+                    <div class="col-lg-4">
+                        <input value="@Model.MaSV" class="form-control" readonly />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-2">
+                        <h4>Họ tên:</h4>
+                    </div>
+                    <div class="col-lg-4">
+                        <input value="@Model.HoTen" class="form-control" readonly />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-2">
+                        <h4>Ngày sinh:</h4>
+                    </div>
+                    <div class="col-lg-4">
+<<<<<<< HEAD
+                        <input value="@Model.NgaySinh.ToString("dd-MM-yyyy")" class="form-control" readonly />
+=======
+                        <input value="@Model.NgaySinh" class="form-control" readonly />
+>>>>>>> f917e0184172b7d7be1a550e72214e58d3e1608b
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-2">
+                        <h4>Giới tính:</h4>
+                    </div>
+                    <div class="col-lg-4">
+                        @{
+                            string gt = "";
+                            if (Model.GioiTinh == false)
+                            {
+                                gt = "Nữ";
+                            }
+                            else
+                            {
+                                gt = "Nam";
+                            }
+                            <input value="@gt" class="form-control" readonly />
+                        }
+
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-2">
+                        <h4>Số điện thoại:</h4>
+                    </div>
+                    <div class="col-lg-4">
+                        <input value="@Model.SDT" class="form-control" readonly />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-2">
+                        <h4>Email:</h4>
+                    </div>
+                    <div class="col-lg-4">
+                        <input value="@Model.Email" class="form-control" readonly />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-2">
+                        <h4>Dân tộc:</h4>
+                    </div>
+                    <div class="col-lg-4">
+<<<<<<< HEAD
+                        <input value="@Model.DanToc" class="form-control" readonly />
+=======
+                        <input value="@Model.TonGiao" class="form-control" readonly />
+>>>>>>> f917e0184172b7d7be1a550e72214e58d3e1608b
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+<<<<<<< HEAD
+    
+=======
+
+>>>>>>> f917e0184172b7d7be1a550e72214e58d3e1608b
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h3>Quá trình học tập</h3>
+                <hr />
+                <div class="row">
+                    <h4 style="color:green;font-weight:bold">Số TC hoàn thành:</h4>
+                </div>
+                <br />
+                <div class="row">
+                    <h4>Ngoại ngữ không chuyên:</h4>
+                </div>
+                <br />
+                <div class="row">
+                    <h4>Kỹ năng xã hội:</h4>
+                </div>
+                <br />
+                <div class="row">
+                    <h4>Bằng ngoại ngữ:</h4>
+                </div>
+                <hr />
+                <div class="row">
+                    <h4 style="color:red;font-weight:bold">Số môn học lại:</h4>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,19 @@
+﻿@using QuanLyKetQuaHocTap.Models;
+@model IEnumerable<tb_CoVanHocTap>
+@{
+    foreach (var item in Model)
+    {
+        <div class="row p-2 bg-white border rounded">
+            <div class="col-md-3 mt-1">
+                <a href="@Url.Action("XemLopHocCoVan", "GiangVien", new { id = item.ID })">
+                    <img class="img-fluid img-responsive rounded product-image" src="~/assets/imgs/class.jpg">
+                </a>
+            </div>
+            <div class="col-md-7 mt-1">
+                <h6>@item.MaLop</h6>
+                <h6>Ngành: @item.tb_Nganh.TenNganh (@item.tb_Nganh.MaNganh)</h6>
+                <div class="mt-1 mb-1 spec-1">Sỉ số: @General.getSoLuongSV(item.ID)</div>
+            </div>
+        </div>
+    }
+}

@@ -1,0 +1,33 @@
+﻿@using QuanLyKetQuaHocTap.Models;
+@model IEnumerable<tb_HocPhan>
+
+@{
+    var sv = ((tb_TaiKhoan)Session["TK"]).tb_SinhVien.First();
+    foreach (var item in Model)
+    {
+        var diem = item.tb_DiemHocPhan.FirstOrDefault(n => n.ID_SinhVien == sv.ID);
+        <div class="row p-2 bg-white border rounded">
+            <div class="col-md-3 mt-1">
+                <a href="@Url.Action("XemHocPhan", "SinhVien", new { id = item.ID })">
+                    <img class="img-fluid img-responsive rounded product-image" src="~/assets/imgs/module.jpg">
+                </a>
+            </div>
+            <div class="col-md-7 mt-1">
+                <h5>@item.tb_MonHoc.TenMH - @item.tb_MonHoc.MaMH - Học phần @item.MaHP</h5>
+                <div class="mt-1 mb-1 spec-1">GV: @item.tb_GiangVien.MaGV - @item.tb_GiangVien.HoTen</div>
+                <div class="mt-1 mb-1 spec-1">Sỉ số: @item.SiSo_HienTai/@item.SiSo_ToiDa</div>
+                <div class="mt-1 mb-1 spec-1">Ngày kết thúc: @General.getStrFormatDate(item.NgayBD)</div>
+                @{
+                    if (diem.DiemGK != null && diem.DiemCK != null)
+                    {
+                        <div class="mt-1 mb-1 spec-1">Điểm tb: @General.getDiemTB(item.tb_MonHoc.TrongSoGiuaKi, diem.DiemGK, diem.DiemCK)</div>
+                    }
+                    else
+                    {
+                        <div class="mt-1 mb-1 spec-1">Điểm tb: Chưa tổng kết</div>
+                    }
+                }
+            </div>
+        </div>
+    }
+}

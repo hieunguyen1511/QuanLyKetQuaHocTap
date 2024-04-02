@@ -1,0 +1,29 @@
+﻿@using QuanLyKetQuaHocTap.Models;
+@model IEnumerable<tb_SinhVien>
+
+@{
+    foreach (var item in Model)
+    {
+        <div class="row p-2 bg-white border rounded">
+            <div class="col-md-3 mt-1">
+                @{
+                    if (item.GioiTinh == General.gioiTinhNam)
+                    {
+                        <img class="img-fluid img-responsive rounded product-image" src="~/assets/imgs/student_male.jpg">
+                    }
+                    else
+                    {
+                        <img class="img-fluid img-responsive rounded product-image" src="~/assets/imgs/student_female.jpg">
+                    }
+                }
+            </div>
+            <div class="col-md-7 mt-1">
+                <h5>@item.MaSV - @item.HoTen</h5>
+                <h6>Ngày sinh: @General.getStrFormatDate(item.NgaySinh)</h6>
+                <h6>SĐT: @item.SDT</h6>
+                <h6>Email: @item.Email</h6>
+                <h6>Dân tộc: @item.DanToc</h6>
+            </div>
+        </div>
+    }
+}

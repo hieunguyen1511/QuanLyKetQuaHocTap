@@ -1,0 +1,55 @@
+﻿@using QuanLyKetQuaHocTap.Models;
+@model IEnumerable<tb_CTGD>
+@{
+    ViewBag.Title = "Chương trình giảng dạy của bạn";
+    Layout = "~/Views/GiangVien/_LayoutGiangVien.cshtml";
+}
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+@{
+    var gv = ((tb_TaiKhoan)Session["TK"]).tb_GiangVien.First();
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <div class="input-group">
+                <input type="search" id="search" class="form-control rounded" placeholder="Nhập từ khoá" aria-label="Search" aria-describedby="search-addon" />
+
+                <button style="margin-left: 10px" type="button" class="btn btn-outline-primary" data-mdb-ripple-init onclick="search()">Tìm kiếm</button>
+            </div>
+        </div>
+        <div class="card-body">
+            <h4 class="text-center">Chương trình giảng dạy của bạn</h4>
+            @*
+            <h3 class="spec-1 text-center">Trạng thái: @hp.TrangThai</h3>*@
+        </div>
+        <div class="card-header">
+        </div>
+        <div id="ctcb">
+            @Html.Action("ChuongTrinhGV_Partial", new { type = 0 })
+        </div>
+
+    </div>
+
+}
+
+<script>
+    function search() {
+        var s = document.getElementById('search').value;
+        const url = new URL('@Url.Action("ChuongTrinhGV_Partial", "GiangVien")', location.origin);
+        url.searchParams.set('keyword', s)
+        url.searchParams.set('type', 0)
+        $('#ctcb').load(url.href);
+    }
+    var searchBar = document.getElementById('search');
+    searchBar.addEventListener("keypress", function (event) {
+        // Sử dụng keyCode hoặc key để kiểm tra xem có phải là phím Enter không
+        if (event.keyCode === 13 || event.key === "Enter") {
+            search(); // Gọi hàm của bạn ở đây
+        }
+    });
+</script>
+

@@ -1,0 +1,145 @@
+﻿@using QuanLyKetQuaHocTap.Models;
+@model QuanLyKetQuaHocTap.Models.tb_GiangVien
+
+
+@{
+    ViewBag.Title = "ChiTiet";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="text-center">Thông tin giảng viên</h3>
+                <hr />
+                <div class="row">
+                    <div class="col-lg-3">
+                        <h4>Mã giảng viên:</h4>
+                    </div>
+                    <div class="col-lg-6">
+                        <input value="@Model.MaGV" class="form-control" readonly />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-3">
+                        <h4>Họ tên:</h4>
+                    </div>
+                    <div class="col-lg-6">
+                        <input value="@Model.HoTen" class="form-control" readonly />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-3">
+                        <h4>Ngày sinh:</h4>
+                    </div>
+                    <div class="col-lg-6">
+                        <input value="@Model.NgaySinh.ToString("dd-MM-yyyy")" class="form-control" readonly />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-3">
+                        <h4>Giới tính:</h4>
+                    </div>
+                    <div class="col-lg-6">
+                        @{
+                            string gt = "";
+                            if (Model.GioiTinh == false)
+                            {
+                                gt = "Nữ";
+                            }
+                            else
+                            {
+                                gt = "Nam";
+                            }
+                            <input value="@gt" class="form-control" readonly />
+                        }
+                    </div>
+                </div>
+                <br />
+              
+                <div class="row">
+                    <div class="col-lg-3">
+                        <h4>Số điện thoại:</h4>
+                    </div>
+                    <div class="col-lg-6">
+                        <input value="@Model.SDT" class="form-control" readonly />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-3">
+                        <h4>Email:</h4>
+                    </div>
+                    <div class="col-lg-6">
+                        <input value="@Model.Email" class="form-control" readonly />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="text-center">Danh sách lớp cố vấn</h3>
+                <hr />
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Mã lớp</th>
+                            <th>Ngành</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.tb_CoVanHocTap)
+                        {
+                            <tr>
+                                <td>@item.MaLop</td>
+                                <td>@item.tb_Nganh.TenNganh</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="text-center">Học phần giảng dạy</h3>
+                <hr />
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Mã học phần</th>
+                            <th>Số tín chỉ</th>
+                            <th>Ngày bắt đầu</th>
+                            <th>Ngày kết thúc</th>
+                            <th>Sỉ số</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.tb_HocPhan)
+                        {
+                            <tr>
+                                <td>@item.MaHP</td>
+                                <td>@item.tb_MonHoc.SoTC</td>
+                                <td>@item.NgayBD</td>
+                                <td>@item.NgayKT</td>
+                                <td>@item.SiSo_HienTai</td>
+                            </tr>
+                        }
+                    </tbody>
+                    </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

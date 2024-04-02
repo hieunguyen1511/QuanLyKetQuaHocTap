@@ -1,0 +1,130 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+
+
+}
+
+
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <canvas id="ThongKe"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="card">
+                        <div class="card-body">
+
+
+                            @using (Html.BeginForm("Index","ThongKe",FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="row">
+                                    <div class="col-4">
+                                        <label class="font-bold">Học kì:</label>
+                                        <select id="HocKi" name="HocKi" class="form-control">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-4">
+                                        <label class="font-bold">Năm học:</label>
+                                        <select id="Nam" name="Nam" class="form-control">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="col-4">
+                                        <label class="font-bold">Ngành:</label>
+                                        @Html.DropDownList("Nganh", null, htmlAttributes: new { @class = "form-control" })
+                                    </div>
+
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <label></label>
+                                        <input type="submit" class="btn btn-primary form-control font-bold" value="Xác nhận" />
+                                    </div>
+                                    <div class="col-4">
+                                        <label></label>
+                                        @Html.ActionLink("In danh sách (EXCEL)", "InFileExcel", "ThongKe", null, new { @class = "btn btn-success form-control font-bold" })
+                                        @*<input type="button" class="btn btn-success form-control font-bold" value="Tải xuống danh sách (Excel)" />*@
+                                    </div>
+                                </div>
+                            }
+
+                            <hr />
+                            <canvas id="ThongKe_TheoDangKi"></canvas>
+                            <hr />
+                            <h4>Số lượng sinh viên đăng kí: @ViewBag.SVDDK</h4>
+                            <h4>Số lượng sinh viên qua môn: @ViewBag.SVQM</h4>
+                            <h4>Số lượng sinh viên học lại: @ViewBag.SVR</h4>
+                            <h4>Số lượng sinh viên học lại 1 môn: @ViewBag.SVR1</h4>
+                            <h4>Số lượng sinh viên học lại 2 môn: @ViewBag.SVR2</h4>
+                            <h4>Số lượng sinh viên học lại >=3 môn: @ViewBag.SVR3M</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+
+    const ctx = document.getElementById('ThongKe');
+    const ctx2 = document.getElementById('ThongKe_TheoDangKi');
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Qua môn', 'Học lại'],
+
+            datasets: [{
+                label: 'Tỉ lệ:',
+                data: [@ViewBag.Tile1, @ViewBag.Tile2],
+                borderWidth: 1
+            }]
+        },
+
+
+    });
+
+    new Chart(ctx2, {
+        type: 'bar',
+
+        data: {
+            labels: ['Học lại 1 môn', 'Học lại 2 môn', 'Học lại >=3 môn'],
+
+            datasets: [{
+                label: 'Số lượng',
+                data: [@ViewBag.SVR1, @ViewBag.SVR2,@ViewBag.SVR3M],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+        }
+
+    }
+    );
+
+
+
+</script>
+
+
+

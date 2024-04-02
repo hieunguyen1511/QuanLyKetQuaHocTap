@@ -1,0 +1,393 @@
+﻿
+@using QuanLyKetQuaHocTap.Models
+
+@{
+    ViewBag.Title = "Quản lý học phần";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model IEnumerable<QuanLyKetQuaHocTap.Models.tb_HocPhan> 
+
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                        <button type="button" class="btn btn btn-info me-md-2" data-bs-toggle="modal" data-bs-target="#modalThemHocPhan">
+                            Thêm học phần
+                        </button>
+
+                        <!--Modal popup thêm học phần-->
+                        @using (Html.BeginForm("ThemHocPhan", "QuanLyHocPhan", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="modal fade" id="modalThemHocPhan">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Thêm mới học phần</h4>
+                                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <div class="col-md-8">
+                                                    <div class="row">
+                                                        <h6 class="col-4">Sỉ số tối đa: </h6>
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" id="SiSoToiDa" name="SiSoToiDa" type="number" min="1" value="40" />
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                    <div class="row">
+                                                        <h6 class="col-4">Trạng thái: </h6>
+                                                        <div class="form-check col-3">
+                                                            <input class="form-check-input" type="radio" name="TrangThai" id="TTHD" value="@General.dangHoatDongHP" checked>
+                                                            <label class="form-check-label" for="TTHD">
+                                                                @General.dangHoatDongHP
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check col-3">
+                                                            <input class="form-check-input" type="radio" name="TrangThai" id="TTDHD" value="@General.dungHoatDongHP">
+                                                            <label class="form-check-label" for="TTDHD">
+                                                                @General.dungHoatDongHP
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                    <div class="row">
+                                                        <h6 class="col-4">Môn học: </h6>
+                                                        <div class="col-md-8">
+                                                            <select name="AddMH" class="form-control" id="selectAddMH">
+                                                                @{
+                                                                    var dsmh = (List<tb_MonHoc>)ViewBag.MonHoc;
+                                                                    int? id_mh = null;
+                                                                    if (dsmh.Count != 0)
+                                                                    {
+                                                                        id_mh = dsmh[0].ID;
+                                                                    }
+                                                                    foreach (var item in dsmh)
+                                                                    {
+                                                                        <option value="@item.ID">@item.TenMH</option>
+                                                                    }
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                    <div class="row">
+                                                        <h6 class="col-4">Giảng viên: </h6>
+                                                        <div class="col-md-8">
+                                                            <div id="loadGV">
+                                                                @Html.Action("LocGiangVien_Partial", new { id_mh = id_mh })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                    <div class="row">
+                                                        <h4 class="col-4">Ngày bắt đầu:</h4>
+                                                        <div class="col-md-3">
+                                                            <input class="form-control" id="ngayBD" name="ngayBD" type="date"  />
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                    <div class="row">
+                                                        <h4 class="col-4">Ngày kết thúc:</h4>
+                                                        <div class="col-md-3">
+                                                            <input class="form-control" id="ngayKT" name="ngayKT" type="date" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="modal-footer justify-content-between">
+                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Hủy</button>
+                                            <button type="submit" class="btn btn-success">Thêm</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <!--end modal-->
+                        <button type="button" class="btn btn btn-success me-md-2" data-bs-toggle="modal" data-bs-target="#modalDSHP">
+                            In danh sách
+                        </button>
+                        &nbsp;
+
+                    </div>
+                </div>
+                <hr />
+
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h3 class="text-center">DANH SÁCH HỌC PHẦN</h3>
+                <hr />
+                <table class="table 0">
+                    <tr>
+                        <th>Mã HP</th>
+                        <th>Tên MH</th>
+                        <th>Mã GV</th>
+                        <th>Họ tên GV</th>
+                        <th>Trạng thái</th>
+                        <th>Ngành học</th>
+                        <th>Chức Năng</th>
+
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MaHP)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tb_MonHoc.TenMH)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tb_GiangVien.MaGV)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tb_GiangVien.HoTen)
+                            </td>
+                            @{
+                                if (item.TrangThai == General.dangHoatDongHP)
+                                {
+                                    <td style="text-align: center; color: cornflowerblue"><b>V</b></td>
+                                }
+                                else
+                                {
+                                    <td style="text-align: center; color: red"><b>X</b></td>
+                                }
+                            }
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tb_MonHoc.tb_Nganh.TenNganh)
+                            </td>
+
+                            <td>
+                                @Html.ActionLink("Sửa", "SuaThongTin", new { id = item.ID }, new { @class = "btn btn-primary" })
+                                @Html.ActionLink("Chi tiết", "ChiTiet", new { id = item.ID }, new { @class = "btn btn-success" })
+                                @*@Html.ActionLink("Xóa", "CapNhatTrangThai", null, new { @class = "btn btn-danger" })*@
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalXoaHP-@item.ID">
+                                    Xóa học phần
+                                </button>
+
+
+                                <!--Modal popup xoa học phần-->
+                                @using (Html.BeginForm("XoaHocPhan", "QuanLyHocPhan", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" value="@item.ID" name="ID" id="ID" />
+                                    <div class="modal fade" id="modalXoaHP-@item.ID">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Thông báo</h4>
+                                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <label> Bạn có muốn xóa học phần có mã <strong style="color:red;">@item.MaHP</strong> không?</label>
+                                                </div>
+                                                <div class="modal-footer justify-content-between">
+                                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Hủy</button>
+                                                    <button type="submit" class="btn btn-danger">Xóa</button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                                <!--end modal-->
+
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Tim kiem-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card card-body">
+            @using (Html.BeginForm("TimKiem", "QuanLyHocPhan", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="row">
+
+                    <div class="col-lg-6">
+                        <input type="text" id="timkiemHP" name="KEY" class="form-control" placeholder="Tìm theo Mã HP, Mã MH hoặc Tên MH" value="@ViewBag.keyword" />
+                    </div>
+                    <div class="col-lg-2">
+                        <button class="btn btn-success" type="submit">Tìm kiếm</button>
+                    </div>
+                    <div class="col-lg-4">
+                        <button class="btn btn-primary col-md-12" type="button" data-bs-toggle="collapse" data-bs-target="#BoLocHP" aria-expanded="false" aria-controls="BoLocHP">
+                            Bộ lọc
+                        </button>
+                    </div>
+                </div>
+            }
+            <div class="row">
+                <div class="form-group col-12">
+
+
+
+                    <div class="collapse" id="BoLocHP">
+                        <hr />
+                        @using (Html.BeginForm("LocTimKiem", "QuanLyHocPhan", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="card card-body">
+                                <div class="form-group">
+
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <label class="col-5">Trạng thái </label>
+                                            <div class="form-check col-3">
+                                                @{
+                                                    if (ViewBag.TrangThai != null && (string)ViewBag.TrangThai == General.dangHoatDongHP)
+                                                    {
+                                                        <input class="form-check-input" type="radio" name="TrangThai" id="TTHD" value="@General.dangHoatDongHP" checked>
+                                                    }
+                                                    else
+                                                    {
+                                                        <input class="form-check-input" type="radio" name="TrangThai" id="TTHD" value="@General.dangHoatDongHP">
+                                                    }
+                                                }
+                                                <label class="form-check-label" for="TTHD">
+                                                    @General.dangHoatDongHP
+                                                </label>
+                                            </div>
+                                            <div class="form-check col-2">
+
+                                                @{
+                                                    if (ViewBag.TrangThai != null && (string)ViewBag.TrangThai == General.dungHoatDongHP)
+                                                    {
+                                                        <input class="form-check-input" type="radio" name="TrangThai" id="TTDHD" value="@General.dungHoatDongHP" checked>
+                                                    }
+                                                    else
+                                                    {
+                                                        <input class="form-check-input" type="radio" name="TrangThai" id="TTDHD" value="@General.dungHoatDongHP">
+                                                    }
+                                                }
+                                                <label class="form-check-label" for="TTDHD">
+                                                    @General.dungHoatDongHP
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <span class="col-4">Giảng viên: </span>
+                                            <div class="col-md-8">
+                                                @*@Html.DropDownList("GiangVien", null, htmlAttributes: new { @class = "form-control" })*@
+                                                <select class="form-control" name="GV" id="selectGV">
+                                                    @{
+                                                        if (ViewBag.SelectGV == null)
+                                                        {
+                                                            <option selected value="-1">Tất cả</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="-1">Tất cả</option>
+                                                        }
+                                                        var gv = (List<tb_GiangVien>)ViewBag.GiangVien;
+                                                        foreach (var item in gv)
+                                                        {
+                                                            if (ViewBag.SelectGV != null && item.ID == (int)ViewBag.SelectGV)
+                                                            {
+                                                                <option value="@item.ID" selected>@item.MaGV - @item.HoTen</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="@item.ID">@item.MaGV - @item.HoTen</option>
+                                                            }
+                                                        }
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <span class="col-4">Ngành học: </span>
+                                            <div class="col-md-8">
+                                                <select class="form-control" name="Nganh" id="selectNganh">
+                                                    @{
+                                                        if (ViewBag.SelectNganh == null)
+                                                        {
+                                                            <option selected value="-1">Tất cả</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="-1">Tất cả</option>
+                                                        }
+                                                        var nganh = (List<tb_Nganh>)ViewBag.Nganh;
+                                                        foreach (var item in nganh)
+                                                        {
+                                                            if (ViewBag.SelectNganh != null && item.ID == (int)ViewBag.SelectNganh)
+                                                            {
+                                                                <option value="@item.ID" selected>@item.TenNganh</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="@item.ID">@item.TenNganh</option>
+                                                            }
+                                                        }
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <button class="btn btn-primary" type="submit">Lọc kết quả</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>
+    const SiSoToiDa = document.getElementById('SiSoToiDa');
+
+    SiSoToiDa.addEventListener('keyup', function (event) {
+        if (event.key === '-' || Number.parseInt(event.target.value) < SiSoToiDa.min) {
+            console.log(event.target.value)
+            event.target.value = 1
+        }
+    });
+    var selectAddMH = document.getElementById("selectAddMH");
+        // Đăng ký sự kiện thay đổi
+        selectAddMH.addEventListener("change", function (event) {
+        // Lấy giá trị đã chọn trong select
+            var id_mh = Number.parseInt(event.target.value);
+            const url = new URL('@Url.Action("LocGiangVien_Partial", "SinhVien")', location.origin);
+            url.searchParams.set('id_mh', id_mh);
+            $('#loadGV').load(url.href);
+    });
+</script>

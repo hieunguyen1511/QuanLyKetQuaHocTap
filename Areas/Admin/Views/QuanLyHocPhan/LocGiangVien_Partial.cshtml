@@ -1,0 +1,26 @@
+﻿@using QuanLyKetQuaHocTap.Models;
+@model IEnumerable<tb_GiangVien>
+<select name="AddGV" class="form-control" id="selectAddGV">
+    @{
+        if (ViewBag.ID_GV == null)
+        {
+            <option value="-1" selected>Để trống</option>
+        }
+        else
+        {
+            <option value="-1">Để trống</option>
+        }
+        foreach (var item in Model)
+        {
+            if (ViewBag.ID_GV != null && (int)ViewBag.ID_GV == item.ID)
+            {
+                <option value="@item.ID" selected>@item.MaGV - @item.HoTen</option>
+            }
+            else
+            {
+                <option value="@item.ID">@item.MaGV - @item.HoTen</option>
+            }
+        }
+    }
+
+</select>

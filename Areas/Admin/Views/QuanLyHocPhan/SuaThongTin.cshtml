@@ -1,0 +1,135 @@
+﻿
+@using QuanLyKetQuaHocTap.Models;
+@model tb_HocPhan
+
+@{
+    ViewBag.Title = "Chỉnh sửa học phần";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h3>Sửa thông tin học phần @Model.MaHP - Môn học @Model.tb_MonHoc.TenMH</h3>
+                <hr />
+                @using (Html.BeginForm("SuaThongTin", "QuanLyHocPhan", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <input hidden id="ID" name="ID" value="@Model.ID" />
+
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            <div class="row">
+                                <h4 class="col-4">Sỉ số tối đa (Sỉ số hiện tại: @Model.SiSo_HienTai):</h4>
+                                <div class="col-md-3">
+                                    <input class="form-control" id="SiSoToiDa" name="SiSoToiDa" type="number" min="@Model.SiSo_HienTai" value="@Model.SiSo_ToiDa" />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <h4 class="col-5">Trạng thái: </h4>
+                                <div class="form-check col-3">
+                                    @{
+                                        if (Model.TrangThai == General.dangHoatDongHP)
+                                        {
+                                            <input class="form-check-input" type="radio" name="TrangThai" id="TTHD" value="@General.dangHoatDongHP" checked>
+                                        }
+                                        else
+                                        {
+                                            <input class="form-check-input" type="radio" name="TrangThai" id="TTHD" value="@General.dangHoatDongHP">
+                                        }
+                                    }
+                                    <label class="form-check-label" for="TTHD">
+                                        @General.dangHoatDongHP
+                                    </label>
+                                </div>
+                                <div class="form-check col-2">
+                                    @{
+                                        if (Model.TrangThai == General.dungHoatDongHP)
+                                        {
+                                            <input class="form-check-input" type="radio" name="TrangThai" id="TTDHD" value="@General.dungHoatDongHP" checked>
+                                        }
+                                        else
+                                        {
+                                            <input class="form-check-input" type="radio" name="TrangThai" id="TTDHD" value="@General.dungHoatDongHP">
+                                        }
+                                    }
+                                    <label class="form-check-label" for="TTDHD">
+                                        @General.dungHoatDongHP
+                                    </label>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <h4 class="col-4">Giảng viên: </h4>
+                                <div class="col-md-8">
+                                    <select name="GV" class="form-control" id="selectGV">
+                                        @{
+                                            var dsgv = (List<tb_GiangVien>)ViewBag.GiangVien;
+                                            foreach (var item in dsgv)
+                                            {
+                                                if (item.ID == Model.ID_GiangVien)
+                                                {
+                                                    <option value="@item.ID" selected>@item.MaGV - @item.HoTen</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.ID">@item.MaGV - @item.HoTen</option>
+                                                }
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <br />
+                        <div class="row">
+                            <h4 class="col-4">Ngày bắt đầu:</h4>
+                            <div class="col-md-3">
+                                <input class="form-control" id="ngayBD" name="ngayBD" type="date" value="@General.getStrFormatDate(Model.NgayBD.GetValueOrDefault())" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <h4 class="col-4">Ngày kết thúc:</h4>
+                            <div class="col-md-3">
+                                <input class="form-control" id="ngayKT" name="ngayKT" type="date" value="@General.getStrFormatDate(Model.NgayKT.GetValueOrDefault())" />
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+
+                    <div class="form-group">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                            <input type="submit" value="Lưu" class="btn btn-success col-2" />
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const SiSoToiDa = document.getElementById('SiSoToiDa');
+
+    SiSoToiDa.addEventListener('keyup', function (event) {
+        if (event.key === '-' || Number.parseInt(event.target.value) < SiSoToiDa.min) {
+            console.log(event.target.value)
+            event.target.value = 1
+        }
+    });
+    var selectGiangVien = document.getElementById("selectGV");
+    // Đăng ký sự kiện thay đổ
+    selectGiangVien.addEventListener("change", function (event) {
+        // Lấy giá trị đã chọn trong select
+        var gv = Number.parseInt(event.target.value);
+        const url = new URL('@Url.Action("LocMonHoc_Partial", "QuanLyHocPhan")', location.origin);
+        url.searchParams.set('id_gv', gv);
+        $('#loadMH').load(url.href);
+    });
+</script>

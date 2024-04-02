@@ -1,0 +1,113 @@
+﻿@model QuanLyKetQuaHocTap.Models.tb_SinhVien
+
+@{
+    ViewBag.Title = "SuaThongTin";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h3>Sửa thông tin sinh viên</h3>
+                <hr />
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <input hidden id="ID" name="ID" value="@Model.ID" />
+
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            <div class="row">
+                                <h4 class="col-4">Họ tên: </h4>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="HoTen" name="HoTen" value="@Model.HoTen" />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <h4 class="col-4">Ngày sinh: </h4>
+                                <div class="col-md-8">
+                                    <input type="date" id="NgaySinh" name="NgaySinh" value="@(Model.NgaySinh.ToString("yyyy-MM-dd"))" class="form-control" />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+<<<<<<< HEAD
+                                <h4 class="col-5">Giới tính: </h4>
+=======
+                                <h4 class="col-5">Giới tính: @ViewBag.count </h4>
+>>>>>>> f917e0184172b7d7be1a550e72214e58d3e1608b
+                                <div class="form-check col-3">
+                                    <input class="form-check-input" type="radio" name="GioiTinh" id="GioiTinh1" value="true" checked>
+                                    <label class="form-check-label" for="GioiTinh1">
+                                        Nam
+                                    </label>
+                                </div>
+                                <div class="form-check col-2">
+                                    <input class="form-check-input" type="radio" name="GioiTinh" id="GioiTinh2" value="false">
+                                    <label class="form-check-label" for="GioiTinh2">
+                                        Nữ
+                                    </label>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <h4 class="col-4">Số điện thoại: </h4>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="SDT" name="SDT" value="@Model.SDT" />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <h4 class="col-4">Email: </h4>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="Email" name="Email" value="@Model.Email" />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <h4 class="col-4">Tôn giáo: </h4>
+                                <div class="col-md-8">
+<<<<<<< HEAD
+                                    <input type="text" class="form-control" id="DanToc" name="TonGiao" value="@Model.DanToc" />
+=======
+                                    <input type="text" class="form-control" id="TonGiao" name="TonGiao" value="@Model.TonGiao" />
+>>>>>>> f917e0184172b7d7be1a550e72214e58d3e1608b
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <h4 class="col-4">Chuyên ngành: </h4>
+                                <div class="col-md-8">
+                                    @Html.DropDownList("ID_Nganh", null, htmlAttributes: new { @class = "form-control" })
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <br />
+
+                    </div>
+
+                    <div class="form-group">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                            <input type="submit" value="Lưu" class="btn btn-success col-2" />
+                        </div>
+                    </div>
+                }
+            </div>
+<<<<<<< HEAD
+         
+        </div>
+    </div>
+    
+=======
+
+        </div>
+    </div>
+
+>>>>>>> f917e0184172b7d7be1a550e72214e58d3e1608b
+</div>
+

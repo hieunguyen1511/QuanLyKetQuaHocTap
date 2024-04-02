@@ -1,0 +1,906 @@
+﻿@using QuanLyKetQuaHocTap.Models;
+@using QuanLyKetQuaHocTap.Areas.Admin.Controllers;
+@model tb_NoiDungDGRL
+@{
+    ViewBag.Title = "Quản lý nội dung rèn luyện";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+
+    .thead {
+        background-color: steelblue;
+        color: white;
+        min-width: 150px;
+    }
+
+    .tieude {
+        background-color: lightblue;
+    }
+
+    .stt {
+        text-align: center;
+        min-width: 50px
+    }
+</style>
+<div class="row">
+
+    <div class="col-lg-12">
+        @{
+            var dsnd = (List<tb_NoiDungDGRL>)ViewBag.NoiDung;
+            <div class="card">
+                <div class="card-body">
+                    @{
+                        if (Model != null)
+                        {
+                            <h3 class="text-center">NỘI DUNG ĐÁNH GIÁ HIỆN HÀNH</h3>
+                            <hr />
+                            <table class="table-bordered" cellpadding="5">
+                                <thead>
+                                    <tr>
+                                        <th style="color: white; Background: steelblue; min-width: 80px; text-align: center">
+                                            STT
+                                        </th>
+                                        <th class="thead tieuchi" style="color: white; width: 900px">
+                                            Nội dung tiêu chí đánh giá
+                                        </th>
+                                        <th class="thead" style="color: white">
+                                            Điểm tối đa
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        foreach (var tieuchi in Model.tb_TieuChiDGRL.OrderBy(n => n.STT))
+                                        {
+                                            <tr>
+                                                <td class="tieude stt">
+                                                    @tieuchi.STT
+                                                </td>
+                                                <td class="tieude tieuchi">
+                                                    @tieuchi.NoiDung
+                                                </td>
+                                                <td class="tieude">
+                                                    @tieuchi.DiemToiDa
+                                                </td>
+                                            </tr>
+                                            foreach (var chitiet in tieuchi.tb_ChiTietTieuChiDGRL.OrderBy(n => n.STT))
+                                            {
+                                                <tr>
+                                                    <td class="stt">
+                                                        @tieuchi.STT.@chitiet.STT
+                                                    </td>
+                                                    <td>
+                                                        @chitiet.NoiDung
+                                                    </td>
+                                                    <td>
+                                                        @chitiet.DiemToiDa
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+
+                        }
+                        else
+                        {
+                            <h3 class="text-center">CHƯA CÓ NỘI DUNG ĐÁNH GIÁ NÀO</h3>
+                        }
+
+                    }
+                    <hr />
+
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalThemMoiNoiDung">
+                        Thêm nội dung
+                    </button>
+                </div>
+            </div>
+            <!--Modal popup xoa sinh vien-->
+            using (Html.BeginForm("ThemMoiNoiDung", "QuanLyRenLuyen", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="length" id="length" value="0" />
+                <input type="hidden" name="tc" id="tc" value="" />
+                <div class="modal fade" id="modalThemMoiNoiDung">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Thêm mới nội dung đánh giá rèn luyện</h4>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <table class="table-bordered" cellpadding="5">
+                                    <thead>
+                                        <tr>
+                                            <th class="stt" style="color: white; Background: steelblue">
+                                                STT
+                                            </th>
+                                            <th class="thead tieuchi" style="color: white; width: 700px">
+                                                Nội dung tiêu chí đánh giá
+                                            </th>
+                                            <th class="thead" style="color: white;">
+                                                Điểm tối đa
+                                            </th>
+                                            <th class="thead" style="color: white">
+                                                Chức năng
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="body-tc">
+                                    </tbody>
+                                </table>
+
+                                <hr />
+
+                                <button type="button" class="btn btn btn-success me-md-2" id="them_tc" value="btn-tc-1" onclick="ThemMoiTC(this)">
+                                    Thêm mới tiêu chí
+                                </button>
+
+                                <hr />
+                                <input type="hidden" id="tc-hidden" value="-1" />
+                                <h3 id="cur-tc-title">Thông tin tiêu chí đánh giá 1</h3>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <h4 id="cur-tc-stt">STT: 1</h4>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <h4>Nội dung tiêu chí đánh giá:</h4>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <input class="form-control" id="cur-tc-nd" type="text" />
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <h4>Điểm tối đa:</h4>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <input value="0" class="form-control" id="cur-tc-diemTD" type="number" />
+                                    </div>
+                                </div>
+                                <div id="error-tc">
+
+                                </div>
+                                <hr />
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                                    <button type="button" class="btn btn btn-info me-md-2" id="luu_tc" value="btn-tc-1" onclick="Luu1TC(this)">
+                                        Lưu tiêu chí
+                                    </button>
+                                </div>
+                                <div style="margin-left: 50px;" id="ct">
+                                    <hr />
+                                    <h3>Chi tiết tiêu chí 1</h3>
+                                    <hr />
+                                    <input type="hidden" id="ct-hidden" value="-1" />
+                                    <table class="table-bordered" cellpadding="5">
+                                        <thead>
+                                            <tr>
+                                                <th class="stt" style="color: white; Background: steelblue">
+                                                    STT
+                                                </th>
+                                                <th class="thead tieuchi" style="color: white; width: 500px">
+                                                    Nội dung tiêu chí đánh giá
+                                                </th>
+                                                <th class="thead" style="color: white">
+                                                    Điểm tối thiểu
+                                                </th>
+                                                <th class="thead" style="color: white">
+                                                    Điểm tối đa
+                                                </th>
+                                                <th class="thead" style="color: white">
+                                                    Chức năng
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="body-ct">
+                                        </tbody>
+                                    </table>
+                                    <hr />
+                                    <button type="button" class="btn btn btn-success me-md-2" id="them_ct" value="btn-ct-1-1" onclick="ThemMoiCT(this)">
+                                        Thêm mới chi tiết
+                                    </button>
+                                    <hr />
+                                    <h3 id="cur-ct-title">Thông tin chi tiết tiêu chí 1</h3>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <h4 id="cur-ct-stt">STT: 1</h4>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <h4>Nội dung tiêu chí đánh giá:</h4>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <input class="form-control" id="cur-ct-nd" type="text" />
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <h4>Điểm tối thiểu:</h4>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <input value="0" class="form-control" id="cur-ct-diemTT" type="number" />
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <h4>Điểm tối đa:</h4>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <input value="0" class="form-control" id="cur-ct-diemTD" type="number" />
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div id="error-ct">
+
+                                    </div>
+                                    <button type="button" class="btn btn btn-primary me-md-2" id="luu_ct" value="btn-ct-1-1" onclick="Luu1CT(this)">
+                                        Lưu chi tiết
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Hủy</button>
+                                <button type="submit" class="btn btn-info">Thêm mới</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <!--end modal-->
+        }
+    </div>
+</div>
+
+
+
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="text-center">DANH SÁCH NỘI DUNG ĐÁNH GIÁ</h3>
+                <hr />
+                <table class="table 0">
+                    <tr>
+                        <th>STT</th>
+                        <th>Ngày khởi tạo</th>
+                        <th>Chức Năng</th>
+
+                    </tr>
+                    @{
+                        int i = 1;
+                        foreach (var item in dsnd)
+                        {
+                            <tr>
+                                <td>@i</td>
+                                <td>
+                                    @General.getStrFormatDate(item.NgayTao)
+                                </td>
+
+                                <td>
+                                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalChiTietND">
+                                        Chi tiết
+                                    </button>
+                                    <!--Modal popup chi tiết bội dung đánh giá-->
+                                    <div class="modal fade" id="modalChiTietND">
+                                        <div class="modal-dialog modal-xl">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Nội dung đánh giá rèn luyện @item.ID</h4>
+                                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <table class="table-bordered" cellpadding="5">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="color: white; Background: steelblue; min-width: 80px; text-align: center">
+                                                                    STT
+                                                                </th>
+                                                                <th class="thead tieuchi" style="color: white; width: 900px">
+                                                                    Nội dung tiêu chí đánh giá
+                                                                </th>
+                                                                <th class="thead" style="color: white">
+                                                                    Điểm tối đa
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @{
+                                                                foreach (var tieuchi in item.tb_TieuChiDGRL.OrderBy(n => n.STT))
+                                                                {
+                                                                    <tr>
+                                                                        <td class="tieude stt">
+                                                                            @tieuchi.STT
+                                                                        </td>
+                                                                        <td class="tieude tieuchi">
+                                                                            @tieuchi.NoiDung
+                                                                        </td>
+                                                                        <td class="tieude">
+                                                                            @tieuchi.DiemToiDa
+                                                                        </td>
+                                                                    </tr>
+                                                                    foreach (var chitiet in tieuchi.tb_ChiTietTieuChiDGRL.OrderBy(n => n.STT))
+                                                                    {
+                                                                        <tr>
+                                                                            <td class="stt">
+                                                                                @tieuchi.STT.@chitiet.STT
+                                                                            </td>
+                                                                            <td>
+                                                                                @chitiet.NoiDung
+                                                                            </td>
+                                                                            <td>
+                                                                                @chitiet.DiemToiDa
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+                                                                }
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="modal-footer justify-content-between">
+                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end modal-->
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function ThemMoiTC(input) {
+        var value = input.value.split('-');
+        var stt = Number.parseInt(value[2]);
+
+        var cur_title = document.getElementById('cur-tc-title');;
+        var cur_stt = document.getElementById('cur-tc-stt');
+        var cur_nd = document.getElementById('cur-tc-nd');
+        var cur_diemTD = document.getElementById('cur-tc-diemTD')
+        var tc_hidden = document.getElementById('tc-hidden');
+        var luu_tc = document.getElementById('luu_tc');
+        var ct = document.getElementById('ct');
+
+        cur_title.innerHTML = `Thông tin tiêu chí đánh giá ${stt}`;
+        cur_stt.innerHTML = `STT: ${stt}`;
+        cur_nd.value = '';
+        cur_diemTD.value = 0;
+        tc_hidden.value = -1;
+
+        luu_tc.value = `btn-tc-${stt}`;
+
+        ct.innerHTML = '';
+    }
+
+    function Luu1TC(input) {
+        var tc = document.getElementById('tc');
+        var value = input.value.split('-');
+        var stt = Number.parseInt(value[2]);
+        var cur_nd_tc = document.getElementById('cur-tc-nd');
+        var cur_diemTD_tc = document.getElementById('cur-tc-diemTD');
+        var error_tc = document.getElementById('error-tc');
+
+        if (cur_nd_tc.value == null || cur_nd_tc.value == '') {
+            error_tc.innerHTML = `
+                                <hr />
+                                <p style="color: red; opacity: 70%">**Vui lòng nhập nội dung tiêu chí đánh giá!!</p>
+                                `;
+            return;
+        }
+        error_tc.innerHTML = '';
+        var tc_hidden = document.getElementById('tc-hidden');
+        if (tc_hidden.value == -1) {
+            var body_tc = document.getElementById('body-tc');
+            body_tc.innerHTML +=
+                `
+            <tr id="tr-tc-${stt}">
+                <td class="stt" id="td-tc-stt-${stt}">${stt}<input type="hidden" name="ct-tc-${stt}" id="ct-tc-${stt}" value=""></td>
+                <td id="td-tc-nd-${stt}">${cur_nd_tc.value}</td>
+                <td id="td-tc-diemTD-${stt}">${cur_diemTD_tc.value}</td>
+                <td id="td-tc-func-${stt}">
+                    <button type="button" class="btn btn btn-warning me-md-2" id="update-tc-${stt}" value="btn-tc-${stt}" onclick="capNhatTC(this)">
+                        Cập nhật
+                    </button>
+                    <button type="button" class="btn btn btn-danger me-md-2" id="delete-tc-${stt}" value="btn-tc-${stt}" onclick="xoaTC(this)">
+                        Xoá
+                    </button>
+                </td>
+            </tr>
+        `;
+            stt += 1;
+            var cur_title_tc = document.getElementById('cur-tc-title');
+            var cur_stt_tc = document.getElementById('cur-tc-stt');
+            var luu_tc = document.getElementById('luu_tc');
+            cur_title_tc.innerHTML = `Thông tin tiêu chí đánh giá ${stt}`;
+            cur_stt_tc.innerHTML = `STT: ${stt}`;
+            luu_tc.value = `btn-tc-${stt}`;
+            var them_tc = document.getElementById('them_tc');
+            them_tc.value = `btn-tc-${stt}`;
+            var length = document.getElementById('length');
+            length.value = Number.parseInt(length.value) + 1;
+            tc.value += stt + ',' + cur_nd_tc.value + ',' + cur_diemTD_tc.value + '|';
+        }
+        else {
+            var tc_nd = document.getElementById(`td-tc-nd-${stt}`);
+            var tc_diemTD = document.getElementById(`td-tc-diemTD-${stt}`);
+            tc_nd.innerHTML = cur_nd_tc.value;
+            tc_diemTD.innerHTML = cur_diemTD_tc.value;
+            var contents = tc.value.split('|');
+            var newValue = '';
+            for (var i = 0; i < contents.length; i++) {
+                if (contents[i] == null || contents[i] == '') {
+                    continue;
+                }
+                var tmp = contents[i].split(',');
+                var stt_tc = Number.parseInt(tmp[0]);
+                if (stt_tc == stt) {
+                    newValue += stt_tc + ',' + cur_nd_tc.value + ',' + cur_diemTD_tc.value + '|';
+                }
+                else {
+                    newValue += stt_tc + ',' + tmp[1] + ',' + tmp[2] + '|';
+                }
+            }
+            tc.value = newValue;
+        }
+    }
+
+
+    function capNhatTC(input) {
+        var value = input.value.split('-');
+        var stt = Number.parseInt(value[2]);
+        var ct_tc = document.getElementById(`ct-tc-${stt}`);
+        var cts = ct_tc.value.split('|');
+        var div_ct = document.getElementById('ct');
+        var tc_hidden = document.getElementById('tc-hidden');
+        tc_hidden.value = stt;
+        var error_tc = document.getElementById('error-tc');
+        error_tc.innerHTML = '';
+        var content =
+            `
+            <hr />
+            <h3>Thông tin chi tiết tiêu chí ${stt}</h3>
+            <hr />
+            <input type="hidden" id="ct-hidden" value="-1" />
+            <table class="table-bordered" cellpadding="5">
+            <thead>
+                <tr>
+                    <th class="stt" style="color: white; Background: steelblue">STT</th>
+                    <th class="thead tieuchi" style="color: white; width: 500px">Nội dung tiêu chí đánh giá</th>
+                    <th class="thead" style="color: white">Điểm tối thiểu</th>
+                    <th class="thead" style="color: white">Điểm tối đa</th>
+                    <th class="thead" style="color: white">Chức năng</th>
+                </tr>
+            </thead>
+            <tbody id="body-ct">
+        `;
+        for (var i = 0; i < cts.length; i++) {
+            if (cts[i] == '' || cts[i] == null) {
+                continue;
+            }
+            var nd_cts = cts[i].split(',');
+            var stt_ct = Number.parseInt(nd_cts[0]);
+            var cur_nd_ct = nd_cts[1];
+            var cur_diemTT_ct = Number.parseInt(nd_cts[2]);
+            var cur_diemTD_ct = Number.parseInt(nd_cts[3]);
+            content +=
+                `
+                <tr id="tr-ct-${stt_ct}">
+                    <td class="stt" id="td-ct-stt-${stt_ct}">${stt_ct}</td>
+                    <td id="td-ct-nd-${stt_ct}">${cur_nd_ct}</td>
+                    <td id="td-ct-diemTT-${stt_ct}">${cur_diemTT_ct}</td>
+                    <td id="td-ct-diemTD-${stt_ct}">${cur_diemTD_ct}</td>
+                    <td id="td-ct-func-${stt_ct}">
+                        <button type="button" class="btn btn btn-warning me-md-2" id="update-ct-${stt}-${stt_ct}" value="btn-ct-${stt}-${stt_ct}" onclick="capNhatCT(this)">
+                            Cập nhật
+                        </button>
+                        <button type="button" class="btn btn btn-danger me-md-2" id="delete-ct-${stt}-${stt_ct}" value="btn-ct-${stt}-${stt_ct}" onclick="xoaCT(this)">
+                            Xoá
+                        </button>
+                    </td>
+                </tr>
+            `;
+
+        }
+        var maxStt = cts.length;
+        content +=
+            `
+            </tbody>
+            </table>
+            <hr />
+                <button type="button" class="btn btn btn-success me-md-2" id="them_ct" value="btn-ct-${stt}-${maxStt}" onclick="ThemMoiCT(this)">Thêm mới chi tiết</button>
+            <hr />
+            <h3 id="cur-ct-title">Thông tin chi tiết tiêu chí ${maxStt}</h3>
+            <div class="row">
+                <div class="col-lg-2">
+                    <h4 id="cur-ct-stt">STT: ${maxStt}</h4>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-2">
+                    <h4>Nội dung tiêu chí đánh giá:</h4>
+                </div>
+                <div class="col-lg-4">
+                    <input class="form-control" id="cur-ct-nd" type="text" />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-2">
+                    <h4>Điểm tối thiểu:</h4>
+                </div>
+                <div class="col-lg-4">
+                    <input value="0" class="form-control" id="cur-ct-diemTT" type="number" />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-2">
+                    <h4>Điểm tối đa:</h4>
+                </div>
+                <div class="col-lg-4">
+                    <input value="0" class="form-control" id="cur-ct-diemTD" type="number" />
+                </div>
+            </div>
+            <hr />
+            <div id="error-ct">
+            </div>
+            <button type="button" class="btn btn btn-primary me-md-2" id="luu_ct" value="btn-ct-${stt}-${maxStt}" onclick="Luu1CT(this)">Lưu chi tiết</button>
+        `;
+        div_ct.innerHTML = content;
+
+        var cur_title = document.getElementById('cur-tc-title');;
+        var cur_stt = document.getElementById('cur-tc-stt');
+        var cur_nd = document.getElementById('cur-tc-nd');
+        var cur_diemTD = document.getElementById('cur-tc-diemTD')
+        var luu_tc = document.getElementById('luu_tc');
+
+        var nd = document.getElementById(`td-tc-nd-${stt}`)
+        var diemTD = document.getElementById(`td-tc-diemTD-${stt}`)
+
+        cur_title.innerHTML = `Thông tin tiêu chí đánh giá ${stt}`;
+        cur_stt.innerHTML = `STT: ${stt}`;
+
+
+        cur_nd.value = nd.innerHTML;
+        cur_diemTD.value = Number.parseInt(diemTD.innerHTML);
+
+        luu_tc.value = `btn-tc-${stt}`;
+    }
+
+    function xoaTC(input) {
+        var value = input.value.split('-');
+        var stt = Number.parseInt(value[2]);
+        var row = document.getElementById(`tr-tc-${stt}`);
+        var luu_tc = document.getElementById('luu_tc');
+        var length = document.getElementById('length');
+        var error_tc = document.getElementById('error-tc');
+        error_tc.innerHTML = '';
+        var them_tc = document.getElementById('them_tc');
+
+        var cur_title = document.getElementById('cur-tc-title');;
+        var cur_stt = document.getElementById('cur-tc-stt');
+        var stt_luu_tc = Number.parseInt(luu_tc.value.split('-')[2]);
+        var tc_hidden = document.getElementById('tc-hidden');
+        if (stt_luu_tc == stt) {
+
+            cur_title.innerHTML = `Thông tin tiêu chí đánh giá ${length.value}`;
+            cur_stt.innerHTML = `STT: ${length.value}`;
+
+            var cur_nd = document.getElementById('cur-tc-nd');
+            var cur_diemTD = document.getElementById('cur-tc-diemTD');
+            cur_nd.value = '';
+            cur_diemTD.value = 0;
+
+            luu_tc.value = `btn-tc-${length.value}`;
+            them_tc.value = `btn-tc-${length.value}`;
+            tc_hidden.value = -1;
+            var ct = document.getElementById('ct');
+            ct.innerHTML = '';
+        }
+        else if (tc_hidden.value != -1 && stt_luu_tc > stt) {
+            var number = stt_luu_tc - 1;
+            cur_title.innerHTML = `Thông tin tiêu chí đánh giá ${number}`;
+            cur_stt.innerHTML = `STT: ${number}`;
+
+            luu_tc.value = `btn-tc-${number}`;
+            them_tc.value = `btn-tc-${number}`;
+            tc_hidden.value = number;
+        }
+        else {
+            cur_title.innerHTML = `Thông tin tiêu chí đánh giá ${length.value}`;
+            cur_stt.innerHTML = `STT: ${length.value}`;
+            luu_tc.value = `btn-tc-${length.value}`;
+            them_tc.value = `btn-tc-${length.value}`;
+        }
+
+        row.remove();
+        for (var i = stt + 1; i <= length.value; i++) {
+            var tr = document.getElementById(`tr-tc-${i}`);
+            tr.id = `tr-tc-${i - 1}`;
+            var ct_tc = document.getElementById(`ct-tc-${i}`);
+            var td_stt = document.getElementById(`td-tc-stt-${i}`);
+            td_stt.innerHTML = `${i - 1}<input type="hidden" id="ct-tc-${i - 1}" value="${ct_tc.value}">`;
+            td_stt.id = `td-tc-stt-${i - 1}`
+            ct_tc.id = `ct-tc-${i - 1}`
+            var nd = document.getElementById(`td-tc-nd-${i}`);
+            nd.id = `td-tc-nd-${i - 1}`;
+            var diemTD = document.getElementById(`td-tc-diemTD-${i}`);
+            diemTD.id = `td-tc-diemTD-${i - 1}`;
+            var func = document.getElementById(`td-tc-func-${i}`)
+            func.id = `td-tc-func-${i - 1}`;
+            var update = document.getElementById(`update-tc-${i}`);
+            update.id = `update-tc-${i - 1}`;
+            update.value = `btn-tc-${i - 1}`;
+            var del = document.getElementById(`delete-tc-${i}`);
+            del.value = `btn-tc-${i - 1}`;
+            del.id = `delete-tc-${i - 1}`;
+        }
+        var tc = document.getElementById('tc');
+        var newValue = '';
+        for (var i = 0; i < contents.length; i++) {
+            if (contents[i] == null || contents[i] == '') {
+                continue;
+            }
+            var tmp = contents[i].split(',');
+            var stt_tc = Number.parseInt(tmp[0]);
+            if (stt_tc == stt) {
+                continue;
+            }
+            if (stt_tc < stt) {
+                newValue += stt_tc + ',' + tmp[1] + ',' + tmp[2] + '|';
+            }
+            else {
+                var newStt = stt_tc - 1;
+                newValue += newStt + ',' + tmp[1] + ',' + tmp[2] + '|';
+            }
+        }
+        tc.value = newValue;
+
+        length.value = Number.parseInt(length.value) - 1;
+    }
+
+
+
+    function ThemMoiCT(input) {
+        var value = input.value.split('-');
+        var stt = Number.parseInt(value[3]);
+        var stt_tc = Number.parseInt(value[2]);
+        var cur_title_ct = document.getElementById('cur-ct-title');
+        var cur_stt_ct = document.getElementById('cur-ct-stt');
+        var cur_nd_ct = document.getElementById('cur-ct-nd');
+        var cur_diemTT_ct = document.getElementById('cur-ct-diemTT');
+        var cur_diemTD_ct = document.getElementById('cur-ct-diemTD');
+        var luu_ct = document.getElementById('luu_ct');
+        var error_ct = document.getElementById('error-ct');
+        var hidden_ct = document.getElementById('ct-hidden');
+        cur_title_ct.innerHTML = `Thông tin chi tiết tiêu chí ${stt}`;
+        cur_stt_ct.innerHTML = `STT: ${stt}`;
+        cur_nd_ct.value = '';
+        cur_diemTT_ct.value = 0;
+        cur_diemTD_ct.value = 0;
+        luu_ct.value = `btn-ct-${stt_tc}-${stt}`;
+        hidden_ct.value = -1;
+        error_ct.innerHTML = '';
+    }
+
+    function Luu1CT(input) {
+
+        var value = input.value.split('-');
+        var stt = Number.parseInt(value[3]);
+        var stt_tc = Number.parseInt(value[2]);
+        var cur_nd_ct = document.getElementById('cur-ct-nd');
+        var cur_diemTT_ct = document.getElementById('cur-ct-diemTT');
+        var cur_diemTD_ct = document.getElementById('cur-ct-diemTD');
+        var error_ct = document.getElementById('error-ct');
+        var hidden_ct = document.getElementById('ct-hidden');
+        var them_ct = document.getElementById('them_ct');
+
+        if (cur_nd_ct.value == null || cur_nd_ct.value == '') {
+            error_ct.innerHTML = '<p style="color: red; opacity: 70%">**Vui lòng nhập nội dung chi tiết tiêu chí!!</p>';
+            return;
+        }
+        if (Number.parseInt(cur_diemTT_ct.value) > Number.parseInt(cur_diemTD_ct.value)) {
+            error_ct.innerHTML = '<p style="color: red; opacity: 70%">**Điểm tối thiểu không thể lớn hơn điểm tối đa!!</p>';
+            return;
+        }
+        error_ct.innerHTML = ''
+        var ct_hidden = document.getElementById('ct-hidden');
+        var body_ct = document.getElementById('body-ct');
+        if (ct_hidden.value == -1) {
+            body_ct.innerHTML +=
+                `
+            <tr id="tr-ct-${stt}">
+                <td class="stt" id="td-ct-stt-${stt}">${stt}</td>
+                <td id="td-ct-nd-${stt}">${cur_nd_ct.value}</td>
+                <td id="td-ct-diemTT-${stt}">${cur_diemTT_ct.value}</td>
+                <td id="td-ct-diemTD-${stt}">${cur_diemTD_ct.value}</td>
+                <td id="td-ct-func-${stt}">
+                    <button type="button" class="btn btn btn-warning me-md-2" id="update-ct-${stt_tc}-${stt}" value="btn-ct-${stt_tc}-${stt}" onclick="capNhatCT(this)">
+                        Cập nhật
+                    </button>
+                    <button type="button" class="btn btn btn-danger me-md-2" id="delete-ct-${stt_tc}-${stt}" value="btn-ct-${stt_tc}-${stt}" onclick="xoaCT(this)">
+                        Xoá
+                    </button>
+                </td>
+            </tr>
+        `;
+
+            var ct_tc = document.getElementById(`ct-tc-${stt_tc}`);
+            ct_tc.value += stt + ',' + cur_nd_ct.value + ',' + cur_diemTT_ct.value + ',' + cur_diemTD_ct.value + '|';
+
+            stt += 1;
+            var cur_title_ct = document.getElementById('cur-ct-title');
+            var cur_stt_ct = document.getElementById('cur-ct-stt');
+            var luu_ct = document.getElementById('luu_ct');
+            cur_title_ct.innerHTML = `Thông tin chi tiết tiêu chí ${stt}`;
+            cur_stt_ct.innerHTML = `STT: ${stt}`;
+            luu_ct.value = `btn-ct-${stt_tc}-${stt}`;
+            hidden_ct.value = -1;
+            them_ct.value = `btn-ct-${stt_tc}-${stt}`;
+        }
+        else {
+
+            var ct_nd = document.getElementById(`td-ct-nd-${stt}`);
+            var ct_diemTT = document.getElementById(`td-ct-diemTT-${stt}`);
+            var ct_diemTD = document.getElementById(`td-ct-diemTD-${stt}`);
+            ct_nd.innerHTML = cur_nd_ct.value;
+            ct_diemTT.innerHTML = cur_diemTT_ct.value;
+            ct_diemTD.innerHTML = cur_diemTD_ct.value;
+        }
+    }
+
+
+    function capNhatCT(input) {
+        var value = input.value.split('-');
+        var stt_tc = Number.parseInt(value[2]);
+        var stt = Number.parseInt(value[3]);
+        var ct_hidden = document.getElementById('ct-hidden');
+        ct_hidden.value = stt;
+        var error_ct = document.getElementById('error-ct');
+        error_ct.innerHTML = '';
+
+        var cur_title = document.getElementById('cur-ct-title');;
+        var cur_stt = document.getElementById('cur-ct-stt');
+        var cur_nd = document.getElementById('cur-ct-nd');
+        var cur_diemTT = document.getElementById('cur-ct-diemTT')
+        var cur_diemTD = document.getElementById('cur-ct-diemTD')
+        var luu_ct = document.getElementById('luu_ct');
+
+        var nd = document.getElementById(`td-ct-nd-${stt}`)
+        var diemTT = document.getElementById(`td-ct-diemTT-${stt}`)
+        var diemTD = document.getElementById(`td-ct-diemTD-${stt}`)
+
+        cur_title.innerHTML = `Thông tin chi tiết tiêu chí ${stt}`;
+        cur_stt.innerHTML = `STT: ${stt}`;
+
+
+        cur_nd.value = nd.innerHTML;
+        cur_diemTT.value = Number.parseInt(diemTT.innerHTML);
+        cur_diemTD.value = Number.parseInt(diemTD.innerHTML);
+
+        luu_ct.value = `btn-tc-${stt_tc}-${stt}`;
+    }
+
+    function xoaCT(input) {
+        var value = input.value.split('-');
+        var stt_tc = Number.parseInt(value[2]);
+        var stt = Number.parseInt(value[3]);
+        var row = document.getElementById(`tr-ct-${stt}`);
+        var hidden_ct = document.getElementById('ct-hidden');
+
+        var ct_tc = document.getElementById(`ct-tc-${stt_tc}`);
+        var cts = ct_tc.value.split('|');
+        var length = cts.length - 1;
+
+        row.remove();
+        for (var i = stt + 1; i <= length; i++) {
+            var stt_ct = document.getElementById(`td-ct-stt-${i}`);
+            stt_ct.innerHTML = i - 1;
+            stt_ct.id = `td-ct-stt-${i - 1}`;
+            var nd = document.getElementById(`td-ct-nd-${i}`);
+            nd.id = `td-ct-nd-${i - 1}`;
+            var diemTT = document.getElementById(`td-ct-diemTT-${i}`);
+            diemTT.id = `td-ct-diemTT-${i - 1}`;
+            var diemTD = document.getElementById(`td-ct-diemTD-${i}`);
+            diemTD.id = `td-ct-diemTD-${i - 1}`;
+            var func = document.getElementById(`td-ct-func-${i}`);
+            func.id = `td-ct-func-${i - 1}`;
+            var update = document.getElementById(`update-ct-${stt_tc}-${i}`);
+            update.value = `btn-ct-${stt_tc}-${i - 1}`;
+            update.id = `update-ct-${stt_tc}-${i - 1}`;
+            var del = document.getElementById(`delete-ct-${stt_tc}-${i}`);
+            update.value = `btn-ct-${stt_tc}-${i - 1}`;
+            del.id = `delete-ct-${stt_tc}-${i - 1}`;
+        }
+
+        var newValue = '';
+        for (var i = 0; i < cts.length; i++) {
+            if (cts[i] == '' || cts[i] == null) {
+                continue;
+            }
+            var nd_cts = cts[i].split(',');
+            var stt_ct = Number.parseInt(nd_cts[0]);
+            if (stt_ct == stt) {
+                continue;
+            }
+            if (stt_ct < stt) {
+                newValue += stt_ct + ',' + nd_cts[1] + ',' + nd_cts[2] + ',' + nd_cts[3] + '|';
+            }
+            else {
+                var newStt = stt_ct - 1;
+                newValue += newStt + ',' + nd_cts[1] + ',' + nd_cts[2] + ',' + nd_cts[3] + '|';
+            }
+        }
+        ct_tc.value = newValue;
+
+        var cur_title_ct = document.getElementById('cur-ct-title');
+        var cur_stt_ct = document.getElementById('cur-ct-stt');
+        var luu_ct = document.getElementById('luu_ct');
+        var error_ct = document.getElementById('error-ct');
+        var them_ct = document.getElementById('them_ct');
+        var stt_luu_ct = Number.parseInt(luu_ct.value.split('-')[3]);
+        error_ct.innerHTML = '';
+
+        if (stt_luu_ct == stt) {
+            cur_title_ct.innerHTML = `Thông tin chi tiết tiêu chí ${length}`;
+            cur_stt_ct.innerHTML = `STT: ${length}`;
+
+            var cur_nd_ct = document.getElementById('cur-ct-nd');
+            var cur_diemTT_ct = document.getElementById('cur-ct-diemTT');
+            var cur_diemTD_ct = document.getElementById('cur-ct-diemTD');
+            cur_nd_ct.value = '';
+            cur_diemTT_ct.value = 0;
+            cur_diemTD_ct.value = 0;
+
+            luu_ct.value = `btn-ct-${stt_tc}-${length}`;
+            hidden_ct.value = -1;
+            them_ct.value = `btn-ct-${stt_tc}-${length}`;
+        }
+        else if (hidden_ct.value != -1 && stt_luu_ct > stt) {
+            var number = stt_luu_ct - 1;
+            cur_title_ct.innerHTML = `Thông tin chi tiết tiêu chí ${number}`;
+            cur_stt_ct.innerHTML = `STT: ${number}`;
+            luu_ct.value = `btn-ct-${stt_tc}-${number}`;
+            hidden_ct.value = number;
+            them_ct.value = `btn-ct-${stt_tc}-${number}`;
+        }
+        else {
+            cur_title_ct.innerHTML = `Thông tin chi tiết tiêu chí ${length}`;
+            cur_stt_ct.innerHTML = `STT: ${length}`;
+            luu_ct.value = `btn-ct-${stt_tc}-${length}`;
+            them_ct.value = `btn-ct-${stt_tc}-${length}`;
+        }
+
+    }
+
+</script>

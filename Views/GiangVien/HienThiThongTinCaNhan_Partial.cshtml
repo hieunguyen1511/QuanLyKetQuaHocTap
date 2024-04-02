@@ -1,0 +1,35 @@
+﻿@using QuanLyKetQuaHocTap.Models;
+@model tb_GiangVien
+
+@{
+    if (Model == null)
+    {
+        Response.Redirect(Url.Action("DangNhap", "DangNhap"));
+        return;
+    }
+    <div class="card-body">
+        <div class="d-flex flex-column align-items-center text-center">
+            @{
+                if (Model.GioiTinh == General.gioiTinhNam)
+                {
+                    <img src="~/assets/imgs/teacher_male.jpg" alt="Giảng viên" class="rounded-circle p-1 bg-primary" width="110">
+                }
+                else
+                {
+                    <img src="~/assets/imgs/teacher_female.jpg" alt="Giảng viên" class="rounded-circle p-1 bg-primary" width="110">
+                }
+            }
+        <div class="mt-3">
+            <h4>@Model.MaGV - @Model.HoTen</h4>
+            <p class="text-secondary mb-1">Trình độ @Model.TrinhDo</p>
+            <p class="text-muted font-size-sm">Email: @Model.Email</p>
+            <p class="text-muted font-size-sm">SĐT: @Model.SDT</p>
+            <p class="text-muted font-size-sm">CCCD: @Model.CCCD</p>
+            <p class="text-muted font-size-sm">Ngày sinh: @General.getStrFormatDate(Model.NgaySinh)</p>
+            <p class="text-muted font-size-sm">Khoa viện: @General.getStrKhoaVien(Model)</p>
+            <p class="text-muted font-size-sm">Chương trình: @General.getStrCTGD(Model)</p>
+        </div>
+        </div>
+    </div>
+}
+
